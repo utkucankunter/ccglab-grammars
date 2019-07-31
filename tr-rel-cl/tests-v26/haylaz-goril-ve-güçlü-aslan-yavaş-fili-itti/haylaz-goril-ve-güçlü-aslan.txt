@@ -1,0 +1,1816 @@
+
+* (ccg-deduce '(haylaz goril ve güçlü aslan))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (HAYLAZ) := VP/*NP
+        : (LAM X (BE_NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := VP
+        : ((LAM X (BE_NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+
+Final LF, normal-order evaluated: 
+
+    (BE_NAUGHTY ((AND (STRONG LION)) GORILLA)) =
+    (BE_NAUGHTY (AND (STRONG LION) GORILLA))
+
+Derivation 2
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+
+Final LF, normal-order evaluated: 
+
+    (NAUGHTY ((AND (STRONG LION)) GORILLA)) =
+    (NAUGHTY (AND (STRONG LION) GORILLA))
+
+Derivation 3
+--------------
+LEX   (HAYLAZ) := VP/*NP
+        : (LAM X (BE_NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := VP
+        : ((LAM X (BE_NAUGHTY X)) GORILLA)
+LEX   (VE) := (VP\*VP)/*VP
+        : (LAM V1 (LAM V2 ((AND V1) V2)))
+LEX   (GÜÇLÜ) := VP/*NP
+        : (LAM X (BE_STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := VP
+        : ((LAM X (BE_STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := VP\*VP
+        : ((LAM V1 (LAM V2 ((AND V1) V2))) ((LAM X (BE_STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := VP
+        : (((LAM V1 (LAM V2 ((AND V1) V2))) ((LAM X (BE_STRONG X)) LION))
+           ((LAM X (BE_NAUGHTY X)) GORILLA))
+
+Final LF, normal-order evaluated: 
+
+    ((AND (BE_STRONG LION)) (BE_NAUGHTY GORILLA)) =
+    (AND (BE_STRONG LION) (BE_NAUGHTY GORILLA))
+
+Derivation 4
+--------------
+LEX   (VE) := (VP\*VP)/*VP
+        : (LAM V1 (LAM V2 ((AND V1) V2)))
+LEX   (GÜÇLÜ) := VP/*NP
+        : (LAM X (BE_STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := VP
+        : ((LAM X (BE_STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := VP\*VP
+        : ((LAM V1 (LAM V2 ((AND V1) V2))) ((LAM X (BE_STRONG X)) LION))
+LEX   (HAYLAZ) := VP/*NP
+        : (LAM X (BE_NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := VP
+        : ((LAM X (BE_NAUGHTY X)) GORILLA)
+NF01  (VE GÜÇLÜ ASLAN) := VP\*VP
+        : ((LAM N (LAM P (N P)))
+           ((LAM V1 (LAM V2 ((AND V1) V2))) ((LAM X (BE_STRONG X)) LION)))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := VP
+        : (((LAM N (LAM P (N P)))
+            ((LAM V1 (LAM V2 ((AND V1) V2))) ((LAM X (BE_STRONG X)) LION)))
+           ((LAM X (BE_NAUGHTY X)) GORILLA))
+
+Final LF, normal-order evaluated: 
+
+    ((AND (BE_STRONG LION)) (BE_NAUGHTY GORILLA)) =
+    (AND (BE_STRONG LION) (BE_NAUGHTY GORILLA))
+
+Derivation 5
+--------------
+LEX   (VE) := (VP\*VP)/*VP
+        : (LAM V1 (LAM V2 ((AND V1) V2)))
+LEX   (GÜÇLÜ) := VP/*NP
+        : (LAM X (BE_STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := VP
+        : ((LAM X (BE_STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := VP\*VP
+        : ((LAM V1 (LAM V2 ((AND V1) V2))) ((LAM X (BE_STRONG X)) LION))
+LEX   (HAYLAZ) := VP/*NP
+        : (LAM X (BE_NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := VP
+        : ((LAM X (BE_NAUGHTY X)) GORILLA)
+P2S01 (VE GÜÇLÜ ASLAN) := VP\*VP
+        : ((LAM N (LAM P (N P)))
+           ((LAM V1 (LAM V2 ((AND V1) V2))) ((LAM X (BE_STRONG X)) LION)))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := VP
+        : (((LAM N (LAM P (N P)))
+            ((LAM V1 (LAM V2 ((AND V1) V2))) ((LAM X (BE_STRONG X)) LION)))
+           ((LAM X (BE_NAUGHTY X)) GORILLA))
+
+Final LF, normal-order evaluated: 
+
+    ((AND (BE_STRONG LION)) (BE_NAUGHTY GORILLA)) =
+    (AND (BE_STRONG LION) (BE_NAUGHTY GORILLA))
+
+Derivation 6
+--------------
+LEX   (VE) := (VP\*VP)/*VP
+        : (LAM V1 (LAM V2 ((AND V1) V2)))
+LEX   (GÜÇLÜ) := VP/*NP
+        : (LAM X (BE_STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := VP
+        : ((LAM X (BE_STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := VP\*VP
+        : ((LAM V1 (LAM V2 ((AND V1) V2))) ((LAM X (BE_STRONG X)) LION))
+LEX   (HAYLAZ) := VP/*NP
+        : (LAM X (BE_NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := VP
+        : ((LAM X (BE_NAUGHTY X)) GORILLA)
+P3S01 (VE GÜÇLÜ ASLAN) := VP\*VP
+        : ((LAM N (LAM P (N P)))
+           ((LAM V1 (LAM V2 ((AND V1) V2))) ((LAM X (BE_STRONG X)) LION)))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := VP
+        : (((LAM N (LAM P (N P)))
+            ((LAM V1 (LAM V2 ((AND V1) V2))) ((LAM X (BE_STRONG X)) LION)))
+           ((LAM X (BE_NAUGHTY X)) GORILLA))
+
+Final LF, normal-order evaluated: 
+
+    ((AND (BE_STRONG LION)) (BE_NAUGHTY GORILLA)) =
+    (AND (BE_STRONG LION) (BE_NAUGHTY GORILLA))
+
+Derivation 7
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+           ((LAM X (NAUGHTY X)) GORILLA))
+
+Final LF, normal-order evaluated: 
+
+    ((AND (STRONG LION)) (NAUGHTY GORILLA)) =
+    (AND (STRONG LION) (NAUGHTY GORILLA))
+
+Derivation 8
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            GORILLA))
+MSBJC04 (HAYLAZ GORIL VE GÜÇLÜ) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := ((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP
+        : (((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+            ((LAM X (NAUGHTY X))
+             (((LAM A1 (LAM A2 ((AND A1) A2)))
+               ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+              GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S ((((P LION) A) (NAUGHTY ((AND (STRONG SPEAKER)) GORILLA))) S)))) =
+    (\ A . \ P . \ S . P LION A (NAUGHTY (AND (STRONG SPEAKER) GORILLA)) S)
+
+Derivation 9
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            GORILLA))
+MSBJC04 (HAYLAZ GORIL VE GÜÇLÜ) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := ((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP
+        : (((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+            ((LAM X (NAUGHTY X))
+             (((LAM A1 (LAM A2 ((AND A1) A2)))
+               ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+              GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S ((((P LION) A) (NAUGHTY ((AND (STRONG SPEAKER)) GORILLA))) S)))) =
+    (\ A . \ P . \ S . P LION A (NAUGHTY (AND (STRONG SPEAKER) GORILLA)) S)
+
+Derivation 10
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            GORILLA))
+MSBJC04 (HAYLAZ GORIL VE GÜÇLÜ) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := ((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP
+        : (((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+            ((LAM X (NAUGHTY X))
+             (((LAM A1 (LAM A2 ((AND A1) A2)))
+               ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+              GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S ((((P LION) A) (NAUGHTY ((AND (STRONG SPEAKER)) GORILLA))) S)))) =
+    (\ A . \ P . \ S . P LION A (NAUGHTY (AND (STRONG SPEAKER) GORILLA)) S)
+
+Derivation 11
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            GORILLA))
+MSBJC04 (HAYLAZ GORIL VE GÜÇLÜ) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := ((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP
+        : (((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+            ((LAM X (NAUGHTY X))
+             (((LAM A1 (LAM A2 ((AND A1) A2)))
+               ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+              GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S ((((P LION) A) (NAUGHTY ((AND (STRONG SPEAKER)) GORILLA))) S)))) =
+    (\ A . \ P . \ S . P LION A (NAUGHTY (AND (STRONG SPEAKER) GORILLA)) S)
+
+Derivation 12
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            GORILLA))
+MSBJC04 (HAYLAZ GORIL VE GÜÇLÜ) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := ((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP
+        : (((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+            ((LAM X (NAUGHTY X))
+             (((LAM A1 (LAM A2 ((AND A1) A2)))
+               ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+              GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S ((((P LION) A) (NAUGHTY ((AND (STRONG SPEAKER)) GORILLA))) S)))) =
+    (\ A . \ P . \ S . P LION A (NAUGHTY (AND (STRONG SPEAKER) GORILLA)) S)
+
+Derivation 13
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           ((LAM X (NAUGHTY X)) GORILLA))
+MSBJC04 (HAYLAZ GORIL VE GÜÇLÜ) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := ((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP
+        : (((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             ((LAM X (NAUGHTY X)) GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S ((((P LION) A) ((AND (STRONG SPEAKER)) (NAUGHTY GORILLA))) S)))) =
+    (\ A . \ P . \ S . P LION A (AND (STRONG SPEAKER) (NAUGHTY GORILLA)) S)
+
+Derivation 14
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           ((LAM X (NAUGHTY X)) GORILLA))
+MSBJC04 (HAYLAZ GORIL VE GÜÇLÜ) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := ((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP
+        : (((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             ((LAM X (NAUGHTY X)) GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S ((((P LION) A) ((AND (STRONG SPEAKER)) (NAUGHTY GORILLA))) S)))) =
+    (\ A . \ P . \ S . P LION A (AND (STRONG SPEAKER) (NAUGHTY GORILLA)) S)
+
+Derivation 15
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           ((LAM X (NAUGHTY X)) GORILLA))
+MSBJC04 (HAYLAZ GORIL VE GÜÇLÜ) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := ((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP
+        : (((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             ((LAM X (NAUGHTY X)) GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S ((((P LION) A) ((AND (STRONG SPEAKER)) (NAUGHTY GORILLA))) S)))) =
+    (\ A . \ P . \ S . P LION A (AND (STRONG SPEAKER) (NAUGHTY GORILLA)) S)
+
+Derivation 16
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           ((LAM X (NAUGHTY X)) GORILLA))
+MSBJC04 (HAYLAZ GORIL VE GÜÇLÜ) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := ((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP
+        : (((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             ((LAM X (NAUGHTY X)) GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S ((((P LION) A) ((AND (STRONG SPEAKER)) (NAUGHTY GORILLA))) S)))) =
+    (\ A . \ P . \ S . P LION A (AND (STRONG SPEAKER) (NAUGHTY GORILLA)) S)
+
+Derivation 17
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           ((LAM X (NAUGHTY X)) GORILLA))
+MSBJC04 (HAYLAZ GORIL VE GÜÇLÜ) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := ((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP
+        : (((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             ((LAM X (NAUGHTY X)) GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S ((((P LION) A) ((AND (STRONG SPEAKER)) (NAUGHTY GORILLA))) S)))) =
+    (\ A . \ P . \ S . P LION A (AND (STRONG SPEAKER) (NAUGHTY GORILLA)) S)
+
+Derivation 18
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            GORILLA))
+VPSBJ03 (HAYLAZ GORIL VE GÜÇLÜ) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := VP/*((VP/*NP)/*NP)
+        : (((LAM X (LAM A (LAM V ((V A) X))))
+            ((LAM X (NAUGHTY X))
+             (((LAM A1 (LAM A2 ((AND A1) A2)))
+               ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+              GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM V ((V LION) (NAUGHTY ((AND (STRONG SPEAKER)) GORILLA)))) =
+    (\ V . V LION (NAUGHTY (AND (STRONG SPEAKER) GORILLA)))
+
+Derivation 19
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            GORILLA))
+VPSBJ03 (HAYLAZ GORIL VE GÜÇLÜ) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := VP/*((VP/*NP)/*NP)
+        : (((LAM X (LAM A (LAM V ((V A) X))))
+            ((LAM X (NAUGHTY X))
+             (((LAM A1 (LAM A2 ((AND A1) A2)))
+               ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+              GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM V ((V LION) (NAUGHTY ((AND (STRONG SPEAKER)) GORILLA)))) =
+    (\ V . V LION (NAUGHTY (AND (STRONG SPEAKER) GORILLA)))
+
+Derivation 20
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            GORILLA))
+VPSBJ03 (HAYLAZ GORIL VE GÜÇLÜ) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := VP/*((VP/*NP)/*NP)
+        : (((LAM X (LAM A (LAM V ((V A) X))))
+            ((LAM X (NAUGHTY X))
+             (((LAM A1 (LAM A2 ((AND A1) A2)))
+               ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+              GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM V ((V LION) (NAUGHTY ((AND (STRONG SPEAKER)) GORILLA)))) =
+    (\ V . V LION (NAUGHTY (AND (STRONG SPEAKER) GORILLA)))
+
+Derivation 21
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            GORILLA))
+VPSBJ03 (HAYLAZ GORIL VE GÜÇLÜ) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := VP/*((VP/*NP)/*NP)
+        : (((LAM X (LAM A (LAM V ((V A) X))))
+            ((LAM X (NAUGHTY X))
+             (((LAM A1 (LAM A2 ((AND A1) A2)))
+               ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+              GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM V ((V LION) (NAUGHTY ((AND (STRONG SPEAKER)) GORILLA)))) =
+    (\ V . V LION (NAUGHTY (AND (STRONG SPEAKER) GORILLA)))
+
+Derivation 22
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            GORILLA))
+VPSBJ03 (HAYLAZ GORIL VE GÜÇLÜ) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := VP/*((VP/*NP)/*NP)
+        : (((LAM X (LAM A (LAM V ((V A) X))))
+            ((LAM X (NAUGHTY X))
+             (((LAM A1 (LAM A2 ((AND A1) A2)))
+               ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+              GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM V ((V LION) (NAUGHTY ((AND (STRONG SPEAKER)) GORILLA)))) =
+    (\ V . V LION (NAUGHTY (AND (STRONG SPEAKER) GORILLA)))
+
+Derivation 23
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           ((LAM X (NAUGHTY X)) GORILLA))
+VPSBJ03 (HAYLAZ GORIL VE GÜÇLÜ) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := VP/*((VP/*NP)/*NP)
+        : (((LAM X (LAM A (LAM V ((V A) X))))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             ((LAM X (NAUGHTY X)) GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM V ((V LION) ((AND (STRONG SPEAKER)) (NAUGHTY GORILLA)))) =
+    (\ V . V LION (AND (STRONG SPEAKER) (NAUGHTY GORILLA)))
+
+Derivation 24
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           ((LAM X (NAUGHTY X)) GORILLA))
+VPSBJ03 (HAYLAZ GORIL VE GÜÇLÜ) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := VP/*((VP/*NP)/*NP)
+        : (((LAM X (LAM A (LAM V ((V A) X))))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             ((LAM X (NAUGHTY X)) GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM V ((V LION) ((AND (STRONG SPEAKER)) (NAUGHTY GORILLA)))) =
+    (\ V . V LION (AND (STRONG SPEAKER) (NAUGHTY GORILLA)))
+
+Derivation 25
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           ((LAM X (NAUGHTY X)) GORILLA))
+VPSBJ03 (HAYLAZ GORIL VE GÜÇLÜ) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := VP/*((VP/*NP)/*NP)
+        : (((LAM X (LAM A (LAM V ((V A) X))))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             ((LAM X (NAUGHTY X)) GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM V ((V LION) ((AND (STRONG SPEAKER)) (NAUGHTY GORILLA)))) =
+    (\ V . V LION (AND (STRONG SPEAKER) (NAUGHTY GORILLA)))
+
+Derivation 26
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           ((LAM X (NAUGHTY X)) GORILLA))
+VPSBJ03 (HAYLAZ GORIL VE GÜÇLÜ) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := VP/*((VP/*NP)/*NP)
+        : (((LAM X (LAM A (LAM V ((V A) X))))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             ((LAM X (NAUGHTY X)) GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM V ((V LION) ((AND (STRONG SPEAKER)) (NAUGHTY GORILLA)))) =
+    (\ V . V LION (AND (STRONG SPEAKER) (NAUGHTY GORILLA)))
+
+Derivation 27
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (VE)(GÜÇLÜ) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2)))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2)))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+           ((LAM X (NAUGHTY X)) GORILLA))
+VPSBJ03 (HAYLAZ GORIL VE GÜÇLÜ) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           (((LAM A1 (LAM A2 ((AND A1) A2)))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL VE GÜÇLÜ)(ASLAN) := VP/*((VP/*NP)/*NP)
+        : (((LAM X (LAM A (LAM V ((V A) X))))
+            (((LAM A1 (LAM A2 ((AND A1) A2)))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+             ((LAM X (NAUGHTY X)) GORILLA)))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM V ((V LION) ((AND (STRONG SPEAKER)) (NAUGHTY GORILLA)))) =
+    (\ V . V LION (AND (STRONG SPEAKER) (NAUGHTY GORILLA)))
+
+Derivation 28
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+MSBJ01 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := S/*(S/*NP)
+        : ((LAM X (LAM P (P X)))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+             GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (P (NAUGHTY ((AND (STRONG LION)) GORILLA)))) =
+    (\ P . P (NAUGHTY (AND (STRONG LION) GORILLA)))
+
+Derivation 29
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+           ((LAM X (NAUGHTY X)) GORILLA))
+MSBJ01 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := S/*(S/*NP)
+        : ((LAM X (LAM P (P X)))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (P ((AND (STRONG LION)) (NAUGHTY GORILLA)))) =
+    (\ P . P (AND (STRONG LION) (NAUGHTY GORILLA)))
+
+Derivation 30
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+MSBJ02 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := (S/*((S/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM P ((P A) X))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+             GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A (LAM P ((P A) (NAUGHTY ((AND (STRONG LION)) GORILLA))))) =
+    (\ A . \ P . P A (NAUGHTY (AND (STRONG LION) GORILLA)))
+
+Derivation 31
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+           ((LAM X (NAUGHTY X)) GORILLA))
+MSBJ02 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := (S/*((S/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM P ((P A) X))))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A (LAM P ((P A) ((AND (STRONG LION)) (NAUGHTY GORILLA))))) =
+    (\ A . \ P . P A (AND (STRONG LION) (NAUGHTY GORILLA)))
+
+Derivation 32
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+MSBJ03 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := (S/*NP)/*((S/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+             GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM A ((P A) (NAUGHTY ((AND (STRONG LION)) GORILLA))))) =
+    (\ P . \ A . P A (NAUGHTY (AND (STRONG LION) GORILLA)))
+
+Derivation 33
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+           ((LAM X (NAUGHTY X)) GORILLA))
+MSBJ03 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := (S/*NP)/*((S/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X))))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM A ((P A) ((AND (STRONG LION)) (NAUGHTY GORILLA))))) =
+    (\ P . \ A . P A (AND (STRONG LION) (NAUGHTY GORILLA)))
+
+Derivation 34
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+MSBJ04 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := ((S/*(((S/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM A (LAM B (LAM P (((P B) A) X)))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+             GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A (LAM B (LAM P (((P B) A) (NAUGHTY ((AND (STRONG LION)) GORILLA)))))) =
+    (\ A . \ B . \ P . P B A (NAUGHTY (AND (STRONG LION) GORILLA)))
+
+Derivation 35
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+           ((LAM X (NAUGHTY X)) GORILLA))
+MSBJ04 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := ((S/*(((S/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM A (LAM B (LAM P (((P B) A) X)))))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A (LAM B (LAM P (((P B) A) ((AND (STRONG LION)) (NAUGHTY GORILLA)))))) =
+    (\ A . \ B . \ P . P B A (AND (STRONG LION) (NAUGHTY GORILLA)))
+
+Derivation 36
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+MSBJC01 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := (S/*S)/*((S/*S)/*NP)
+        : ((LAM X (LAM P (LAM S ((P X) S))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+             GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM S ((P (NAUGHTY ((AND (STRONG LION)) GORILLA))) S))) =
+    (\ P . \ S . P (NAUGHTY (AND (STRONG LION) GORILLA)) S)
+
+Derivation 37
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+           ((LAM X (NAUGHTY X)) GORILLA))
+MSBJC01 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := (S/*S)/*((S/*S)/*NP)
+        : ((LAM X (LAM P (LAM S ((P X) S))))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM S ((P ((AND (STRONG LION)) (NAUGHTY GORILLA))) S))) =
+    (\ P . \ S . P (AND (STRONG LION) (NAUGHTY GORILLA)) S)
+
+Derivation 38
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+MSBJC02 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := ((S/*S)/*(((S/*S)/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM P (LAM S (((P A) X) S)))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+             GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A (LAM P (LAM S (((P A) (NAUGHTY ((AND (STRONG LION)) GORILLA))) S)))) =
+    (\ A . \ P . \ S . P A (NAUGHTY (AND (STRONG LION) GORILLA)) S)
+
+Derivation 39
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+           ((LAM X (NAUGHTY X)) GORILLA))
+MSBJC02 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := ((S/*S)/*(((S/*S)/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM P (LAM S (((P A) X) S)))))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A (LAM P (LAM S (((P A) ((AND (STRONG LION)) (NAUGHTY GORILLA))) S)))) =
+    (\ A . \ P . \ S . P A (AND (STRONG LION) (NAUGHTY GORILLA)) S)
+
+Derivation 40
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+MSBJC03 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := ((S/*S)/*NP)/*(((S/*S)/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A (LAM S (((P A) X) S)))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+             GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM A (LAM S (((P A) (NAUGHTY ((AND (STRONG LION)) GORILLA))) S)))) =
+    (\ P . \ A . \ S . P A (NAUGHTY (AND (STRONG LION) GORILLA)) S)
+
+Derivation 41
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+           ((LAM X (NAUGHTY X)) GORILLA))
+MSBJC03 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := ((S/*S)/*NP)/*(((S/*S)/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A (LAM S (((P A) X) S)))))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM A (LAM S (((P A) ((AND (STRONG LION)) (NAUGHTY GORILLA))) S)))) =
+    (\ P . \ A . \ S . P A (AND (STRONG LION) (NAUGHTY GORILLA)) S)
+
+Derivation 42
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+MSBJC04 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+             GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM B
+     (LAM A
+      (LAM P (LAM S ((((P B) A) (NAUGHTY ((AND (STRONG LION)) GORILLA))) S))))) =
+    (\ B . \ A . \ P . \ S . P B A (NAUGHTY (AND (STRONG LION) GORILLA)) S)
+
+Derivation 43
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+           ((LAM X (NAUGHTY X)) GORILLA))
+MSBJC04 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM B
+     (LAM A
+      (LAM P (LAM S ((((P B) A) ((AND (STRONG LION)) (NAUGHTY GORILLA))) S))))) =
+    (\ B . \ A . \ P . \ S . P B A (AND (STRONG LION) (NAUGHTY GORILLA)) S)
+
+Derivation 44
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+VPSBJ01 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := VP/*(VP/*NP)
+        : ((LAM X (LAM V (V X)))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+             GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V (V (NAUGHTY ((AND (STRONG LION)) GORILLA)))) =
+    (\ V . V (NAUGHTY (AND (STRONG LION) GORILLA)))
+
+Derivation 45
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+           ((LAM X (NAUGHTY X)) GORILLA))
+VPSBJ01 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := VP/*(VP/*NP)
+        : ((LAM X (LAM V (V X)))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V (V ((AND (STRONG LION)) (NAUGHTY GORILLA)))) =
+    (\ V . V (AND (STRONG LION) (NAUGHTY GORILLA)))
+
+Derivation 46
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+VPSBJ02 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := (VP/*NP)/*((VP/*NP)/*NP)
+        : ((LAM X (LAM V (LAM A ((V A) X))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+             GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V (LAM A ((V A) (NAUGHTY ((AND (STRONG LION)) GORILLA))))) =
+    (\ V . \ A . V A (NAUGHTY (AND (STRONG LION) GORILLA)))
+
+Derivation 47
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+           ((LAM X (NAUGHTY X)) GORILLA))
+VPSBJ02 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := (VP/*NP)/*((VP/*NP)/*NP)
+        : ((LAM X (LAM V (LAM A ((V A) X))))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V (LAM A ((V A) ((AND (STRONG LION)) (NAUGHTY GORILLA))))) =
+    (\ V . \ A . V A (AND (STRONG LION) (NAUGHTY GORILLA)))
+
+Derivation 48
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+VPSBJ03 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+             GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A (LAM V ((V A) (NAUGHTY ((AND (STRONG LION)) GORILLA))))) =
+    (\ A . \ V . V A (NAUGHTY (AND (STRONG LION) GORILLA)))
+
+Derivation 49
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+           ((LAM X (NAUGHTY X)) GORILLA))
+VPSBJ03 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A (LAM V ((V A) ((AND (STRONG LION)) (NAUGHTY GORILLA))))) =
+    (\ A . \ V . V A (AND (STRONG LION) (NAUGHTY GORILLA)))
+
+Derivation 50
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION)) GORILLA)
+>     (HAYLAZ)(GORIL VE GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            GORILLA))
+VPSBJ04 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := ((VP/*NP)/*NP)/*(((VP/*NP)/*NP)/*NP)
+        : ((LAM X (LAM V (LAM B (LAM A (((V B) A) X)))))
+           ((LAM X (NAUGHTY X))
+            (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+             GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V (LAM B (LAM A (((V B) A) (NAUGHTY ((AND (STRONG LION)) GORILLA)))))) =
+    (\ V . \ B . \ A . V B A (NAUGHTY (AND (STRONG LION) GORILLA)))
+
+Derivation 51
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (VE) := (NP\*NP)/*NP
+        : (LAM A1 (LAM A2 ((AND A1) A2)))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (VE)(GÜÇLÜ ASLAN) := NP\*NP
+        : ((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+<     (HAYLAZ GORIL)(VE GÜÇLÜ ASLAN) := NP
+        : (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+           ((LAM X (NAUGHTY X)) GORILLA))
+VPSBJ04 (HAYLAZ GORIL VE GÜÇLÜ ASLAN) := ((VP/*NP)/*NP)/*(((VP/*NP)/*NP)/*NP)
+        : ((LAM X (LAM V (LAM B (LAM A (((V B) A) X)))))
+           (((LAM A1 (LAM A2 ((AND A1) A2))) ((LAM X (STRONG X)) LION))
+            ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V (LAM B (LAM A (((V B) A) ((AND (STRONG LION)) (NAUGHTY GORILLA)))))) =
+    (\ V . \ B . \ A . V B A (AND (STRONG LION) (NAUGHTY GORILLA)))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

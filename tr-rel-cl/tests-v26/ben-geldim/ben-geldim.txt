@@ -1,0 +1,73 @@
+
+* (ccg-deduce '(ben gel -di -m))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+MSBJ01 (BEN) := S/*(S/*NP)
+        : ((LAM X (LAM P (P X))) SPEAKER)
+LEX   (GEL) := VP/*NP
+        : (LAM X (COME X))
+P3S05 (-DI) := (VP/*NP)\*(VP/*NP)
+        : ((LAM N (LAM P (LAM X (N (P X)))))
+           ((LAM N (LAM P (N P)))
+            (LAM P
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) ((P W0) T))
+                 ((((KNOW ((P W0) T)) SPEAKER) W0) T))))))))
+<     (GEL)(-DI) := VP/*NP
+        : (((LAM N (LAM P (LAM X (N (P X)))))
+            ((LAM N (LAM P (N P)))
+             (LAM P
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) ((P W0) T))
+                  ((((KNOW ((P W0) T)) SPEAKER) W0) T))))))))
+           (LAM X (COME X)))
+AGR01 (-M) := (S/*NP)\*(VP/*NP)
+        : ((LAM N (LAM P (LAM X (P X)))) 0)
+<     (GEL -DI)(-M) := S/*NP
+        : (((LAM N (LAM P (LAM X (P X)))) 0)
+           (((LAM N (LAM P (LAM X (N (P X)))))
+             ((LAM N (LAM P (N P)))
+              (LAM P
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) ((P W0) T))
+                   ((((KNOW ((P W0) T)) SPEAKER) W0) T))))))))
+            (LAM X (COME X))))
+>     (BEN)(GEL -DI -M) := S
+        : (((LAM X (LAM P (P X))) SPEAKER)
+           (((LAM N (LAM P (LAM X (P X)))) 0)
+            (((LAM N (LAM P (LAM X (N (P X)))))
+              ((LAM N (LAM P (N P)))
+               (LAM P
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) ((P W0) T))
+                    ((((KNOW ((P W0) T)) SPEAKER) W0) T))))))))
+             (LAM X (COME X)))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((EXISTS T)
+       (((AND ((EARLIER T0) T)) (((COME SPEAKER) W0) T))
+        ((((KNOW (((COME SPEAKER) W0) T)) SPEAKER) W0) T))))) =
+    (\ W0 . \ T0 . EXISTS T
+     (AND (EARLIER T0 T) (COME SPEAKER W0 T)
+      (KNOW (COME SPEAKER W0 T) SPEAKER W0 T)))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

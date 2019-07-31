@@ -1,0 +1,83 @@
+
+* (ccg-deduce '(haylaz goril -i it -en))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+SRCOBJ01 (HAYLAZ GORIL -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X))))
+           ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA)))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (IT)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -I)(IT -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X))))
+            ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA)))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (AGENT ((PUSH (NAUGHTY GORILLA)) X))) =
+    (\ X . AGENT (PUSH (NAUGHTY GORILLA) X))
+
+Derivation 2
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+SRCOBJ01 (HAYLAZ GORIL -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X))))
+           ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA)))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (IT)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -I)(IT -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X))))
+            ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA)))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (AGENT ((PUSH (NAUGHTY GORILLA)) X))) =
+    (\ X . AGENT (PUSH (NAUGHTY GORILLA) X))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

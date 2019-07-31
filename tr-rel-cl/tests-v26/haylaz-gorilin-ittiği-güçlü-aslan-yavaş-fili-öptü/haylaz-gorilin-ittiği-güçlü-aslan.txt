@@ -1,0 +1,2323 @@
+
+* (ccg-deduce '(haylaz goril -in it -dik -i güçlü aslan))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (HAYLAZ) := VP/*NP
+        : (LAM X (BE_NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := VP
+        : ((LAM X (BE_NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (BE_NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA))) =
+    (BE_NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA)))
+
+Derivation 2
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA))) =
+    (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA)))
+
+Derivation 3
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+
+Final LF, normal-order evaluated: 
+
+    (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) (NAUGHTY GORILLA))) =
+    (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) (NAUGHTY GORILLA)))
+
+Derivation 4
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X)))))
+MSBJC04 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ)(ASLAN) := ((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP
+        : (((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+            ((LAM X (NAUGHTY X))
+             ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+               ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                  ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                   (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                 (LAM X X))
+                (LAM Y (LAM X ((PUSH Y) X)))))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S
+       ((((P LION) A)
+         (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG SPEAKER)) GORILLA))))
+        S)))) =
+    (\ A . \ P . \ S . P LION A
+     (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG SPEAKER) GORILLA))) S)
+
+Derivation 5
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+MSBJC04 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X)))))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ)(ASLAN) := ((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP
+        : (((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X)))))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S
+       ((((P LION) A)
+         (PATIENT_ACTUAL_EVENT ((PUSH (STRONG SPEAKER)) (NAUGHTY GORILLA))))
+        S)))) =
+    (\ A . \ P . \ S . P LION A
+     (PATIENT_ACTUAL_EVENT (PUSH (STRONG SPEAKER) (NAUGHTY GORILLA))) S)
+
+Derivation 6
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X)))))
+VPSBJ03 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X))))))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ)(ASLAN) := VP/*((VP/*NP)/*NP)
+        : (((LAM X (LAM A (LAM V ((V A) X))))
+            ((LAM X (NAUGHTY X))
+             ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+               ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                  ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                   (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                 (LAM X X))
+                (LAM Y (LAM X ((PUSH Y) X)))))
+              ((LAM P (P SPEAKER)) (LAM X (STRONG X))))))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM V
+     ((V LION)
+      (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG SPEAKER)) GORILLA))))) =
+    (\ V . V LION
+     (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG SPEAKER) GORILLA))))
+
+Derivation 7
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+NOMVRBI00 (GÜÇLÜ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (STRONG X)))
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM P (P SPEAKER)) (LAM X (STRONG X))))
+VPSBJ03 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM P (P SPEAKER)) (LAM X (STRONG X)))))
+LEX   (ASLAN) := NP
+        : LION
+>     (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ)(ASLAN) := VP/*((VP/*NP)/*NP)
+        : (((LAM X (LAM A (LAM V ((V A) X))))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM P (P SPEAKER)) (LAM X (STRONG X)))))
+           LION)
+
+Final LF, normal-order evaluated: 
+
+    (LAM V
+     ((V LION)
+      (PATIENT_ACTUAL_EVENT ((PUSH (STRONG SPEAKER)) (NAUGHTY GORILLA))))) =
+    (\ V . V LION
+     (PATIENT_ACTUAL_EVENT (PUSH (STRONG SPEAKER) (NAUGHTY GORILLA))))
+
+Derivation 8
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+MSBJ01 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := S/*(S/*NP)
+        : ((LAM X (LAM P (P X)))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM X (STRONG X)) LION))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (P (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA))))) =
+    (\ P . P (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA))))
+
+Derivation 9
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+MSBJ01 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := S/*(S/*NP)
+        : ((LAM X (LAM P (P X)))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (P (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) (NAUGHTY GORILLA))))) =
+    (\ P . P (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) (NAUGHTY GORILLA))))
+
+Derivation 10
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+MSBJ02 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := (S/*((S/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM P ((P A) X))))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM X (STRONG X)) LION))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      ((P A) (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA)))))) =
+    (\ A . \ P . P A
+     (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA))))
+
+Derivation 11
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+MSBJ02 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := (S/*((S/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM P ((P A) X))))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      ((P A) (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) (NAUGHTY GORILLA)))))) =
+    (\ A . \ P . P A
+     (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) (NAUGHTY GORILLA))))
+
+Derivation 12
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+MSBJ03 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := (S/*NP)/*((S/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X))))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM X (STRONG X)) LION))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P
+     (LAM A
+      ((P A) (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA)))))) =
+    (\ P . \ A . P A
+     (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA))))
+
+Derivation 13
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+MSBJ03 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := (S/*NP)/*((S/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X))))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P
+     (LAM A
+      ((P A) (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) (NAUGHTY GORILLA)))))) =
+    (\ P . \ A . P A
+     (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) (NAUGHTY GORILLA))))
+
+Derivation 14
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+MSBJ04 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := ((S/*(((S/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM A (LAM B (LAM P (((P B) A) X)))))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM X (STRONG X)) LION))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM B
+      (LAM P
+       (((P B) A)
+        (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA))))))) =
+    (\ A . \ B . \ P . P B A
+     (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA))))
+
+Derivation 15
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+MSBJ04 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := ((S/*(((S/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM A (LAM B (LAM P (((P B) A) X)))))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM B
+      (LAM P
+       (((P B) A)
+        (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) (NAUGHTY GORILLA))))))) =
+    (\ A . \ B . \ P . P B A
+     (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) (NAUGHTY GORILLA))))
+
+Derivation 16
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+MSBJC01 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := (S/*S)/*((S/*S)/*NP)
+        : ((LAM X (LAM P (LAM S ((P X) S))))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM X (STRONG X)) LION))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P
+     (LAM S
+      ((P (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA)))) S))) =
+    (\ P . \ S . P
+     (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA))) S)
+
+Derivation 17
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+MSBJC01 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := (S/*S)/*((S/*S)/*NP)
+        : ((LAM X (LAM P (LAM S ((P X) S))))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P
+     (LAM S
+      ((P (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) (NAUGHTY GORILLA)))) S))) =
+    (\ P . \ S . P
+     (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) (NAUGHTY GORILLA))) S)
+
+Derivation 18
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+MSBJC02 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := ((S/*S)/*(((S/*S)/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM P (LAM S (((P A) X) S)))))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM X (STRONG X)) LION))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S
+       (((P A) (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA))))
+        S)))) =
+    (\ A . \ P . \ S . P A
+     (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA))) S)
+
+Derivation 19
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+MSBJC02 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := ((S/*S)/*(((S/*S)/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM P (LAM S (((P A) X) S)))))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM P
+      (LAM S
+       (((P A) (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) (NAUGHTY GORILLA))))
+        S)))) =
+    (\ A . \ P . \ S . P A
+     (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) (NAUGHTY GORILLA))) S)
+
+Derivation 20
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+MSBJC03 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := ((S/*S)/*NP)/*(((S/*S)/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A (LAM S (((P A) X) S)))))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM X (STRONG X)) LION))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P
+     (LAM A
+      (LAM S
+       (((P A) (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA))))
+        S)))) =
+    (\ P . \ A . \ S . P A
+     (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA))) S)
+
+Derivation 21
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+MSBJC03 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := ((S/*S)/*NP)/*(((S/*S)/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A (LAM S (((P A) X) S)))))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P
+     (LAM A
+      (LAM S
+       (((P A) (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) (NAUGHTY GORILLA))))
+        S)))) =
+    (\ P . \ A . \ S . P A
+     (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) (NAUGHTY GORILLA))) S)
+
+Derivation 22
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+MSBJC04 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM X (STRONG X)) LION))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM B
+     (LAM A
+      (LAM P
+       (LAM S
+        ((((P B) A)
+          (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA))))
+         S))))) =
+    (\ B . \ A . \ P . \ S . P B A
+     (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA))) S)
+
+Derivation 23
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+MSBJC04 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM B
+     (LAM A
+      (LAM P
+       (LAM S
+        ((((P B) A)
+          (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) (NAUGHTY GORILLA))))
+         S))))) =
+    (\ B . \ A . \ P . \ S . P B A
+     (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) (NAUGHTY GORILLA))) S)
+
+Derivation 24
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+VPSBJ01 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := VP/*(VP/*NP)
+        : ((LAM X (LAM V (V X)))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM X (STRONG X)) LION))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V (V (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA))))) =
+    (\ V . V (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA))))
+
+Derivation 25
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+VPSBJ01 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := VP/*(VP/*NP)
+        : ((LAM X (LAM V (V X)))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V (V (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) (NAUGHTY GORILLA))))) =
+    (\ V . V (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) (NAUGHTY GORILLA))))
+
+Derivation 26
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+VPSBJ02 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := (VP/*NP)/*((VP/*NP)/*NP)
+        : ((LAM X (LAM V (LAM A ((V A) X))))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM X (STRONG X)) LION))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V
+     (LAM A
+      ((V A) (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA)))))) =
+    (\ V . \ A . V A
+     (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA))))
+
+Derivation 27
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+VPSBJ02 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := (VP/*NP)/*((VP/*NP)/*NP)
+        : ((LAM X (LAM V (LAM A ((V A) X))))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V
+     (LAM A
+      ((V A) (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) (NAUGHTY GORILLA)))))) =
+    (\ V . \ A . V A
+     (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) (NAUGHTY GORILLA))))
+
+Derivation 28
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+VPSBJ03 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM X (STRONG X)) LION))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM V
+      ((V A) (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA)))))) =
+    (\ A . \ V . V A
+     (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA))))
+
+Derivation 29
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+VPSBJ03 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A
+     (LAM V
+      ((V A) (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) (NAUGHTY GORILLA)))))) =
+    (\ A . \ V . V A
+     (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) (NAUGHTY GORILLA))))
+
+Derivation 30
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+>     (HAYLAZ)(GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := NP
+        : ((LAM X (NAUGHTY X))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+VPSBJ04 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := ((VP/*NP)/*NP)/*(((VP/*NP)/*NP)/*NP)
+        : ((LAM X (LAM V (LAM B (LAM A (((V B) A) X)))))
+           ((LAM X (NAUGHTY X))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) GORILLA)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((PUSH Y) X)))))
+             ((LAM X (STRONG X)) LION))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V
+     (LAM B
+      (LAM A
+       (((V B) A)
+        (NAUGHTY (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) GORILLA))))))) =
+    (\ V . \ B . \ A . V B A
+     (NAUGHTY (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) GORILLA))))
+
+Derivation 31
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (HAYLAZ GORIL)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (IT)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((PUSH Y) X))))
+>     (HAYLAZ GORIL -IN)(IT -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+LEX   (GÜÇLÜ) := NP/*NP
+        : (LAM X (STRONG X))
+LEX   (ASLAN) := NP
+        : LION
+>     (GÜÇLÜ)(ASLAN) := NP
+        : ((LAM X (STRONG X)) LION)
+>     (HAYLAZ GORIL -IN IT -DIK -I)(GÜÇLÜ ASLAN) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((PUSH Y) X)))))
+           ((LAM X (STRONG X)) LION))
+VPSBJ04 (HAYLAZ GORIL -IN IT -DIK -I GÜÇLÜ ASLAN) := ((VP/*NP)/*NP)/*(((VP/*NP)/*NP)/*NP)
+        : ((LAM X (LAM V (LAM B (LAM A (((V B) A) X)))))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) ((LAM X (NAUGHTY X)) GORILLA))
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((PUSH Y) X)))))
+            ((LAM X (STRONG X)) LION)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V
+     (LAM B
+      (LAM A
+       (((V B) A)
+        (PATIENT_ACTUAL_EVENT ((PUSH (STRONG LION)) (NAUGHTY GORILLA))))))) =
+    (\ V . \ B . \ A . V B A
+     (PATIENT_ACTUAL_EVENT (PUSH (STRONG LION) (NAUGHTY GORILLA))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

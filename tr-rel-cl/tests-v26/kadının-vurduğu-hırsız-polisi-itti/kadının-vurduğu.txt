@@ -1,0 +1,51 @@
+
+* (ccg-deduce '(kadın -in vur -dik -i))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (KADıN)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) WOMAN)
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (VUR)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -IN)(VUR -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) WOMAN)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((HIT Y) X)))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A (PATIENT_ACTUAL_EVENT ((HIT A) WOMAN))) =
+    (\ A . PATIENT_ACTUAL_EVENT (HIT A WOMAN))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

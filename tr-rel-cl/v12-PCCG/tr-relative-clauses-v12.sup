@@ -1,0 +1,446 @@
+(((ALI -N -IN KITAP -I KAYıP 0) ("BE_LOST" ("BOOK" "ALI")))
+ ((KAYıP 0 ALI -N -IN KITAP -I) ("BE_LOST" ("BOOK" "ALI")))
+ ((ALI -N -IN KITAP -I VE DERGI -S -I KAYıP 0)
+  ("BE_LOST" (("AND" ("MAGAZINE" "ALI")) ("BOOK" "ALI"))))
+ ((KAYıP 0 ALI -N -IN KITAP -I VE DERGI -S -I)
+  ("BE_LOST" (("AND" ("MAGAZINE" "ALI")) ("BOOK" "ALI"))))
+ ((ALI -N -IN KITAP -I AL -DIK -I -N -I GÖR -DI -M)
+  (LAM X
+   (LAM W0
+    (LAM T0
+     (("EXISTS" T)
+      ((("AND" (("EARLIER" T0) T))
+        (((("SEE" ("NOMINAL" (("TAKE" "BOOK") "ALI"))) X) W0) T))
+       (((("KNOW" (((("SEE" ("NOMINAL" (("TAKE" "BOOK") "ALI"))) X) W0) T))
+          "SPEAKER")
+         W0)
+        T)))))))
+ ((GÖR -DI -M ALI -N -IN KITAP -I AL -DIK -I -N -I)
+  (LAM X
+   (LAM W0
+    (LAM T0
+     (("EXISTS" T)
+      ((("AND" (("EARLIER" T0) T))
+        (((("SEE" ("NOMINAL" (("TAKE" "BOOK") "ALI"))) X) W0) T))
+       (((("KNOW" (((("SEE" ("NOMINAL" (("TAKE" "BOOK") "ALI"))) X) W0) T))
+          "SPEAKER")
+         W0)
+        T)))))))
+ ((PRO ALI -N -IN KITAP -I AL -DIK -I -N -I GÖR -DI -M)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("SEE" ("NOMINAL" (("TAKE" "BOOK") "ALI"))) "SPEAKER") W0) T))
+      (((("KNOW"
+          (((("SEE" ("NOMINAL" (("TAKE" "BOOK") "ALI"))) "SPEAKER") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((ALI -N -IN KITAP -I AL -DIK -I -N -I GÖR -DI -M PRO)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("SEE" ("NOMINAL" (("TAKE" "BOOK") "ALI"))) "SPEAKER") W0) T))
+      (((("KNOW"
+          (((("SEE" ("NOMINAL" (("TAKE" "BOOK") "ALI"))) "SPEAKER") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((GÖR -DI -M PRO ALI -N -IN KITAP -I AL -DIK -I -N -I)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("SEE" ("NOMINAL" (("TAKE" "BOOK") "ALI"))) "SPEAKER") W0) T))
+      (((("KNOW"
+          (((("SEE" ("NOMINAL" (("TAKE" "BOOK") "ALI"))) "SPEAKER") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((HAYLAZ GORIL -I HıZLıCA IT -EN GÜÇLÜ ASLAN YAVAŞ FIL -I ÖP -DI 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("KISS" ("SLOW" "ELEPHANT"))
+          ("AGENT"
+           (("PUSH" ("QUICKLY" ("NAUGHTY" "GORILLA"))) ("STRONG" "LION"))))
+         W0)
+        T))
+      (((("KNOW"
+          (((("KISS" ("SLOW" "ELEPHANT"))
+             ("AGENT"
+              (("PUSH" ("QUICKLY" ("NAUGHTY" "GORILLA"))) ("STRONG" "LION"))))
+            W0)
+           T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((YAVAŞ FIL -I ÖP -DI 0 HAYLAZ GORIL -I HıZLıCA IT -EN GÜÇLÜ ASLAN)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("KISS" ("SLOW" "ELEPHANT"))
+          ("AGENT"
+           (("PUSH" ("QUICKLY" ("NAUGHTY" "GORILLA"))) ("STRONG" "LION"))))
+         W0)
+        T))
+      (((("KNOW"
+          (((("KISS" ("SLOW" "ELEPHANT"))
+             ("AGENT"
+              (("PUSH" ("QUICKLY" ("NAUGHTY" "GORILLA"))) ("STRONG" "LION"))))
+            W0)
+           T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((HAYLAZ GORIL -I HıZLıCA IT -EN GÜÇLÜ ASLAN ÖP -DI 0 YAVAŞ FIL -I)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("KISS" ("SLOW" "ELEPHANT"))
+          ("AGENT"
+           (("PUSH" ("QUICKLY" ("NAUGHTY" "GORILLA"))) ("STRONG" "LION"))))
+         W0)
+        T))
+      (((("KNOW"
+          (((("KISS" ("SLOW" "ELEPHANT"))
+             ("AGENT"
+              (("PUSH" ("QUICKLY" ("NAUGHTY" "GORILLA"))) ("STRONG" "LION"))))
+            W0)
+           T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((ÖP -DI 0 HAYLAZ GORIL -I HıZLıCA IT -EN GÜÇLÜ ASLAN YAVAŞ FIL -I)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("KISS" ("SLOW" "ELEPHANT"))
+          ("AGENT"
+           (("PUSH" ("QUICKLY" ("NAUGHTY" "GORILLA"))) ("STRONG" "LION"))))
+         W0)
+        T))
+      (((("KNOW"
+          (((("KISS" ("SLOW" "ELEPHANT"))
+             ("AGENT"
+              (("PUSH" ("QUICKLY" ("NAUGHTY" "GORILLA"))) ("STRONG" "LION"))))
+            W0)
+           T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((HAYLAZ GORIL -IN HıZLıCA IT -DIK -I GÜÇLÜ ASLAN YAVAŞ FIL -I ÖP -DI 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     (((AND (("EARLIER" T0) T))
+       (((("KISS" ("SLOW" "ELEPHANT"))
+          ("PATIENT"
+           (("PUSH" ("STRONG" "LION")) ("QUICKLY" ("NAUGHTY" "GORILLA")))))
+         W0)
+        T))
+      (((("KNOW"
+          (((("KISS" ("SLOW" "ELEPHANT"))
+             ("PATIENT"
+              (("PUSH" ("STRONG" "LION")) ("QUICKLY" ("NAUGHTY" "GORILLA")))))
+            W0)
+           T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((HAYLAZ GORIL -IN MINIK KARDEŞ -I -N -I TATLıCA ÖP -DI -M)
+  (LAM X
+   (LAM W0
+    (LAM T0
+     (("EXISTS" T)
+      ((("AND" (("EARLIER" T0) T))
+        (((("KISS" ("SWEETLY" (("TINY" "SIBLING") ("NAUGHTY" "GORILLA")))) X)
+          W0)
+         T))
+       (((("KNOW"
+           (((("KISS" ("SWEETLY" (("TINY" "SIBLING") ("NAUGHTY" "GORILLA"))))
+              X)
+             W0)
+            T))
+          "SPEAKER")
+         W0)
+        T)))))))
+ ((HAYLAZ GORIL -I ÖP -DI -M)
+  (LAM X
+   (LAM W0
+    (LAM T0
+     (("EXISTS" T)
+      ((("AND" (("EARLIER" T0) T)) (((("KISS" ("NAUGHTY" "GORILLA")) X) W0) T))
+       (((("KNOW" (((("KISS" ("NAUGHTY" "GORILLA")) X) W0) T)) "SPEAKER") W0)
+        T)))))))
+ ((HAYLAZ GORIL -I YAVAŞÇA ÖP -EN GÜÇLÜ ASLAN KAYBOL -MIŞ 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       ((("GET_LOST"
+          ("AGENT"
+           (("KISS" ("SLOWLY" ("NAUGHTY" "GORILLA"))) ("STRONG" "LION"))))
+         W0)
+        T))
+      ("NOT"
+       (((("KNOW"
+           ((("GET_LOST"
+              ("AGENT"
+               (("KISS" ("SLOWLY" ("NAUGHTY" "GORILLA"))) ("STRONG" "LION"))))
+             W0)
+            T))
+          "SPEAKER")
+         W0)
+        T)))))))
+ ((HAYLAZ GORIL -I YAVAŞÇA ÖP -DI 0 GÜÇLÜ ASLAN)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("KISS" ("SLOWLY" ("NAUGHTY" "GORILLA"))) ("STRONG" "LION")) W0) T))
+      (((("KNOW"
+          (((("KISS" ("SLOWLY" ("NAUGHTY" "GORILLA"))) ("STRONG" "LION")) W0)
+           T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((KADıN -I HıRSıZ VUR -DI 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T)) (((("HIT" "WOMAN") "ROBBER") W0) T))
+      (((("KNOW" (((("HIT" "WOMAN") "ROBBER") W0) T)) "SPEAKER") W0) T))))))
+ ((KADıN -IN VUR -DIK -I HıRSıZ POLIS -I IT -DI 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("PUSH" "POLICEMAN") ("PATIENT" (("HIT" "ROBBER") "WOMAN"))) W0) T))
+      (((("KNOW"
+          (((("PUSH" "POLICEMAN") ("PATIENT" (("HIT" "ROBBER") "WOMAN"))) W0)
+           T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((KADıN -I VUR -EN HıRSıZ) ("AGENT" (("HIT" "WOMAN") "ROBBER")))
+ ((KADıN -I VUR -EN HıRSıZ POLIS -I IT -DI 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("PUSH" "POLICEMAN") ("AGENT" (("HIT" "WOMAN") "ROBBER"))) W0) T))
+      (((("KNOW"
+          (((("PUSH" "POLICEMAN") ("AGENT" (("HIT" "WOMAN") "ROBBER"))) W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((KADıN -I VUR -DI 0)
+  (LAM X
+   (LAM W0
+    (LAM T0
+     (("EXISTS" T)
+      ((("AND" (("EARLIER" T0) T)) (((("HIT" "WOMAN") X) W0) T))
+       (((("KNOW" (((("HIT" "WOMAN") X) W0) T)) "SPEAKER") W0) T)))))))
+ ((KEDI KÖPEK -IN TAVŞAN -I ıSıR -DIK -I -N -I GÖR -DI 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("SEE" ("NOMINAL" (("BITE" "RABBIT") "DOG"))) "CAT") W0) T))
+      (((("KNOW"
+          (((("SEE" ("NOMINAL" (("BITE" "RABBIT") "DOG"))) "CAT") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((KEDI -N -IN SÜT -I) ("MILK" "CAT"))
+ ((KITAP -I VE DERGI -Y -I OKU -DI -M)
+  (LAM X
+   (LAM W0
+    (LAM T0
+     (("EXISTS" T)
+      ((("AND" (("EARLIER" T0) T))
+        (((("READ" (("AND" "MAGAZINE") "BOOK")) X) W0) T))
+       (((("KNOW" (((("READ" (("AND" "MAGAZINE") "BOOK")) X) W0) T)) "SPEAKER")
+         W0)
+        T)))))))
+ ((KÖPEK -IN ıSıR -DIK -I TAVŞAN KAÇ -DI 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       ((("ESCAPE" ("PATIENT" (("BITE" "RABBIT") "DOG"))) W0) T))
+      (((("KNOW" ((("ESCAPE" ("PATIENT" (("BITE" "RABBIT") "DOG"))) W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((PRO ALI -N -IN KITAP -I AL -DIK -I -N -I GÖR -DI -M)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("SEE" ("NOMINAL" (("TAKE" "BOOK") "ALI"))) "SPEAKER") W0) T))
+      (((("KNOW"
+          (((("SEE" ("NOMINAL" (("TAKE" "BOOK") "ALI"))) "SPEAKER") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((PRO HAYLAZ GORIL -IN KARDEŞ -I -N -I ÖP -DI -M)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("KISS" ("SIBLING" ("NAUGHTY" "GORILLA"))) "SPEAKER") W0) T))
+      (((("KNOW"
+          (((("KISS" ("SIBLING" ("NAUGHTY" "GORILLA"))) "SPEAKER") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((PRO HAYLAZ GORIL -IN MINIK KARDEŞ -I -N -I TATLıCA ÖP -DI -M)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("KISS" ("SWEETLY" (("TINY" "SIBLING") ("NAUGHTY" "GORILLA"))))
+          "SPEAKER")
+         W0)
+        T))
+      (((("KNOW"
+          (((("KISS" ("SWEETLY" (("TINY" "SIBLING") ("NAUGHTY" "GORILLA"))))
+             "SPEAKER")
+            W0)
+           T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((PRO HAYLAZ GORIL -I ÖP -DI -M)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("KISS" ("NAUGHTY" "GORILLA")) "SPEAKER") W0) T))
+      (((("KNOW" (((("KISS" ("NAUGHTY" "GORILLA")) "SPEAKER") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((PRO -IN HAYLAZ GORIL -I KAYBOL -MIŞ 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       ((("GET_LOST" (("NAUGHTY" "GORILLA") "THIRD_PERSON")) W0) T))
+      ("NOT"
+       (((("KNOW" ((("GET_LOST" (("NAUGHTY" "GORILLA") "THIRD_PERSON")) W0) T))
+          "SPEAKER")
+         W0)
+        T)))))))
+ ((PRO KADıN -I VUR -DI 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T)) (((("HIT" "WOMAN") "THIRD_PERSON") W0) T))
+      (((("KNOW" (((("HIT" "WOMAN") "THIRD_PERSON") W0) T)) "SPEAKER") W0)
+       T))))))
+ ((PRO KITAP -I VE DERGI -Y -I OKU -DI -M)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("READ" (("AND" "MAGAZINE") "BOOK")) "SPEAKER") W0) T))
+      (((("KNOW" (((("READ" (("AND" "MAGAZINE") "BOOK")) "SPEAKER") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((AHMET ALI -N -IN KARDEŞ -I -N -IN DERGI -S -I -N -I OKU -DI 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("READ" ("MAGAZINE" ("SIBLING" "ALI"))) "AHMET") W0) T))
+      (((("KNOW" (((("READ" ("MAGAZINE" ("SIBLING" "ALI"))) "AHMET") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((AHMET KITAP -I VE DERGI -Y -I OKU -DI 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("READ" (("AND" "MAGAZINE") "BOOK")) "AHMET") W0) T))
+      (((("KNOW" (((("READ" (("AND" "MAGAZINE") "BOOK")) "AHMET") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((BEN KADıN -I IT -EN KÖPEK -I GÖR -DI -M)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("SEE" ("AGENT" (("PUSH" "WOMAN") "DOG"))) "SPEAKER") W0) T))
+      (((("KNOW"
+          (((("SEE" ("AGENT" (("PUSH" "WOMAN") "DOG"))) "SPEAKER") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((BEN KADıN -IN IT -DIK -I KÖPEK -I GÖR -DI -M)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("SEE" ("PATIENT" (("PUSH" "DOG") "WOMAN"))) "SPEAKER") W0) T))
+      (((("KNOW"
+          (((("SEE" ("PATIENT" (("PUSH" "DOG") "WOMAN"))) "SPEAKER") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((BEN KADıN -IN KÖPEK -I GÖR -DIK -I -N -I GÖR -IYOR -M)
+  (LAM W0
+   (LAM T0
+    (((("EXISTS" T1) "EXISTS") T2)
+     ((("AND" (("EARLIER" T0) T1)) (("EARLIER" T2) T0))
+      (((("SEE" ("NOMINAL" (("SEE" "DOG") "WOMAN"))) "SPEAKER") W0)
+       (T1 T2)))))))
+ ((BEN KADıN -IN KÖPEK -I IT -DIK -I -N -I GÖR -DI -M)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("SEE" ("NOMINAL" (("PUSH" "DOG") "WOMAN"))) "SPEAKER") W0) T))
+      (((("KNOW"
+          (((("SEE" ("NOMINAL" (("PUSH" "DOG") "WOMAN"))) "SPEAKER") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((BEN YÜRÜ -EN KADıN -I GÖR -DI -M)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T))
+       (((("SEE" ("AGENT" ("WALK" "WOMAN"))) "SPEAKER") W0) T))
+      (((("KNOW" (((("SEE" ("AGENT" ("WALK" "WOMAN"))) "SPEAKER") W0) T))
+         "SPEAKER")
+        W0)
+       T))))))
+ ((KADıN KÖPEK -I GÖR -DI 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     ((("AND" (("EARLIER" T0) T)) (((("SEE" "DOG") "WOMAN") W0) T))
+      (((("KNOW" (((("SEE" "DOG") "WOMAN") W0) T)) "SPEAKER") W0) T))))))
+ ((KADıN KÖPEK -I GÖR -ECEK 0)
+  (LAM W0
+   (LAM T0
+    (("EXISTS" T)
+     (("AND" (("EARLIER" T) T0)) (((("SEE" "DOG") "WOMAN") W0) T))))))
+ ((KADıN KÖPEK -I GÖR -IYOR 0)
+  (LAM W0
+   (LAM T0
+    (((("EXISTS" T1) "EXISTS") T2)
+     ((("AND" (("EARLIER" T0) T1)) (("EARLIER" T2) T0))
+      (((("SEE" "DOG") "WOMAN") W0) (T1 T2))))))))

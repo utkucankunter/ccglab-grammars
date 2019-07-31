@@ -1,0 +1,156 @@
+
+* (ccg-deduce '(kadın -in vur -dik -i hırsız polis -i it -di -0))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-IN) := ((NP/*NP)/*((NP/*NP)/*NP))\*NP
+        : (LAM X (LAM P (LAM A ((P A) X))))
+<     (KADıN)(-IN) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X)))) WOMAN)
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+ORC06 (-DIK) := (((NP/*NP)/*NP)\*((VP/*NP)/*NP))/*(NP\*NP)
+        : ((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+           ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+            (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+>     (-DIK)(-I) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : (((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+            ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+             (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+           (LAM X X))
+<     (VUR)(-DIK -I) := (NP/*NP)/*NP
+        : ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+             ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+              (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+            (LAM X X))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -IN)(VUR -DIK -I) := NP/*NP
+        : (((LAM X (LAM P (LAM A ((P A) X)))) WOMAN)
+           ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+              ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+               (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+             (LAM X X))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -IN VUR -DIK -I)(HıRSıZ) := NP
+        : ((((LAM X (LAM P (LAM A ((P A) X)))) WOMAN)
+            ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+               ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+              (LAM X X))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+MSBJ02 (KADıN -IN VUR -DIK -I HıRSıZ) := (S/*((S/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM P ((P A) X))))
+           ((((LAM X (LAM P (LAM A ((P A) X)))) WOMAN)
+             ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                 (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+               (LAM X X))
+              (LAM Y (LAM X ((HIT Y) X)))))
+            ROBBER))
+LEX   (POLIS) := NP
+        : POLICEMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (POLIS)(-I) := NP
+        : ((LAM X X) POLICEMAN)
+>     (KADıN -IN VUR -DIK -I HıRSıZ)(POLIS -I) := S/*((S/*NP)/*NP)
+        : (((LAM X (LAM A (LAM P ((P A) X))))
+            ((((LAM X (LAM P (LAM A ((P A) X)))) WOMAN)
+              ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                 ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                  (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                (LAM X X))
+               (LAM Y (LAM X ((HIT Y) X)))))
+             ROBBER))
+           ((LAM X X) POLICEMAN))
+LEX   (IT) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((PUSH Y) X)))
+P3S06 (-DI) := ((VP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM N (LAM P (LAM A (LAM X (N ((P A) X))))))
+           ((LAM N (LAM P (N P)))
+            (LAM P
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) ((P W0) T))
+                 ((((KNOW ((P W0) T)) SPEAKER) W0) T))))))))
+<     (IT)(-DI) := (VP/*NP)/*NP
+        : (((LAM N (LAM P (LAM A (LAM X (N ((P A) X))))))
+            ((LAM N (LAM P (N P)))
+             (LAM P
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) ((P W0) T))
+                  ((((KNOW ((P W0) T)) SPEAKER) W0) T))))))))
+           (LAM Y (LAM X ((PUSH Y) X))))
+AGR05 (0) := ((S/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM N (LAM P (LAM A (LAM X ((P A) X))))) 0)
+<     (IT -DI)(0) := (S/*NP)/*NP
+        : (((LAM N (LAM P (LAM A (LAM X ((P A) X))))) 0)
+           (((LAM N (LAM P (LAM A (LAM X (N ((P A) X))))))
+             ((LAM N (LAM P (N P)))
+              (LAM P
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) ((P W0) T))
+                   ((((KNOW ((P W0) T)) SPEAKER) W0) T))))))))
+            (LAM Y (LAM X ((PUSH Y) X)))))
+>     (KADıN -IN VUR -DIK -I HıRSıZ POLIS -I)(IT -DI 0) := S
+        : ((((LAM X (LAM A (LAM P ((P A) X))))
+             ((((LAM X (LAM P (LAM A ((P A) X)))) WOMAN)
+               ((((LAM M (LAM N (LAM P (LAM X (LAM Y (((M N) (P X)) Y))))))
+                  ((LAM M (LAM N (LAM P (LAM Y (((M N) P) Y)))))
+                   (LAM N (LAM P (LAM Y (PATIENT_ACTUAL_EVENT ((N P) Y)))))))
+                 (LAM X X))
+                (LAM Y (LAM X ((HIT Y) X)))))
+              ROBBER))
+            ((LAM X X) POLICEMAN))
+           (((LAM N (LAM P (LAM A (LAM X ((P A) X))))) 0)
+            (((LAM N (LAM P (LAM A (LAM X (N ((P A) X))))))
+              ((LAM N (LAM P (N P)))
+               (LAM P
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) ((P W0) T))
+                    ((((KNOW ((P W0) T)) SPEAKER) W0) T))))))))
+             (LAM Y (LAM X ((PUSH Y) X))))))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((EXISTS T)
+       (((AND ((EARLIER T0) T))
+         ((((PUSH POLICEMAN) (PATIENT_ACTUAL_EVENT ((HIT ROBBER) WOMAN))) W0)
+          T))
+        ((((KNOW
+            ((((PUSH POLICEMAN) (PATIENT_ACTUAL_EVENT ((HIT ROBBER) WOMAN)))
+              W0)
+             T))
+           SPEAKER)
+          W0)
+         T))))) =
+    (\ W0 . \ T0 . EXISTS T
+     (AND (EARLIER T0 T)
+      (PUSH POLICEMAN (PATIENT_ACTUAL_EVENT (HIT ROBBER WOMAN)) W0 T)
+      (KNOW (PUSH POLICEMAN (PATIENT_ACTUAL_EVENT (HIT ROBBER WOMAN)) W0 T)
+       SPEAKER W0 T)))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

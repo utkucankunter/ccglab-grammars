@@ -1,0 +1,41 @@
+
+* (ccg-deduce '(haylaz))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (HAYLAZ) := VP/*NP
+        : (LAM X (BE_NAUGHTY X))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (BE_NAUGHTY X)) =
+    (\ X . BE_NAUGHTY X)
+
+Derivation 2
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (NAUGHTY X)) =
+    (\ X . NAUGHTY X)
+
+Derivation 3
+--------------
+NOMVRBI00 (HAYLAZ) := NP
+        : ((LAM P (P SPEAKER)) (LAM X (NAUGHTY X)))
+
+Final LF, normal-order evaluated: 
+
+    (NAUGHTY SPEAKER) =
+    (NAUGHTY SPEAKER)
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

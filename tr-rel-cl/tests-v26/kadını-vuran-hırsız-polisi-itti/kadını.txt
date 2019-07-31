@@ -1,0 +1,215 @@
+
+* (ccg-deduce '(kadın -i))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+
+Final LF, normal-order evaluated: 
+
+    WOMAN =
+    (WOMAN)
+
+Derivation 2
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+
+Final LF, normal-order evaluated: 
+
+    WOMAN =
+    (WOMAN)
+
+Derivation 3
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+MOBJ00 (KADıN -I) := S/*((S/*NP)/*NP)
+        : ((LAM A (LAM P ((P A) PRO))) ((LAM X X) WOMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P ((P WOMAN) PRO)) =
+    (\ P . P WOMAN PRO)
+
+Derivation 4
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+MOBJC00 (KADıN -I) := (S/*S)/*(((S/*S)/*NP)/*NP)
+        : ((LAM A (LAM P (LAM S (((P A) PRO) S)))) ((LAM X X) WOMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM S (((P WOMAN) PRO) S))) =
+    (\ P . \ S . P WOMAN PRO S)
+
+Derivation 5
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+MOBJ07 (KADıN -I) := (S/*((S/*NP)/*NP))/*NP
+        : ((LAM A (LAM X (LAM P ((P A) X)))) ((LAM X X) WOMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (LAM P ((P WOMAN) X))) =
+    (\ X . \ P . P WOMAN X)
+
+Derivation 6
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+MOBJ08 (KADıN -I) := (S/*NP)/*((S/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM X ((P WOMAN) X))) =
+    (\ P . \ X . P WOMAN X)
+
+Derivation 7
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+MOBJC07 (KADıN -I) := ((S/*S)/*(((S/*S)/*NP)/*NP))/*NP
+        : ((LAM A (LAM X (LAM P (LAM S (((P A) X) S))))) ((LAM X X) WOMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (LAM P (LAM S (((P WOMAN) X) S)))) =
+    (\ X . \ P . \ S . P WOMAN X S)
+
+Derivation 8
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+MOBJC08 (KADıN -I) := ((S/*S)/*NP)/*(((S/*S)/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X (LAM S (((P A) X) S))))) ((LAM X X) WOMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM X (LAM S (((P WOMAN) X) S)))) =
+    (\ P . \ X . \ S . P WOMAN X S)
+
+Derivation 9
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM X ((P WOMAN) X))) =
+    (\ P . \ X . P WOMAN X)
+
+Derivation 10
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+ORCOBJ00 (KADıN -I) := (NP/*NP)/*(((NP/*NP)/*NP)/*NP)
+        : ((LAM A (LAM P (LAM B (((P B) A) PRO)))) ((LAM X X) WOMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM B (((P B) WOMAN) PRO))) =
+    (\ P . \ B . P B WOMAN PRO)
+
+Derivation 11
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+ORCOBJ07 (KADıN -I) := ((NP/*NP)/*(((NP/*NP)/*NP)/*NP))/*(NP/*NP)
+        : ((LAM A (LAM X (LAM P (LAM B (((P B) A) X))))) ((LAM X X) WOMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (LAM P (LAM B (((P B) WOMAN) X)))) =
+    (\ X . \ P . \ B . P B WOMAN X)
+
+Derivation 12
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+NOMOBJ00 (KADıN -I) := NP/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P ((P A) PRO))) ((LAM X X) WOMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P ((P WOMAN) PRO)) =
+    (\ P . P WOMAN PRO)
+
+Derivation 13
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+NOMOBJ14 (KADıN -I) := ((NP/*(NP/*NP))/*((NP/*NP)/*NP))/*(NP/*NP)
+        : ((LAM A (LAM X (LAM P ((P A) X)))) ((LAM X X) WOMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (LAM P ((P WOMAN) X))) =
+    (\ X . \ P . P WOMAN X)
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

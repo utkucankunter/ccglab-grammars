@@ -1,0 +1,185 @@
+(ali -n -in kitap -i kayıp -0  |:|  !be_lost  |(| !book !ali |)|  |;| 
+kayıp -0 ali -n -in kitap -i  |:|  !be_lost  |(| !book !ali |)|  |;| 
+
+ali -n -in kitap -i ve dergi -s -i kayıp -0  |:|  !BE_LOST  |(| !AND  |(| !MAGAZINE !ALI |)|   |(| !BOOK !ALI |)|  |)|  |;| 
+kayıp -0 ali -n -in kitap -i ve dergi -s -i  |:|  !BE_LOST  |(| !AND  |(| !MAGAZINE !ALI |)|   |(| !BOOK !ALI |)|  |)|  |;| 
+
+ali -n -in kitap -i al -dik -i -n -i gör -di -m  |:|   |\\| X |\\| W0 |\\| T0 |.| !EXISTS T  |(| !AND  |(| !EARLIER T0 T |)|   |(| !SEE  |(| !NOMINAL  |(| !TAKE !BOOK !ALI |)|  |)|  X W0 T |)|   |(| !KNOW  |(| !SEE  |(| !NOMINAL  |(| !TAKE !BOOK !ALI |)|  |)|  X W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+gör -di -m ali -n -in kitap -i al -dik -i -n -i  |:|   |\\| X |\\| W0 |\\| T0 |.| !EXISTS T  |(| !AND  |(| !EARLIER T0 T |)|   |(| !SEE  |(| !NOMINAL  |(| !TAKE !BOOK !ALI |)|  |)|  X W0 T |)|   |(| !KNOW  |(| !SEE  |(| !NOMINAL  |(| !TAKE !BOOK !ALI |)|  |)|  X W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+pro ali -n -in kitap -i al -dik -i -n -i gör -di -m  |:|   |\\| W0 |\\| T0 |.| !EXISTS T  |(| !AND  |(| !EARLIER T0 T |)|   |(| !SEE  |(| !NOMINAL  |(| !TAKE !BOOK !ALI |)|  |)|  !SPEAKER W0 T |)|   |(| !KNOW  |(| !SEE  |(| !NOMINAL  |(| !TAKE !BOOK !ALI |)|  |)|  !SPEAKER W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+ali -n -in kitap -i al -dik -i -n -i gör -di -m pro  |:|   |\\| W0 |\\| T0 |.| !EXISTS T  |(| !AND  |(| !EARLIER T0 T |)|   |(| !SEE  |(| !NOMINAL  |(| !TAKE !BOOK !ALI |)|  |)|  !SPEAKER W0 T |)|   |(| !KNOW  |(| !SEE  |(| !NOMINAL  |(| !TAKE !BOOK !ALI |)|  |)|  !SPEAKER W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+gör -di -m pro ali -n -in kitap -i al -dik -i -n -i  |:|   |\\| W0 |\\| T0 |.| !EXISTS T  |(| !AND  |(| !EARLIER T0 T |)|   |(| !SEE  |(| !NOMINAL  |(| !TAKE !BOOK !ALI |)|  |)|  !SPEAKER W0 T |)|   |(| !KNOW  |(| !SEE  |(| !NOMINAL  |(| !TAKE !BOOK !ALI |)|  |)|  !SPEAKER W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+haylaz goril -i hızlıca it -en güçlü aslan yavaş fil -i öp -di -0  |:|   |\\| W0 |\\| T0 |.| !EXISTS T  |(| !AND  |(| !EARLIER T0 T |)|   |(| !KISS  |(| !SLOW !ELEPHANT |)|   |(| !AGENT  |(| !PUSH  |(| !QUICKLY  |(| !NAUGHTY !GORILLA |)|  |)|   |(| !STRONG !LION |)|  |)|  |)|  W0 T |)|   |(| !KNOW  |(| !KISS  |(| !SLOW !ELEPHANT |)|   |(| !AGENT  |(| !PUSH  |(| !QUICKLY  |(| !NAUGHTY !GORILLA |)|  |)|   |(| !STRONG !LION |)|  |)|  |)|  W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+yavaş fil -i öp -di -0 haylaz goril -i hızlıca it -en güçlü aslan  |:|   |\\| W0 |\\| T0 |.| !EXISTS T  |(| !AND  |(| !EARLIER T0 T |)|   |(| !KISS  |(| !SLOW !ELEPHANT |)|   |(| !AGENT  |(| !PUSH  |(| !QUICKLY  |(| !NAUGHTY !GORILLA |)|  |)|   |(| !STRONG !LION |)|  |)|  |)|  W0 T |)|   |(| !KNOW  |(| !KISS  |(| !SLOW !ELEPHANT |)|   |(| !AGENT  |(| !PUSH  |(| !QUICKLY  |(| !NAUGHTY !GORILLA |)|  |)|   |(| !STRONG !LION |)|  |)|  |)|  W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+haylaz goril -i hızlıca it -en güçlü aslan öp -di -0 yavaş fil -i  |:|   |\\| W0 |\\| T0 |.| !EXISTS T  |(| !AND  |(| !EARLIER T0 T |)|   |(| !KISS  |(| !SLOW !ELEPHANT |)|   |(| !AGENT  |(| !PUSH  |(| !QUICKLY  |(| !NAUGHTY !GORILLA |)|  |)|   |(| !STRONG !LION |)|  |)|  |)|  W0 T |)|   |(| !KNOW  |(| !KISS  |(| !SLOW !ELEPHANT |)|   |(| !AGENT  |(| !PUSH  |(| !QUICKLY  |(| !NAUGHTY !GORILLA |)|  |)|   |(| !STRONG !LION |)|  |)|  |)|  W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+öp -di -0 haylaz goril -i hızlıca it -en güçlü aslan yavaş fil -i  |:|   |\\| W0 |\\| T0 |.| !EXISTS T  |(| !AND  |(| !EARLIER T0 T |)|   |(| !KISS  |(| !SLOW !ELEPHANT |)|   |(| !AGENT  |(| !PUSH  |(| !QUICKLY  |(| !NAUGHTY !GORILLA |)|  |)|   |(| !STRONG !LION |)|  |)|  |)|  W0 T |)|   |(| !KNOW  |(| !KISS  |(| !SLOW !ELEPHANT |)|   |(| !AGENT  |(| !PUSH  |(| !QUICKLY  |(| !NAUGHTY !GORILLA |)|  |)|   |(| !STRONG !LION |)|  |)|  |)|  W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+haylaz goril -in hızlıca it -dik -i güçlü aslan yavaş fil -i öp -di -0  |:|  
+    |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| AND  |(| !EARLIER T0 T |)| 
+       |(| !KISS  |(| !SLOW !ELEPHANT |)| 
+        |(| !PATIENT  |(| !PUSH  |(| !STRONG !LION |)|   |(| !QUICKLY  |(| !NAUGHTY !GORILLA |)|  |)|  |)|  |)|  W0 T |)| 
+       |(| !KNOW
+        |(| !KISS  |(| !SLOW !ELEPHANT |)| 
+         |(| !PATIENT  |(| !PUSH  |(| !STRONG !LION |)|   |(| !QUICKLY  |(| !NAUGHTY !GORILLA |)|  |)|  |)|  |)|  W0 T |)| 
+       !SPEAKER W0 T |)|  |)|  |;| 
+
+haylaz goril -in minik kardeş -i -n -i tatlıca öp -di -m  |:|  
+     |\\|  X  |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)| 
+       |(| !KISS  |(| !SWEETLY  |(| !TINY !SIBLING  |(| !NAUGHTY !GORILLA |)|  |)|  |)|  X W0 T |)| 
+       |(| !KNOW  |(| !KISS  |(| !SWEETLY  |(| !TINY !SIBLING  |(| !NAUGHTY !GORILLA |)|  |)|  |)|  X W0 T |)|  !SPEAKER W0
+       T |)|  |)|  |;| 
+
+haylaz goril -i öp -di -m  |:|  
+     |\\|  X  |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !KISS  |(| !NAUGHTY !GORILLA |)|  X W0 T |)| 
+       |(| !KNOW  |(| !KISS  |(| !NAUGHTY !GORILLA |)|  X W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+haylaz goril -i yavaşça öp -en güçlü aslan kaybol -miş -0  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)| 
+       |(| !GET_LOST  |(| !AGENT  |(| !KISS  |(| !SLOWLY  |(| !NAUGHTY !GORILLA |)|  |)|   |(| !STRONG !LION |)|  |)|  |)|  W0 T |)| 
+       |(| !NOT
+        |(| !KNOW
+         |(| !GET_LOST  |(| !AGENT  |(| !KISS  |(| !SLOWLY  |(| !NAUGHTY !GORILLA |)|  |)|   |(| !STRONG !LION |)|  |)|  |)|  W0 T |)| 
+        !SPEAKER W0 T |)|  |)|  |)|  |;| 
+
+haylaz goril -i yavaşça öp -di -0 güçlü aslan  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !KISS  |(| !SLOWLY  |(| !NAUGHTY !GORILLA |)|  |)|   |(| !STRONG !LION |)|  W0 T |)| 
+       |(| !KNOW  |(| !KISS  |(| !SLOWLY  |(| !NAUGHTY !GORILLA |)|  |)|   |(| !STRONG !LION |)|  W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+kadın -i hırsız vur -di -0  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !HIT !WOMAN !ROBBER W0 T |)| 
+       |(| !KNOW  |(| !HIT !WOMAN !ROBBER W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+kadın -in vur -dik -i hırsız polis -i it -di -0  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !PUSH !POLICEMAN  |(| !PATIENT  |(| !HIT !ROBBER !WOMAN |)|  |)|  W0 T |)| 
+       |(| !KNOW  |(| !PUSH !POLICEMAN  |(| !PATIENT  |(| !HIT !ROBBER !WOMAN |)|  |)|  W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+kadın -i vur -en hırsız  |:|  !AGENT  |(| !HIT !WOMAN !ROBBER |)|  |;| 
+
+kadın -i vur -en hırsız polis -i it -di -0  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !PUSH !POLICEMAN  |(| !AGENT  |(| !HIT !WOMAN !ROBBER |)|  |)|  W0 T |)| 
+       |(| !KNOW  |(| !PUSH !POLICEMAN  |(| !AGENT  |(| !HIT !WOMAN !ROBBER |)|  |)|  W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+kadın -i vur -di -0  |:|  
+     |\\|  X  |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !HIT !WOMAN X W0 T |)| 
+       |(| !KNOW  |(| !HIT !WOMAN X W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+kedi köpek -in tavşan -i ısır -dik -i -n -i gör -di -0  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !SEE  |(| !NOMINAL  |(| !BITE !RABBIT !DOG |)|  |)|  !CAT W0 T |)| 
+       |(| !KNOW  |(| !SEE  |(| !NOMINAL  |(| !BITE !RABBIT !DOG |)|  |)|  !CAT W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+kedi -n -in süt -i  |:|  !MILK !CAT |;| 
+
+kitap -i ve dergi -y -i oku -di -m  |:|  
+     |\\|  X  |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !READ  |(| !AND !MAGAZINE !BOOK |)|  X W0 T |)| 
+       |(| !KNOW  |(| !READ  |(| !AND !MAGAZINE !BOOK |)|  X W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+köpek -in ısır -dik -i tavşan kaç -di -0  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !ESCAPE  |(| !PATIENT  |(| !BITE !RABBIT !DOG |)|  |)|  W0 T |)| 
+       |(| !KNOW  |(| !ESCAPE  |(| !PATIENT  |(| !BITE !RABBIT !DOG |)|  |)|  W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+pro ali -n -in kitap -i al -dik -i -n -i gör -di -m  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !SEE  |(| !NOMINAL  |(| !TAKE !BOOK !ALI |)|  |)|  !SPEAKER W0 T |)| 
+       |(| !KNOW  |(| !SEE  |(| !NOMINAL  |(| !TAKE !BOOK !ALI |)|  |)|  !SPEAKER W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+pro haylaz goril -in kardeş -i -n -i öp -di -m  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !KISS  |(| !SIBLING  |(| !NAUGHTY !GORILLA |)|  |)|  !SPEAKER W0 T |)| 
+       |(| !KNOW  |(| !KISS  |(| !SIBLING  |(| !NAUGHTY !GORILLA |)|  |)|  !SPEAKER W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+pro haylaz goril -in minik kardeş -i -n -i tatlıca öp -di -m  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)| 
+       |(| !KISS  |(| !SWEETLY  |(| !TINY !SIBLING  |(| !NAUGHTY !GORILLA |)|  |)|  |)|  !SPEAKER W0 T |)| 
+       |(| !KNOW  |(| !KISS  |(| !SWEETLY  |(| !TINY !SIBLING  |(| !NAUGHTY !GORILLA |)|  |)|  |)|  !SPEAKER W0 T |)| 
+       !SPEAKER W0 T |)|  |)|  |;| 
+
+pro haylaz goril -i öp -di -m  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !KISS  |(| !NAUGHTY !GORILLA |)|  !SPEAKER W0 T |)| 
+       |(| !KNOW  |(| !KISS  |(| !NAUGHTY !GORILLA |)|  !SPEAKER W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+pro -in haylaz goril -i kaybol -miş -0  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !GET_LOST  |(| !NAUGHTY !GORILLA !THIRD_PERSON |)|  W0 T |)| 
+       |(| !NOT  |(| !KNOW  |(| !GET_LOST  |(| !NAUGHTY !GORILLA !THIRD_PERSON |)|  W0 T |)|  !SPEAKER W0 T |)|  |)|  |)|  |;| 
+
+pro kadın -i vur -di -0  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !HIT !WOMAN !THIRD_PERSON W0 T |)| 
+       |(| !KNOW  |(| !HIT !WOMAN !THIRD_PERSON W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+pro kitap -i ve dergi -y -i oku -di -m  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !READ  |(| !AND !MAGAZINE !BOOK |)|  !SPEAKER W0 T |)| 
+       |(| !KNOW  |(| !READ  |(| !AND !MAGAZINE !BOOK |)|  !SPEAKER W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+ahmet ali -n -in kardeş -i -n -in dergi -s -i -n -i oku -di -0  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !READ  |(| !MAGAZINE  |(| !SIBLING !ALI |)|  |)|  !AHMET W0 T |)| 
+       |(| !KNOW  |(| !READ  |(| !MAGAZINE  |(| !SIBLING !ALI |)|  |)|  !AHMET W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+
+
+
+
+
+
+
+
+
+ahmet kitap -i ve dergi -y -i oku -di -0  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !READ  |(| !AND !MAGAZINE !BOOK |)|  !AHMET W0 T |)| 
+       |(| !KNOW  |(| !READ  |(| !AND !MAGAZINE !BOOK |)|  !AHMET W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+ben kadın -i it -en köpek -i gör -di -m  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !SEE  |(| !AGENT  |(| !PUSH !WOMAN !DOG |)|  |)|  !SPEAKER W0 T |)| 
+       |(| !KNOW  |(| !SEE  |(| !AGENT  |(| !PUSH !WOMAN !DOG |)|  |)|  !SPEAKER W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+ben kadın -in it -dik -i köpek -i gör -di -m  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !SEE  |(| !PATIENT  |(| !PUSH !DOG !WOMAN |)|  |)|  !SPEAKER W0 T |)| 
+       |(| !KNOW  |(| !SEE  |(| !PATIENT  |(| !PUSH !DOG !WOMAN |)|  |)|  !SPEAKER W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+ben kadın -in köpek -i gör -dik -i -n -i gör -iyor -m  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T1 !EXISTS T2
+      |(| !AND  |(| !EARLIER T0 T1 |)|   |(| !EARLIER T2 T0 |)| 
+       |(| !SEE  |(| !NOMINAL  |(| !SEE !DOG !WOMAN |)|  |)|  !SPEAKER W0  |(| T1 T2 |)|  |)|  |)|  |;| 
+
+ben kadın -in köpek -i it -dik -i -n -i gör -di -m  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !SEE  |(| !NOMINAL  |(| !PUSH !DOG !WOMAN |)|  |)|  !SPEAKER W0 T |)| 
+       |(| !KNOW  |(| !SEE  |(| !NOMINAL  |(| !PUSH !DOG !WOMAN |)|  |)|  !SPEAKER W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+ben yürü -en kadın -i gör -di -m  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !SEE  |(| !AGENT  |(| !WALK !WOMAN |)|  |)|  !SPEAKER W0 T |)| 
+       |(| !KNOW  |(| !SEE  |(| !AGENT  |(| !WALK !WOMAN |)|  |)|  !SPEAKER W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+kadın köpek -i gör -di -0  |:|  
+    |\\|  W0  |\\|  T0  |.|  !EXISTS T
+      |(| !AND  |(| !EARLIER T0 T |)|   |(| !SEE !DOG !WOMAN W0 T |)| 
+       |(| !KNOW  |(| !SEE !DOG !WOMAN W0 T |)|  !SPEAKER W0 T |)|  |)|  |;| 
+
+kadın köpek -i gör -ecek -0  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T  |(| !AND  |(| !EARLIER T T0 |)|   |(| !SEE !DOG !WOMAN W0 T |)|  |)|  |;| 
+
+kadın köpek -i gör -iyor -0  |:|  
+     |\\|  W0  |\\|  T0  |.|  !EXISTS T1 !EXISTS T2
+      |(| !AND  |(| !EARLIER T0 T1 |)|   |(| !EARLIER T2 T0 |)|   |(| !SEE !DOG !WOMAN W0  |(| T1 T2 |)|  |)|  |)|  |;| 
+)

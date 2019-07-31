@@ -1,0 +1,614 @@
+
+* (ccg-deduce '(kadın -i vur -en hırsız))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (VUR)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -I)(VUR -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -I VUR -EN)(HıRSıZ) := NP
+        : ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+            (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+              ((LAM M (LAM P (LAM X (M (P X)))))
+               (LAM P (LAM X (AGENT (P X))))))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+
+Final LF, normal-order evaluated: 
+
+    (AGENT ((HIT WOMAN) ROBBER)) =
+    (AGENT (HIT WOMAN ROBBER))
+
+Derivation 2
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (VUR)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -I)(VUR -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -I VUR -EN)(HıRSıZ) := NP
+        : ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+            (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+              ((LAM M (LAM P (LAM X (M (P X)))))
+               (LAM P (LAM X (AGENT (P X))))))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+MSBJ01 (KADıN -I VUR -EN HıRSıZ) := S/*(S/*NP)
+        : ((LAM X (LAM P (P X)))
+           ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+             (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+               ((LAM M (LAM P (LAM X (M (P X)))))
+                (LAM P (LAM X (AGENT (P X))))))
+              (LAM Y (LAM X ((HIT Y) X)))))
+            ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (P (AGENT ((HIT WOMAN) ROBBER)))) =
+    (\ P . P (AGENT (HIT WOMAN ROBBER)))
+
+Derivation 3
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (VUR)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -I)(VUR -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -I VUR -EN)(HıRSıZ) := NP
+        : ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+            (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+              ((LAM M (LAM P (LAM X (M (P X)))))
+               (LAM P (LAM X (AGENT (P X))))))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+MSBJ02 (KADıN -I VUR -EN HıRSıZ) := (S/*((S/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM P ((P A) X))))
+           ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+             (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+               ((LAM M (LAM P (LAM X (M (P X)))))
+                (LAM P (LAM X (AGENT (P X))))))
+              (LAM Y (LAM X ((HIT Y) X)))))
+            ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A (LAM P ((P A) (AGENT ((HIT WOMAN) ROBBER))))) =
+    (\ A . \ P . P A (AGENT (HIT WOMAN ROBBER)))
+
+Derivation 4
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (VUR)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -I)(VUR -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -I VUR -EN)(HıRSıZ) := NP
+        : ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+            (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+              ((LAM M (LAM P (LAM X (M (P X)))))
+               (LAM P (LAM X (AGENT (P X))))))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+MSBJ03 (KADıN -I VUR -EN HıRSıZ) := (S/*NP)/*((S/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A ((P A) X))))
+           ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+             (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+               ((LAM M (LAM P (LAM X (M (P X)))))
+                (LAM P (LAM X (AGENT (P X))))))
+              (LAM Y (LAM X ((HIT Y) X)))))
+            ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM A ((P A) (AGENT ((HIT WOMAN) ROBBER))))) =
+    (\ P . \ A . P A (AGENT (HIT WOMAN ROBBER)))
+
+Derivation 5
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (VUR)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -I)(VUR -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -I VUR -EN)(HıRSıZ) := NP
+        : ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+            (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+              ((LAM M (LAM P (LAM X (M (P X)))))
+               (LAM P (LAM X (AGENT (P X))))))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+MSBJ04 (KADıN -I VUR -EN HıRSıZ) := ((S/*(((S/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM A (LAM B (LAM P (((P B) A) X)))))
+           ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+             (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+               ((LAM M (LAM P (LAM X (M (P X)))))
+                (LAM P (LAM X (AGENT (P X))))))
+              (LAM Y (LAM X ((HIT Y) X)))))
+            ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A (LAM B (LAM P (((P B) A) (AGENT ((HIT WOMAN) ROBBER)))))) =
+    (\ A . \ B . \ P . P B A (AGENT (HIT WOMAN ROBBER)))
+
+Derivation 6
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (VUR)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -I)(VUR -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -I VUR -EN)(HıRSıZ) := NP
+        : ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+            (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+              ((LAM M (LAM P (LAM X (M (P X)))))
+               (LAM P (LAM X (AGENT (P X))))))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+MSBJC01 (KADıN -I VUR -EN HıRSıZ) := (S/*S)/*((S/*S)/*NP)
+        : ((LAM X (LAM P (LAM S ((P X) S))))
+           ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+             (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+               ((LAM M (LAM P (LAM X (M (P X)))))
+                (LAM P (LAM X (AGENT (P X))))))
+              (LAM Y (LAM X ((HIT Y) X)))))
+            ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM S ((P (AGENT ((HIT WOMAN) ROBBER))) S))) =
+    (\ P . \ S . P (AGENT (HIT WOMAN ROBBER)) S)
+
+Derivation 7
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (VUR)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -I)(VUR -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -I VUR -EN)(HıRSıZ) := NP
+        : ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+            (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+              ((LAM M (LAM P (LAM X (M (P X)))))
+               (LAM P (LAM X (AGENT (P X))))))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+MSBJC02 (KADıN -I VUR -EN HıRSıZ) := ((S/*S)/*(((S/*S)/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM P (LAM S (((P A) X) S)))))
+           ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+             (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+               ((LAM M (LAM P (LAM X (M (P X)))))
+                (LAM P (LAM X (AGENT (P X))))))
+              (LAM Y (LAM X ((HIT Y) X)))))
+            ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A (LAM P (LAM S (((P A) (AGENT ((HIT WOMAN) ROBBER))) S)))) =
+    (\ A . \ P . \ S . P A (AGENT (HIT WOMAN ROBBER)) S)
+
+Derivation 8
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (VUR)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -I)(VUR -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -I VUR -EN)(HıRSıZ) := NP
+        : ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+            (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+              ((LAM M (LAM P (LAM X (M (P X)))))
+               (LAM P (LAM X (AGENT (P X))))))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+MSBJC03 (KADıN -I VUR -EN HıRSıZ) := ((S/*S)/*NP)/*(((S/*S)/*NP)/*NP)
+        : ((LAM X (LAM P (LAM A (LAM S (((P A) X) S)))))
+           ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+             (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+               ((LAM M (LAM P (LAM X (M (P X)))))
+                (LAM P (LAM X (AGENT (P X))))))
+              (LAM Y (LAM X ((HIT Y) X)))))
+            ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM A (LAM S (((P A) (AGENT ((HIT WOMAN) ROBBER))) S)))) =
+    (\ P . \ A . \ S . P A (AGENT (HIT WOMAN ROBBER)) S)
+
+Derivation 9
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (VUR)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -I)(VUR -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -I VUR -EN)(HıRSıZ) := NP
+        : ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+            (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+              ((LAM M (LAM P (LAM X (M (P X)))))
+               (LAM P (LAM X (AGENT (P X))))))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+MSBJC04 (KADıN -I VUR -EN HıRSıZ) := (((S/*S)/*((((S/*S)/*NP)/*NP)/*NP))/*NP)/*NP
+        : ((LAM X (LAM B (LAM A (LAM P (LAM S ((((P B) A) X) S))))))
+           ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+             (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+               ((LAM M (LAM P (LAM X (M (P X)))))
+                (LAM P (LAM X (AGENT (P X))))))
+              (LAM Y (LAM X ((HIT Y) X)))))
+            ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM B (LAM A (LAM P (LAM S ((((P B) A) (AGENT ((HIT WOMAN) ROBBER))) S))))) =
+    (\ B . \ A . \ P . \ S . P B A (AGENT (HIT WOMAN ROBBER)) S)
+
+Derivation 10
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (VUR)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -I)(VUR -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -I VUR -EN)(HıRSıZ) := NP
+        : ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+            (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+              ((LAM M (LAM P (LAM X (M (P X)))))
+               (LAM P (LAM X (AGENT (P X))))))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+VPSBJ01 (KADıN -I VUR -EN HıRSıZ) := VP/*(VP/*NP)
+        : ((LAM X (LAM V (V X)))
+           ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+             (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+               ((LAM M (LAM P (LAM X (M (P X)))))
+                (LAM P (LAM X (AGENT (P X))))))
+              (LAM Y (LAM X ((HIT Y) X)))))
+            ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V (V (AGENT ((HIT WOMAN) ROBBER)))) =
+    (\ V . V (AGENT (HIT WOMAN ROBBER)))
+
+Derivation 11
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (VUR)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -I)(VUR -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -I VUR -EN)(HıRSıZ) := NP
+        : ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+            (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+              ((LAM M (LAM P (LAM X (M (P X)))))
+               (LAM P (LAM X (AGENT (P X))))))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+VPSBJ02 (KADıN -I VUR -EN HıRSıZ) := (VP/*NP)/*((VP/*NP)/*NP)
+        : ((LAM X (LAM V (LAM A ((V A) X))))
+           ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+             (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+               ((LAM M (LAM P (LAM X (M (P X)))))
+                (LAM P (LAM X (AGENT (P X))))))
+              (LAM Y (LAM X ((HIT Y) X)))))
+            ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V (LAM A ((V A) (AGENT ((HIT WOMAN) ROBBER))))) =
+    (\ V . \ A . V A (AGENT (HIT WOMAN ROBBER)))
+
+Derivation 12
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (VUR)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -I)(VUR -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -I VUR -EN)(HıRSıZ) := NP
+        : ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+            (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+              ((LAM M (LAM P (LAM X (M (P X)))))
+               (LAM P (LAM X (AGENT (P X))))))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+VPSBJ03 (KADıN -I VUR -EN HıRSıZ) := (VP/*((VP/*NP)/*NP))/*NP
+        : ((LAM X (LAM A (LAM V ((V A) X))))
+           ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+             (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+               ((LAM M (LAM P (LAM X (M (P X)))))
+                (LAM P (LAM X (AGENT (P X))))))
+              (LAM Y (LAM X ((HIT Y) X)))))
+            ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM A (LAM V ((V A) (AGENT ((HIT WOMAN) ROBBER))))) =
+    (\ A . \ V . V A (AGENT (HIT WOMAN ROBBER)))
+
+Derivation 13
+--------------
+LEX   (KADıN) := NP
+        : WOMAN
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (KADıN)(-I) := NP
+        : ((LAM X X) WOMAN)
+SRCOBJ01 (KADıN -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+LEX   (VUR) := (VP/*NP)/*NP
+        : (LAM Y (LAM X ((HIT Y) X)))
+SRC06 (-EN) := ((NP/*NP)/*NP)\*((VP/*NP)/*NP)
+        : ((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+           ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+<     (VUR)(-EN) := (NP/*NP)/*NP
+        : (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+            ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+           (LAM Y (LAM X ((HIT Y) X))))
+>     (KADıN -I)(VUR -EN) := NP/*NP
+        : (((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+           (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+             ((LAM M (LAM P (LAM X (M (P X))))) (LAM P (LAM X (AGENT (P X))))))
+            (LAM Y (LAM X ((HIT Y) X)))))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+>     (KADıN -I VUR -EN)(HıRSıZ) := NP
+        : ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+            (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+              ((LAM M (LAM P (LAM X (M (P X)))))
+               (LAM P (LAM X (AGENT (P X))))))
+             (LAM Y (LAM X ((HIT Y) X)))))
+           ROBBER)
+VPSBJ04 (KADıN -I VUR -EN HıRSıZ) := ((VP/*NP)/*NP)/*(((VP/*NP)/*NP)/*NP)
+        : ((LAM X (LAM V (LAM B (LAM A (((V B) A) X)))))
+           ((((LAM A (LAM P (LAM X ((P A) X)))) ((LAM X X) WOMAN))
+             (((LAM M (LAM P (LAM A (LAM X (((M P) A) X)))))
+               ((LAM M (LAM P (LAM X (M (P X)))))
+                (LAM P (LAM X (AGENT (P X))))))
+              (LAM Y (LAM X ((HIT Y) X)))))
+            ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM V (LAM B (LAM A (((V B) A) (AGENT ((HIT WOMAN) ROBBER)))))) =
+    (\ V . \ B . \ A . V B A (AGENT (HIT WOMAN ROBBER)))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

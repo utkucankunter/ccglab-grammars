@@ -1,0 +1,545 @@
+
+* (ccg-deduce '(haylaz goril -i))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+
+Final LF, normal-order evaluated: 
+
+    (NAUGHTY GORILLA) =
+    (NAUGHTY GORILLA)
+
+Derivation 2
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+
+Final LF, normal-order evaluated: 
+
+    (NAUGHTY GORILLA) =
+    (NAUGHTY GORILLA)
+
+Derivation 3
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+
+Final LF, normal-order evaluated: 
+
+    (NAUGHTY GORILLA) =
+    (NAUGHTY GORILLA)
+
+Derivation 4
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+
+Final LF, normal-order evaluated: 
+
+    (NAUGHTY GORILLA) =
+    (NAUGHTY GORILLA)
+
+Derivation 5
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+MOBJ00 (HAYLAZ GORIL -I) := S/*((S/*NP)/*NP)
+        : ((LAM A (LAM P ((P A) PRO)))
+           ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P ((P (NAUGHTY GORILLA)) PRO)) =
+    (\ P . P (NAUGHTY GORILLA) PRO)
+
+Derivation 6
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+MOBJ00 (HAYLAZ GORIL -I) := S/*((S/*NP)/*NP)
+        : ((LAM A (LAM P ((P A) PRO)))
+           ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P ((P (NAUGHTY GORILLA)) PRO)) =
+    (\ P . P (NAUGHTY GORILLA) PRO)
+
+Derivation 7
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+MOBJC00 (HAYLAZ GORIL -I) := (S/*S)/*(((S/*S)/*NP)/*NP)
+        : ((LAM A (LAM P (LAM S (((P A) PRO) S))))
+           ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM S (((P (NAUGHTY GORILLA)) PRO) S))) =
+    (\ P . \ S . P (NAUGHTY GORILLA) PRO S)
+
+Derivation 8
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+MOBJC00 (HAYLAZ GORIL -I) := (S/*S)/*(((S/*S)/*NP)/*NP)
+        : ((LAM A (LAM P (LAM S (((P A) PRO) S))))
+           ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM S (((P (NAUGHTY GORILLA)) PRO) S))) =
+    (\ P . \ S . P (NAUGHTY GORILLA) PRO S)
+
+Derivation 9
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+MOBJ07 (HAYLAZ GORIL -I) := (S/*((S/*NP)/*NP))/*NP
+        : ((LAM A (LAM X (LAM P ((P A) X))))
+           ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (LAM P ((P (NAUGHTY GORILLA)) X))) =
+    (\ X . \ P . P (NAUGHTY GORILLA) X)
+
+Derivation 10
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+MOBJ07 (HAYLAZ GORIL -I) := (S/*((S/*NP)/*NP))/*NP
+        : ((LAM A (LAM X (LAM P ((P A) X))))
+           ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (LAM P ((P (NAUGHTY GORILLA)) X))) =
+    (\ X . \ P . P (NAUGHTY GORILLA) X)
+
+Derivation 11
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+MOBJ08 (HAYLAZ GORIL -I) := (S/*NP)/*((S/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X))))
+           ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM X ((P (NAUGHTY GORILLA)) X))) =
+    (\ P . \ X . P (NAUGHTY GORILLA) X)
+
+Derivation 12
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+MOBJ08 (HAYLAZ GORIL -I) := (S/*NP)/*((S/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X))))
+           ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM X ((P (NAUGHTY GORILLA)) X))) =
+    (\ P . \ X . P (NAUGHTY GORILLA) X)
+
+Derivation 13
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+MOBJC07 (HAYLAZ GORIL -I) := ((S/*S)/*(((S/*S)/*NP)/*NP))/*NP
+        : ((LAM A (LAM X (LAM P (LAM S (((P A) X) S)))))
+           ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (LAM P (LAM S (((P (NAUGHTY GORILLA)) X) S)))) =
+    (\ X . \ P . \ S . P (NAUGHTY GORILLA) X S)
+
+Derivation 14
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+MOBJC07 (HAYLAZ GORIL -I) := ((S/*S)/*(((S/*S)/*NP)/*NP))/*NP
+        : ((LAM A (LAM X (LAM P (LAM S (((P A) X) S)))))
+           ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (LAM P (LAM S (((P (NAUGHTY GORILLA)) X) S)))) =
+    (\ X . \ P . \ S . P (NAUGHTY GORILLA) X S)
+
+Derivation 15
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+MOBJC08 (HAYLAZ GORIL -I) := ((S/*S)/*NP)/*(((S/*S)/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X (LAM S (((P A) X) S)))))
+           ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM X (LAM S (((P (NAUGHTY GORILLA)) X) S)))) =
+    (\ P . \ X . \ S . P (NAUGHTY GORILLA) X S)
+
+Derivation 16
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+MOBJC08 (HAYLAZ GORIL -I) := ((S/*S)/*NP)/*(((S/*S)/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X (LAM S (((P A) X) S)))))
+           ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM X (LAM S (((P (NAUGHTY GORILLA)) X) S)))) =
+    (\ P . \ X . \ S . P (NAUGHTY GORILLA) X S)
+
+Derivation 17
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+SRCOBJ01 (HAYLAZ GORIL -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X))))
+           ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM X ((P (NAUGHTY GORILLA)) X))) =
+    (\ P . \ X . P (NAUGHTY GORILLA) X)
+
+Derivation 18
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+SRCOBJ01 (HAYLAZ GORIL -I) := (NP/*NP)/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P (LAM X ((P A) X))))
+           ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM X ((P (NAUGHTY GORILLA)) X))) =
+    (\ P . \ X . P (NAUGHTY GORILLA) X)
+
+Derivation 19
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+ORCOBJ00 (HAYLAZ GORIL -I) := (NP/*NP)/*(((NP/*NP)/*NP)/*NP)
+        : ((LAM A (LAM P (LAM B (((P B) A) PRO))))
+           ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM B (((P B) (NAUGHTY GORILLA)) PRO))) =
+    (\ P . \ B . P B (NAUGHTY GORILLA) PRO)
+
+Derivation 20
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+ORCOBJ00 (HAYLAZ GORIL -I) := (NP/*NP)/*(((NP/*NP)/*NP)/*NP)
+        : ((LAM A (LAM P (LAM B (((P B) A) PRO))))
+           ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P (LAM B (((P B) (NAUGHTY GORILLA)) PRO))) =
+    (\ P . \ B . P B (NAUGHTY GORILLA) PRO)
+
+Derivation 21
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+ORCOBJ07 (HAYLAZ GORIL -I) := ((NP/*NP)/*(((NP/*NP)/*NP)/*NP))/*(NP/*NP)
+        : ((LAM A (LAM X (LAM P (LAM B (((P B) A) X)))))
+           ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (LAM P (LAM B (((P B) (NAUGHTY GORILLA)) X)))) =
+    (\ X . \ P . \ B . P B (NAUGHTY GORILLA) X)
+
+Derivation 22
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+ORCOBJ07 (HAYLAZ GORIL -I) := ((NP/*NP)/*(((NP/*NP)/*NP)/*NP))/*(NP/*NP)
+        : ((LAM A (LAM X (LAM P (LAM B (((P B) A) X)))))
+           ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (LAM P (LAM B (((P B) (NAUGHTY GORILLA)) X)))) =
+    (\ X . \ P . \ B . P B (NAUGHTY GORILLA) X)
+
+Derivation 23
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+NOMOBJ00 (HAYLAZ GORIL -I) := NP/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P ((P A) PRO)))
+           ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P ((P (NAUGHTY GORILLA)) PRO)) =
+    (\ P . P (NAUGHTY GORILLA) PRO)
+
+Derivation 24
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+NOMOBJ00 (HAYLAZ GORIL -I) := NP/*((NP/*NP)/*NP)
+        : ((LAM A (LAM P ((P A) PRO)))
+           ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM P ((P (NAUGHTY GORILLA)) PRO)) =
+    (\ P . P (NAUGHTY GORILLA) PRO)
+
+Derivation 25
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (GORIL)(-I) := NP
+        : ((LAM X X) GORILLA)
+>     (HAYLAZ)(GORIL -I) := NP
+        : ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA))
+NOMOBJ14 (HAYLAZ GORIL -I) := ((NP/*(NP/*NP))/*((NP/*NP)/*NP))/*(NP/*NP)
+        : ((LAM A (LAM X (LAM P ((P A) X))))
+           ((LAM X (NAUGHTY X)) ((LAM X X) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (LAM P ((P (NAUGHTY GORILLA)) X))) =
+    (\ X . \ P . P (NAUGHTY GORILLA) X)
+
+Derivation 26
+--------------
+LEX   (HAYLAZ) := NP/*NP
+        : (LAM X (NAUGHTY X))
+LEX   (GORIL) := NP
+        : GORILLA
+>     (HAYLAZ)(GORIL) := NP
+        : ((LAM X (NAUGHTY X)) GORILLA)
+LEX   (-I) := NP\*NP
+        : (LAM X X)
+<     (HAYLAZ GORIL)(-I) := NP
+        : ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA))
+NOMOBJ14 (HAYLAZ GORIL -I) := ((NP/*(NP/*NP))/*((NP/*NP)/*NP))/*(NP/*NP)
+        : ((LAM A (LAM X (LAM P ((P A) X))))
+           ((LAM X X) ((LAM X (NAUGHTY X)) GORILLA)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (LAM P ((P (NAUGHTY GORILLA)) X))) =
+    (\ X . \ P . P (NAUGHTY GORILLA) X)
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

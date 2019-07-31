@@ -1,0 +1,1047 @@
+%CCG for Turkish Finite-Verb Inflection
+%Utku Can Kunter, April 2018
+
+%For questions, corrections and suggestions: uckunter@gmail.com
+%This is a work-in-progress, please do not judge harshly.
+
+%References:
+
+%Rules do not cover the following (among many others):
+
+%Rules are replicated to cover:
+
+%Items are grouped according to their functions:
+%%Stems, words, phrases: NPs, Also, Verbs, Auxiliary, Quick VPs, Speech env
+%%Suffixes: Non-finite verb suffix attempts, Negation (Non-finite verbs), 
+%%Generic agreement
+%Features are used for restricting the number of possible derivations:
+
+%Workflow:
+%%(load-grammar "finite-verb-suffixes" :maker 'sbcl)
+%%(ccg-deduce '(ahmet gel -di -agr))
+%%(cky-show-deduction)
+%%(cky-pprint)
+
+%Some examples:
+%%(ccg-deduce '(ahmet gel -me -di -agr))
+
+%**********************
+%Type-raising ensures incremental parsing is possible; but non-incremental parsing is still legal, due to verbs being of form vp\np or v\np\np. 
+%Verb forms will be converted to vp/np and vp/np/np as the default option. Other word orders are handled in subject and object type-raises.
+%Even if the default word order happens to be fitting, it will not violate the incrementality assumption.
+%**********************
+
+%Type-raising
+%%Type-raising only accounts for structures left-to-right, to ensure the parse is constructed incrementally.
+%%NP /SUBJECT/ /MAIN SENTENCE/ type-raising, word orders with s at the beginning
+%**********************
+%No transitive causative for now
+%**********************
+%%The feature verb=itr|tr is necessary for avoiding awkward derivations due to free word order.
+%%Converbs must occur right before the verb
+%%Conditional sentences must be separately dealt with
+(MSBJ01)	np[case=nom,agr=?x1] : x --> s[agr=?x1,verb=itr]/*(s[agr=?x1,verb=itr]/*np[case=nom,agr=?x1]) %intransitive %sv
+				: \x\p.p x;
+(MSBJ02)	np[case=nom,agr=?x1] : x --> (s[agr=?x1,verb=tr]/*((s[agr=?x1,verb=tr]/*np[case=nom,agr=?x1])/*np[case=acc]))/*np[case=acc] %transitive %sov
+				: \x\a\p.p a x;
+(MSBJ03)	np[case=nom,agr=?x1] : x --> (s[agr=?x1,verb=tr]/*np[case=acc])/*((s[agr=?x1,verb=tr]/*np[case=nom,agr=?x1])/*np[case=acc]) %transitive %svo
+				: \x\p\a.p a x;
+(MSBJ04)	np[case=nom,agr=?x1] : x --> ((s[agr=?x1,verb=tr]/*(((s[agr=?x1,verb=tr]/*np[case=nom,agr=?x1])/*np[case=acc])/*np[case=dat]))/*np[case=acc])/*np[case=dat] %causative transitive %soov
+				: \x\a\b\p.p b a x; 
+
+(MSBJC01)	np[case=nom,agr=?x1] : x --> (s[agr=?x1,verb=itr]/*s[mod=false,pos=7])/*((s[agr=?x1,verb=itr]/*s[mod=false,pos=7])/*np[case=nom,agr=?x1]) %intransitive %sv
+				: \x\p\s.p x s;
+(MSBJC02)	np[case=nom,agr=?x1] : x --> ((s[agr=?x1,verb=tr]/*s[mod=false,pos=7])/*(((s[agr=?x1,verb=tr]/*s[mod=false,pos=7])/*np[case=nom,agr=?x1])/*np[case=acc]))/*np[case=acc] %transitive %sov
+				: \x\a\p\s.p a x s;
+(MSBJC03)	np[case=nom,agr=?x1] : x --> ((s[agr=?x1,verb=tr]/*s[mod=false,pos=7])/*np[case=acc])/*(((s[agr=?x1,verb=tr]/*s[mod=false,pos=7])/*np[case=nom,agr=?x1])/*np[case=acc]) %transitive %svo
+				: \x\p\a\s.p a x s;
+(MSBJC04)	np[case=nom,agr=?x1] : x --> (((s[agr=?x1,verb=tr]/*s[mod=false,pos=7])/*((((s[agr=?x1,verb=tr]/*s[mod=false,pos=7])/*np[case=nom,agr=?x1])/*np)/*np))/*np)/*np %transitive %soov
+				: \x\b\a\p\s.p b a x s;
+
+%%Verb phrase subjects
+%***********************
+%No object type-raising for now
+%************************
+(VPSBJ01)	np[case=nom,agr=?x1] : x --> vp[vp=time_conv,pos=converb,verb=?x9]/*(vp[vp=time_conv,pos=converb,verb=?x9]/*np) %intransitve %sv
+				: \x\v.v x;			
+(VPSBJ02)	np[case=nom,agr=?x1] : x --> (vp[vp=time_conv,pos=converb,verb=?x9]/*np)/*((vp[vp=time_conv,pos=converb,verb=?x9]/*np)/*np) %transitive %svo
+				: \x\v\a.v a x;		
+(VPSBJ03)	np[case=nom,agr=?x1] : x --> (vp[vp=time_conv,pos=converb,verb=?x9]/*((vp[vp=time_conv,pos=converb,verb=?x9]/*np)/*np))/*np %transitive %sov
+				: \x\a\v.v a x;			
+(VPSBJ04)	np[case=nom,agr=?x1] : x --> ((vp[vp=time_conv,pos=converb,verb=?x9]/*np)/*np)/*(((vp[vp=time_conv,pos=converb,verb=?x9]/*np)/*np)/*np) %ditransitive %svoo
+				: \x\v\b\a.v b a x;		
+
+%%NP /OBJECT/ /MAIN SENTENCE/ type-raising, word orders with o at the beginning
+%%%Pro-drop is accounted for.
+%*****************
+%%%Actually ?x2 must occur in the set (acc,dat,loc,abl), but let's not complicate things for now
+%*****************
+(MOBJ00)	np[case=acc] : a --> s[agr=1s,verb=tr]/*((s[agr=1s,verb=tr]/*np[case=nom,agr=1s])/*np[case=acc]) %transitive %ov %geçici
+				: \a\p.p a !pro;
+(MOBJC00)	np[case=acc] : a --> (s[agr=1s,verb=tr]/*s[mod=false,pos=7])/*(((s[agr=1s,verb=tr]/*s[mod=false,pos=7])/*np[case=nom,agr=1s])/*np[case=acc]) %transitive %ov %geçici
+				: \a\p\s.p a !pro s;
+
+%(MOBJ01)	np[case=?x2] : a --> s[agr=1s]/*((s[agr=1s,verb=tr]/*np[case=nom,agr=1s])/*np[case=?x2]) %transitive %ov
+%				: \a\p.p a !speaker;
+%(MOBJ02)	np[case=?x2] : a --> s[agr=2s]/*((s[agr=2s,verb=tr]/*np[case=nom,agr=2s])/*np[case=?x2]) %transitive %ov
+%				: \a\p.p a !hearer;
+%(MOBJ03)	np[case=?x2] : a --> s[agr=3s]/*((s[agr=3s,verb=tr]/*np[case=nom,agr=3s])/*np[case=?x2]) %transitive %ov
+%				: \a\p.p a !third_person;
+%MOBJ04)	np[case=?x2] : a --> s[agr=1p]/*((s[agr=1p,verb=tr]/*np[case=nom,agr=1p])/*np[case=?x2]) %transitive %ov
+%				: \a\p.p a !team_speaker;
+%(MOBJ05)	np[case=?x2] : a --> s[agr=2p]/*((s[agr=2p,verb=tr]/*np[case=nom,agr=2p])/*np[case=?x2]) %transitive %ov
+%				: \a\p.p a !team_hearer;
+%(MOBJ06)	np[case=?x2] : a --> s[agr=3p]/*((s[agr=3p,verb=tr]/*np[case=nom,agr=3p])/*np[case=?x2]) %transitive %ov
+%				: \a\p.p a !team_third;
+				
+(MOBJ07)	np[case=acc] : a --> (s[agr=?x1,verb=tr]/*((s[agr=?x1,verb=tr]/*np[case=nom,agr=?x1])/*np[case=acc]))/*np[case=nom,agr=?x1] %transitive %osv
+				: \a\x\p.p a x;
+(MOBJ08)	np[case=acc] : a --> (s[agr=?x1,verb=tr]/*np[case=nom,agr=?x1])/*((s[agr=?x1,verb=tr]/*np[case=nom,agr=?x1])/*np[case=acc]) %transitive %ovs
+				: \a\p\x.p a x;
+
+(MOBJC07)	np[case=acc] : a --> ((s[agr=?x1,verb=tr]/*s[mod=false,pos=7])/*(((s[agr=?x1,verb=tr]/*s[mod=false,pos=7])/*np[case=nom,agr=?x1])/*np[case=acc]))/*np[case=nom,agr=?x1] %transitive %osv
+				: \a\x\p\s.p a x s;
+(MOBJC08)	np[case=acc] : a --> ((s[agr=?x1,verb=tr]/*s[mod=false,pos=7])/*np[case=nom,agr=?x1])/*(((s[agr=?x1,verb=tr]/*s[mod=false,pos=7])/*np[case=nom,agr=?x1])/*np[case=acc]) %transitive %ovs
+				: \a\p\x\s.p a x s;
+
+%%Intransitive /VERB/ /MAIN SENTENCE/ type-raising, word orders with v at the beginning
+%%%Pro-drop is accounted for.
+%%%vs is accounted for by the default form.
+(MVRBI00)	s[agr=1s,verb=itr]/*np[case=nom,agr=1s] : p --> s[agr=1s,verb=itr] %v %geçici
+				: \p.p !pro;
+%(MVRBI01)	s[agr=1s,verb=itr]/*np[case=nom,agr=1s] : p --> s[agr=1s,verb=itr] %v
+%				: \p.p !speaker;
+%(MVRBI02)	s[agr=2s,verb=itr]/*np[case=nom,agr=2s] : p --> s[agr=2s,verb=itr] %v
+%				: \p.p !hearer;
+%(MVRBI03)	s[agr=3s,verb=itr]/*np[case=nom,agr=3s] : p --> s[agr=3s,verb=itr] %v
+%				: \p.p !third_person;
+%(MVRBI04)	s[agr=1p,verb=itr]/*np[case=nom,agr=1p] : p --> s[agr=1p,verb=itr] %v
+%				: \p.p !team_speaker;
+%(MVRBI05)	s[agr=2p,verb=itr]/*np[case=nom,agr=2p] : p --> s[agr=2p,verb=itr] %v
+%				: \p.p !team_hearer;
+%(MVRBI06)	s[agr=3p,verb=itr]/*np[case=nom,agr=3p] : p --> s[agr=3p,verb=itr] %v
+%				: \p.p !team_third;
+				
+%%Transitive /VERB/ type-raising
+%%%Pro-drop is accounted for.
+%%%vos is accounted for by the default form.
+(MVRBT00)	s[agr=1s,verb=tr]/*np[case=nom,agr=1s]/*np[case=acc] 
+			: p --> s[agr=1s,verb=tr]/*np[case=acc] %vo %geçici
+			: \p\a.p a !pro;
+%(MVRBT01)	s[agr=1s,verb=tr]/*np[case=nom,agr=1s]/*np[case=?x2] 
+%			: p --> s[agr=1s,verb=tr]/*np[case=?x2] %vo
+%			: \p\a.p a !speaker;
+%(MVRBT02)	s[agr=2s,verb=tr]/*np[case=nom,agr=2s]/*np[case=?x2] 
+%			: p --> s[agr=2s,verb=tr]/*np[case=?x2] %vo
+%			: \p\a.p a !hearer;
+%(MVRBT03)	s[agr=3s,verb=tr]/*np[case=nom,agr=3s]/*np[case=?x2] 
+%			: p --> s[agr=3s,verb=tr]/*np[case=?x2] %vo
+%			: \p\a.p a !third_person;
+%(MVRBT04)	s[agr=1p,verb=tr]/*np[case=nom,agr=1p]/*np[case=?x2] 
+%			: p --> s[agr=1p,verb=tr]/*np[case=?x2] %vo
+%			: \p\a.p a !team_speaker;
+%(MVRBT05)	s[agr=2p,verb=tr]/*np[case=nom,agr=2p]/*np[case=?x2] 
+%			: p --> s[agr=2p,verb=tr]/*np[case=?x2] %vo
+%			: \p\a.p a !team_hearer;
+%(MVRBT06)	s[agr=3p,verb=tr]/*np[case=nom,agr=3p]/*np[case=?x2] 
+%			: p --> s[agr=3p,verb=tr]/*np[case=?x2] %vo
+%			: \p\a.p a !team_third;
+
+(MVRBT07)	s[agr=?x1,verb=tr]/*np[case=nom,agr=?x1]/*np[case=acc] 
+			: p --> (s[agr=?x1,verb=tr]/*np[case=acc])/*np[case=nom,agr=?x1] %vso
+			: \p\x\a.p a x;
+				
+%Stems, words, phrases
+%%NPs
+kitap		n := np[case=nom,agr=3s] : !book;
+dergi		n := np[case=nom,agr=3s] : !magazine;
+mektup		n := np[case=nom,agr=3s] : !letter;
+
+adam		n := np[case=nom,agr=3s] : !man;
+kadın		n := np[case=nom,agr=3s] : !woman;
+kardeş		n := np[case=nom,agr=3s] : !sibling;
+
+goril		n := np[case=nom,agr=3s] : !gorilla;
+aslan		n := np[case=nom,agr=3s] : !lion;
+fil			n := np[case=nom,agr=3s] : !elephant;
+kedi		n := np[case=nom,agr=3s] : !cat;
+köpek		n := np[case=nom,agr=3s] : !dog;
+tavşan		n := np[case=nom,agr=3s] : !rabbit;
+
+sabah		n := np[case=nom,agr=3s] : !morning;
+zaman		n := np[case=nom,agr=3s] : !time;
+
+oda			n := np[case=nom,agr=3s] : !room;
+yer			n := np[case=nom,agr=3s] : !place;
+ev			n := np[case=nom,agr=3s] : !house;
+
+süt			n := np[case=nom,agr=3s] : !milk;
+
+ne			n := np[case=nom,agr=3s] : !what;
+
+%%NPs - Legacy
+pro			n := np[case=nom,agr=1s] : !speaker;
+pro			n := np[case=nom,agr=2s] : !hearer;
+pro			n := np[case=nom,agr=3s] : !third_person;
+pro			n := np[case=nom,agr=1p] : !team_speaker;
+pro			n := np[case=nom,agr=2p] : !team_hearer;
+pro			n := np[case=nom,agr=3p] : !team_third;
+
+ben 		n := np[case=nom,agr=1s] : !speaker;
+sen 		n := np[case=nom,agr=2s] : !hearer;
+o			n := np[case=nom,agr=3s] : !third_person;
+biz 		n := np[case=nom,agr=1p] : !team_speaker;
+siz 		n := np[case=nom,agr=2p] : !team_hearer;
+onlar		n := np[case=nom,agr=3p] : !team_third;
+
+söz 		n := np[case=nom,agr=3s] : !promise;
+huzur 		n := np[case=nom,agr=3s] : !peace;
+şeker 		n := np[case=nom,agr=3s] : !candy;
+
+komiser 	n := np[case=nom,agr=3s] : !officer;
+polis 		n := np[case=nom,agr=3s] : !policeman;
+polise 		n := np[case=nom,agr=3s] : !policeman;
+hırsız		n := np[case=nom,agr=3s] : !robber;
+hırsızı		n := np[case=nom,agr=3s] : !robber;
+hırsızın	n := np[case=nom,agr=3s] : !robber;
+hapse		n := np[case=nom,agr=3s] : !to_prison;
+
+beşinci_ödev n := np[case=nom,agr=3s] : !fifth_asg;
+borcu 		n := np[case=nom,agr=3s] : !loan;
+araba 		n := np[case=nom,agr=3s] : !car;
+
+ahmet		n := np[case=nom,agr=3s] : !ahmet;
+ali			n := np[case=nom,agr=3s] : !ali;
+ahmetin		n := np[case=nom,agr=3s] : !ahmet;
+herkes		n := np[case=nom,agr=3s] : !everyone;
+kimse		n := np[case=nom,agr=3s] : !no_one;
+
+%%Connectives
+%%özel olarak aynı genitive'e bağlı possessive'ler için bir ve kuralı olmalı
+%%ve için incrementality varsayımı fazla maliyetli olur, hiçbir np arkasından ve bekleyerek okunmaz; demek ki ve görünce bir adım geri atıyoruz.
+ve  	n := (np[case=?x1,agr=?x2]\*np[case=?x1,agr=?x2])/*np[case=?x1,agr=?x2] 
+			: \a1\a2.!and a1 a2;
+ve 		n := ((np[case=nom,agr=3s]\*(np[case=nom,agr=3s]/*np[case=poss,agr=?x1]))\*np[case=poss,agr=?x1])/*np[case=poss,agr=?x1]
+			: \a1\a2\x.!and (a1 x) (a2 x);
+ve 		n := ((np[case=nom,agr=3s])\*np[case=poss,agr=?x1])/*np[case=poss,agr=?x1]
+			: \a1\a2.!and (a1 pro) (a2 pro);
+ve  	n := (vp\*vp)/*vp : \v1\v2.!and v1 v2;
+ve  	n := (s\*s)/*s : \s1\s2.!and s1 s2;
+
+%%Connectives - Legacy (not really a connective)
+de 			n := np[case=?x]\*np[case=?x] : \x.x;
+
+%%Adjectivals
+haylaz		adj := np[case=?x1,agr=?x2]/*np[case=?x1,agr=?x2] : \x.!naughty x;
+güçlü		adj := np[case=?x1,agr=?x2]/*np[case=?x1,agr=?x2] : \x.!strong x;
+yavaş		adj := np[case=?x1,agr=?x2]/*np[case=?x1,agr=?x2] : \x.!slow x;
+kayıp		adj := np[case=?x1,agr=?x2]/*np[case=?x1,agr=?x2] : \x.!lost x;
+minik		adj := np[case=?x1,agr=?x2]/*np[case=?x1,agr=?x2] : \x.!tiny x;
+
+haylaz		v := vp[pos=0]/*np[case=nom] : \x.!be_naughty x; %sv
+güçlü		v := vp[pos=0]/*np[case=nom] : \x.!be_strong x; %sv
+yavaş		v := vp[pos=0]/*np[case=nom] : \x.!be_slow x; %sv
+kayıp		v := vp[pos=0]/*np[case=nom] : \x.!be_lost x; %sv
+minik		v := vp[pos=0]/*np[case=nom] : \x.!be_tiny x; %sv
+
+%%Adverbials
+%%If we assume no category other than verb based clauses (nominal, adjectival, adverbial or verb phrase) take the form s, the following are ok.
+hızlıca		adv := vp[pos=0,verb=?x1]/*vp[pos=0,verb=?x1]
+				: \p.!quickly p;
+yavaşça		adv := vp[pos=0,verb=?x1]/*vp[pos=0,verb=?x1]
+				: \p.!slowly p;
+tatlıca		adv := vp[pos=0,verb=?x1]/*vp[pos=0,verb=?x1]
+				: \p.!sweetly p;
+				
+%% /ADVERB/ type-raising
+(ADV01)	vp[pos=0,verb=?x1]/*vp[pos=0,verb=?x1] : a --> (vp[pos=0,verb=itr]/*np[case=nom,agr=?x1])/*(vp[pos=0,verb=itr]/*np[case=nom,agr=?x1])
+			: \a\p\x.a (p x);
+(ADV02)	vp[pos=0,verb=?x1]/*vp[pos=0,verb=?x1] : a --> ((vp[pos=0,verb=tr]/*np[case=nom,agr=?x1])/*np[case=?x2])/*((vp[pos=0,verb=tr]/*np[case=nom,agr=?x1])/*np[case=?x2])
+			: \a\p\b\x.a (p b x);
+(ADV03)	vp[pos=0,verb=?x1]/*vp[pos=0,verb=?x1] : a --> (((vp[pos=0,verb=tr]/*np[case=nom,agr=?x1])/*np[case=?x2])/*np[case=?x3])/*(((vp[pos=0,verb=tr]/*np[case=nom,agr=?x1])/*np[case=?x2])/*np[case=?x3])
+			: \a\p\c\b\x.a (p c b x);
+
+%%Verbs 
+%%Modified word order is handled on verbs
+oku		v := vp[pos=0,verb=itr,caus=false,mod=false]/*np[case=nom] : \x.!read x; %sv
+gel		v := vp[pos=0,verb=itr,caus=false,mod=false]/*np[case=nom] : \x.!come x; %sv
+kaybol	v := vp[pos=0,verb=itr,caus=false,mod=false]/*np[case=nom] : \x.!get_lost x; %sv
+kaç		v := vp[pos=0,verb=itr,caus=false,mod=false]/*np[case=nom] : \x.!escape x; %sv
+uyu		v := vp[pos=0,verb=itr,caus=false,mod=false]/*np[case=nom] : \x.!sleep x; %sv
+yürü 	v := vp[pos=0,verb=itr,caus=false,mod=false]/*np[case=nom] : \x.!walk x; %sv
+konuş 	v := vp[pos=0,verb=itr,caus=false,mod=false]/*np[case=nom] : \x.!speak x; %
+
+oku		v := (vp[pos=0,verb=tr,caus=false,mod=false]/*np[case=nom])/*np[case=acc] : \y\x.!read y x; %sov
+al		v := (vp[pos=0,verb=tr,caus=false,mod=false]/*np[case=nom])/*np[case=acc] : \y\x.!take y x; %sov
+ısır 	v := (vp[pos=0,verb=tr,caus=false,mod=false]/*np[case=nom])/*np[case=acc] : \y\x.!bite y x; %sov
+gör		v := (vp[pos=0,verb=tr,caus=false,mod=false]/*np[case=nom])/*np[case=acc] : \y\x.!see y x; %sov
+öp		v := (vp[pos=0,verb=tr,caus=false,mod=false]/*np[case=nom])/*np[case=acc] : \y\x.!kiss y x; %sov
+vur		v := (vp[pos=0,verb=tr,caus=false,mod=false]/*np[case=nom])/*np[case=acc] : \y\x.!hit y x; %sov
+kaç		v := (vp[pos=0,verb=tr,caus=false,mod=false]/*np[case=nom])/*np[case=abl] : \y\x.!escape y x; %
+gönder 	v := (vp[pos=0,verb=tr,caus=false,mod=false]/*np[case=nom])/*np[case=acc] : \y\x.!send y x;%sov
+it		v := (vp[pos=0,verb=tr,caus=false,mod=false]/*np[case=nom])/*np[case=acc] : \y\x.!push y x; %sov
+
+%Quick time converbs
+sen_okuldayken	vp := vp[vp=time_conv] : \w0\t0.(!time !hearer_at_school);
+hapisteyken	vp := vp[vp=time_conv] : \w0\t0.(!time !was_in_jail);
+
+%%Case Markers
+%%% \* instead of \* because relative clauses may be composed of multiple words
+%%%If we use \*, we would need an additional set of rules for non-finite verbs
+-i		c := np[case=acc]\*np[case=nom] : \x.x;
+-e		c := np[case=dat]\*np[case=nom] : \x.x;
+-de		c := np[case=loc]\*np[case=nom] : \x.x;
+-den	c := np[case=abl]\*np[case=nom] : \x.x;
+-in		c := (np[case=nom,agr=3s]/*np[case=poss,agr=?x1])\*np[case=nom,agr=?x1] : \x\y.x y; %all agr except 1s 
+-im		c := (np[case=nom,agr=3s]/*np[case=poss,agr=1s])\*np[case=nom,agr=1s] : \x\y.x y;
+
+%%NOM-LOC -> "geldiğinde"
+-de 	c := vp[vp=time_conv]\*np[case=nom,clause=NOM] : \x.!time x;
+
+%ORCSBJ
+-in		c := ((np[case=nom,agr=3s]/*np[case=nom])/*((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])/*np[case=gen,agr=?x1]))\*np[case=nom] %intransitive %sv->o
+			: \x\p\a.p a x;
+-im		c := ((np[case=nom,agr=3s]/*np[case=nom])/*((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])/*np[case=gen,agr=1s]))\*np[case=nom] %intransitive %sv->o
+			: \x\p\a.p a x;
+
+-in		c := ((np[case=nom,agr=3s]/*np[case=nom])/*((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=?x1]))\*np[case=nom] %transitive %sv->o
+			: \x\p\a.p a x;
+-im		c := ((np[case=nom,agr=3s]/*np[case=nom])/*((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=1s]))\*np[case=nom] %transitive %sv->o
+			: \x\p\a.p a x;
+
+-in		c := (((np[case=nom,agr=3s]/*np[case=nom])/*(((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=?x1])/*np[case=?x3]))/*np[case=?x3])\*np[case=nom] %transitive %sov->o
+			: \x\b\p\a.p b a x;
+-im		c := (((np[case=nom,agr=3s]/*np[case=nom])/*(((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=1s])/*np[case=?x3]))/*np[case=?x3])\*np[case=nom] %transitive %sov->o
+			: \x\b\p\a.p b a x;
+
+%NOMSBJ
+-in		c := (np[case=nom,agr=3s]/*(np[case=nom,clause=NOM,verb=itr]/*np[case=gen,agr=?x1]))\*np[case=nom] %intransitive %sv
+			: \x\p.p x;
+-im		c := (np[case=nom,agr=3s]/*(np[case=nom,clause=NOM,verb=itr]/*np[case=gen,agr=1s]))\*np[case=nom] %intransitive %sv
+			: \x\p.p x;
+
+-in		c := ((np[case=nom,agr=3s]/*((np[case=nom,clause=NOM,verb=tr]/*np[case=gen,agr=?x1])/*np[case=acc]))/*np[case=acc])\*np[case=nom] %transitive %sov
+			: \x\a\p.p a x;
+-im		c := ((np[case=nom,agr=3s]/*((np[case=nom,clause=NOM,verb=tr]/*np[case=gen,agr=1s])/*np[case=acc]))/*np[case=acc])\*np[case=nom] %transitive %sov
+			: \x\a\p.p a x;
+
+%%%case markers can also convert an adjective to a case marked np
+%********************
+%şimdilik uğraşmayalım, sıfatların beklediği variable'ı ortadan kaybetmek lazım.
+%********************
+%-i		c := np[case=acc]\*(np/*np) : \x.x;
+%-e		c := np[case=dat]\*(np/*np) : \x.x;
+%-de	c := np[case=loc]\*(np/*np) : \x.x;
+%-den	c := np[case=abl]\*(np/*np) : \x.x;
+%-in	c := (np[case=nom,agr=3s]/*np[case=poss])\*(np/*np) : \x\y.x y; %all agr except 1s 
+%-im	c := (np[case=nom,agr=3s]/*np[case=poss,agr=1s])\*(np/*np) : \x\y.x y;
+
+%%%possessive: "senin kitabın"
+-im		c := np[case=poss,agr=1s]\*np[case=nom] : \x.x;
+-in		c := np[case=poss,agr=2s]\*np[case=nom] : \x.x;
+-i		c := np[case=poss,agr=3s]\*np[case=nom] : \x.x;
+-imiz	c := np[case=poss,agr=1p]\*np[case=nom] : \x.x;
+-iniz	c := np[case=poss,agr=2p]\*np[case=nom] : \x.x;
+-leri	c := np[case=poss,agr=3p]\*np[case=nom] : \x.x;
+
+%% /POSS/ type-raising
+-in		c := np[case=nom,agr=3s]\*np[case=nom,agr=3s]
+				: \a.!pro a; %çalışmıyor
+
+%(POSS01)	np[case=poss,agr=1s] : a --> np[case=nom,agr=3s]
+%				: \a.!speaker a;
+%(POSS02)	np[case=poss,agr=2s] : a --> np[case=nom,agr=3s]
+%				: \a.!hearer a;
+%(POSS03)	np[case=poss,agr=3s] : a --> np[case=nom,agr=3s]
+%				: \a.!third_person a;
+%(POSS04)	np[case=poss,agr=1p] : a --> np[case=nom,agr=3s]
+%				: \a.!team_speaker a;
+%(POSS05)	np[case=poss,agr=2p] : a --> np[case=nom,agr=3s]
+%				: \a.!team_hearer a;
+%(POSS06)	np[case=poss,agr=3p] : a --> np[case=nom,agr=3s]
+%				: \a.!team_third a;
+
+%%Plural
+-ler	c := np[case=?x1,agr=?x2]\*np[case=?x1,agr=?x2] : \x.!plural x;
+
+%%Blending Consonant - Binds to the next suffix
+-y	c := @X/*@X : \n.n;
+-ş	c := @X/*@X : \n.n;
+-s	c := @X/*@X : \n.n;
+-n	c := @X/*@X : \n.n;
+
+%%Type-raising for nominals: v must come last, otherwise the sentence is incomprehensible
+%%NP /SUBJECT/ /ORC-NOM/ type-raising
+%There are no ORCSBJ## or NOMSBJ## rules, because taking a genitive expecting a possessive and converting it to a verb expecting subject does not account for the missing variable for the expected possessive. Instead, alternative rules for genitive markers are provided that produce ORCSBJ's.
+			
+%%NP /OBJECT/ /ORC-NOM/ type-raising
+%%%Pro-drop is accounted for.
+%%%Nominals must end with v, they are incomprehensible otherwise
+%*****************
+%%%Actually ?x2 must occur in the set (acc,dat,loc,abl), but let's not complicate things for now
+%*****************
+(SRCOBJ01)	np[case=acc] : a --> (np[case=nom,agr=3s]/*np[case=nom])/*((np[case=nom,clause=SRC,verb=tr]/*np[case=nom])/*np[case=acc]) %transitive %ov->s
+				: \a\p\x.p a x;
+
+(ORCOBJ00)	np[case=acc] : a --> (np[case=nom,agr=3s]/*np[case=nom])/*(((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=1s])/*np[case=acc]) %transitive %ov %geçici
+				: \a\p\b.p b a !pro;
+%(ORCOBJ01)	np[case=?x2] : a --> (np[case=nom,agr=3s]/*np[case=nom])/*(((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=1s])/*np[case=?x2]) %transitive %ov
+%				: \a\p\b.p b a !speaker;
+%(ORCOBJ02)	np[case=?x2] : a --> (np[case=nom,agr=3s]/*np[case=nom])/*(((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=2s])/*np[case=?x2]) %transitive %ov
+%				: \a\p\b.p b a !hearer;
+%(ORCOBJ03)	np[case=?x2] : a --> (np[case=nom,agr=3s]/*np[case=nom])/*(((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=3s])/*np[case=?x2]) %transitive %ov
+%				: \a\p\b.p b a !third_person;
+%(ORCOBJ04)	np[case=?x2] : a --> (np[case=nom,agr=3s]/*np[case=nom])/*(((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=1p])/*np[case=?x2]) %transitive %ov
+%				: \a\p\b.p b a !team_speaker;
+%(ORCOBJ05)	np[case=?x2] : a --> (np[case=nom,agr=3s]/*np[case=nom])/*(((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=2p])/*np[case=?x2]) %transitive %ov
+%				: \a\p\b.p b a !team_hearer;
+%(ORCOBJ06)	np[case=?x2] : a --> (np[case=nom,agr=3s]/*np[case=nom])/*(((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=3p])/*np[case=?x2]) %transitive %ov
+%				: \a\p\b.p b a !team_third;
+				
+(ORCOBJ07)	np[case=acc] : a --> ((np[case=nom,agr=3s]/*np[case=nom])/*(((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=?x1])/*np[case=?x2]))/*(np[case=nom,agr=3s]/*np[case=poss,agr=?x1]) %transitive %osv
+				: \a\x\p\b.p b a x;
+
+(NOMOBJ00)	np[case=acc] : a --> np[case=nom,agr=3s]/*((np[case=nom,clause=NOM,verb=tr]/*np[case=gen,agr=?x1])/*np[case=acc]) %transitive %ov %geçici
+				: \a\p.p a !pro;
+%(NOMOBJ01)	np[case=?x2] : a --> np[case=nom,agr=3s]/*((np[case=nom,clause=NOM,verb=tr]/*np[case=gen,agr=?x1])/*np[case=?x2]) %transitive %ov
+%				: \a\p.p a !speaker;
+%(NOMOBJ02)	np[case=?x2] : a --> np[case=nom,agr=3s]/*((np[case=nom,clause=NOM,verb=tr]/*np[case=gen,agr=?x1])/*np[case=?x2]) %transitive %ov
+%				: \a\p.p a !hearer;
+%(NOMOBJ03)	np[case=?x2] : a --> np[case=nom,agr=3s]/*((np[case=nom,clause=NOM,verb=tr]/*np[case=gen,agr=?x1])/*np[case=?x2]) %transitive %ov
+%				: \a\p.p a !third_person;
+%(NOMOBJ04)	np[case=?x2] : a --> np[case=nom,agr=3s]/*((np[case=nom,clause=NOM,verb=tr]/*np[case=gen,agr=?x1])/*np[case=?x2]) %transitive %ov
+%				: \a\p.p a !team_speaker;
+%(NOMOBJ05)	np[case=?x2] : a --> np[case=nom,agr=3s]/*((np[case=nom,clause=NOM,verb=tr]/*np[case=gen,agr=?x1])/*np[case=?x2]) %transitive %ov
+%				: \a\p.p a !team_hearer;
+%(NOMOBJ06)	np[case=?x2] : a --> np[case=nom,agr=3s]/*((np[case=nom,clause=NOM,verb=tr]/*np[case=gen,agr=?x1])/*np[case=?x2]) %transitive %ov
+%				: \a\p.p a !team_third;
+				
+(NOMOBJ14)	np[case=acc] : a --> ((np[case=nom]/*(np[case=nom,agr=3s]/*np[case=nom]))/*((np[case=nom,clause=NOM,verb=tr]/*np[case=gen,agr=?x1])/*np[case=acc]))/*(np[case=nom,agr=3s]/*np[case=poss,agr=?x1]) %transitive %osv
+				: \a\x\p.p a x;
+
+%%Intransitive /VERB/ /ORC-NOM/ type-raising, word orders with v at the beginning
+%%%vo or vso are not allowed in ORC and NOM.
+%%%Pro-drop is accounted for.
+%%%SRC's s is outside and cannot be dropped.
+(ORCVRBI00)	((np[case=nom,clause=ORC]/*np[case=nom])/*np[case=gen,agr=1s]) 
+				: p --> (np[case=nom,clause=ORC,verb=itr]/*np[case=nom]) %v %geçici
+				: \p.p !pro;
+%(ORCVRBI01)	((np[case=nom,clause=ORC]/*np[case=nom])/*np[case=gen,agr=1s]) 
+%				: p --> (np[case=nom,clause=ORC,verb=itr]/*np[case=nom]) %v
+%				: \p.p !speaker;
+%(ORCVRBI02)	((np[case=nom,clause=ORC]/*np[case=nom])/*np[case=gen,agr=2s]) 
+%				: p --> (np[case=nom,clause=ORC,verb=itr]/*np[case=nom]) %v
+%				: \p.p !hearer;
+%(ORCVRBI03)	((np[case=nom,clause=ORC]/*np[case=nom])/*np[case=gen,agr=3s]) 
+%				: p --> (np[case=nom,clause=ORC,verb=itr]/*np[case=nom]) %v
+%				: \p.p !third_person;
+%(ORCVRBI04)	((np[case=nom,clause=ORC]/*np[case=nom])/*np[case=gen,agr=1p]) 
+%				: p --> (np[case=nom,clause=ORC,verb=itr]/*np[case=nom]) %v
+%				: \p.p !team_speaker;
+%(ORCVRBI05)	((np[case=nom,clause=ORC]/*np[case=nom])/*np[case=gen,agr=2p]) 
+%				: p --> (np[case=nom,clause=ORC,verb=itr]/*np[case=nom]) %v
+%				: \p.p !team_hearer;
+%(ORCVRBI06)	((np[case=nom,clause=ORC]/*np[case=nom])/*np[case=gen,agr=3p]) 
+%				: p --> (np[case=nom,clause=ORC,verb=itr]/*np[case=nom]) %v
+%				: \p.p !team_third;
+				
+(NOMVRBI00)	(np[case=nom,clause=NOM]/*np[case=gen,agr=1s]) 
+				: p --> np[case=nom,clause=NOM,verb=itr] %v %geçici
+				: \p.p !speaker;
+%(NOMVRBI01)	(np[case=nom,clause=NOM]/*np[case=gen,agr=1s]) 
+%				: p --> np[case=nom,clause=NOM,verb=itr] %v
+%				: \p.p !speaker;
+%(NOMVRBI02)	(np[case=nom,clause=NOM]/*np[case=gen,agr=2s]) 
+%				: p --> np[case=nom,clause=NOM,verb=itr] %v
+%				: \p.p !hearer;
+%(NOMVRBI03)	(np[case=nom,clause=NOM]/*np[case=gen,agr=3s]) 
+%				: p --> np[case=nom,clause=NOM,verb=itr] %v
+%				: \p.p !third_person;
+%(NOMVRBI04)	(np[case=nom,clause=NOM]/*np[case=gen,agr=1p])
+%				: p --> np[case=nom,clause=NOM,verb=itr] %v
+%				: \p.p !team_speaker;
+%(NOMVRBI05)	(np[case=nom,clause=NOM]/*np[case=gen,agr=2p]) 
+%				: p --> np[case=nom,clause=NOM,verb=itr] %v
+%				: \p.p !team_hearer;
+%(NOMVRBI06)	(np[case=nom,clause=NOM]/*np[case=gen,agr=3p]) 
+%				: p --> np[case=nom,clause=NOM,verb=itr] %v
+%				: \p.p !team_third;
+				
+%%Non-finite Verb Inflection
+%%% "ben geldiğim için" is different than "benim geldiğim oda"
+%%% "ben geldiğim için" nominalizer (subjunctive) experimental
+%%% -dik binds to possessives, it must precede one
+
+%%% "benim geldiğim oda" object relative clause
+%%% "köpeğin tavşanı ısırdığını gördü" nominal
+%%%subject (nom), object (any) -> subject (gen), object (nom)
+%%%Intransitive ORC için ADJ yerine NP hedeflemek için yeni kurala gerek yok, çünkü CASE marker'lar zaten NP'ye çevirebiliyor, ama transitive'lerde NP hedefliyorsak araya bir object geleceğini hesaba katmamız gerekiyor, paralel olsun diye ikisinin de kuralını ayrıca yazıyorum.
+%for ORC only the word orders ending with v are allowed: sov & osv, otherwise the sentence is incomprehensible
+
+%%%SRC: "gelinen yer", "geçen gün", "son benimoyu yiyen kız" subject relative clause
+%%%Intransitive
+-en 		c := (np[case=nom,clause=SRC,verb=itr]/*np[case=nom])\*vp[pos=-1,verb=itr]
+				: \p\x.!agent (p x);
+				
+%%% /SRC/ type-raising
+%%%Somehow passive intransitive does not work here, but I did not forbid it for now.
+%%%Also, somehow object might be left inside, while another item outside is specified by the clause.
+(SRC01)	(np[case=nom,clause=SRC,verb=itr]/*np[case=nom])\*vp[pos=-1,verb=itr]
+			: m --> (np[case=nom,clause=SRC,verb=itr]/*np[case=nom])\*vp[pos=0,verb=itr]
+			: \m\p\x.m (p x);
+(SRC02)	(np[case=nom,clause=SRC,verb=itr]/*np[case=nom])\*vp[pos=-1]
+			: m --> (np[case=nom,clause=SRC,verb=itr]/*np[case=nom])\*vp[pos=1,verb=itr]
+			: \m\p\x.m (p x);
+(SRC03)	(np[case=nom,clause=SRC,verb=itr]/*np[case=nom])\*vp[pos=-1]
+			: m --> (np[case=nom,clause=SRC,verb=itr]/*np[case=nom])\*vp[pos=2,verb=itr]
+			: \m\p\x.m (p x);
+(SRC04)	(np[case=nom,clause=SRC,verb=itr]/*np[case=nom])\*vp[pos=-1,verb=itr]
+			: m --> (np[case=nom,clause=SRC,verb=itr]/*np[case=nom])\*vp[pos=3,verb=itr]
+			: \m\p\x.m (p x);
+			
+(SRC05)	(np[case=nom,clause=SRC,verb=itr]/*np[case=nom])\*vp[pos=?x1,verb=itr]
+			: m --> (np[case=nom,clause=SRC,verb=itr]/*np[case=nom])\*(vp[pos=?x1,verb=itr]/*np[case=nom])
+			: \m\p\x.m p x;
+(SRC06)	(np[case=nom,clause=SRC,verb=itr]/*np[case=nom])\*vp[pos=?x1,verb=itr]
+			: m --> ((np[case=nom,clause=SRC,verb=tr]/*np[case=nom])/*np[case=?x2])\*((vp[pos=?x1,verb=tr]/*np[case=nom])/*np[case=?x2])
+			: \m\p\a\x.m p a x;
+(SRC07)	(np[case=nom,clause=SRC,verb=itr]/*np[case=nom])\*vp[pos=?x1,verb=itr]
+			: m --> (((np[case=nom,clause=SRC,verb=tr]/*np[case=nom])/*np[case=?x2])/*np)\*(((vp[pos=?x1,verb=tr]/*np[case=nom])/*np[case=?x2])/*np)
+			: \m\p\a\x.m p a x;
+
+%%%ORC: "geldiğin yer" (handled in NVRBI), "senin geldiğin yer", "yediğin yoğurt" (handled in NVRBT), "senin yediğin yoğurt", "senin yoğurt yediğin yer"
+-dik 		c := ((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])\*vp[pos=-1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+				: \n\p\y.!patient_actual_event (n p y);
+-ecek 		c := ((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])\*vp[pos=-1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+				: \n\p\y.!patient_hyp_event (n p y);
+				
+%%% /ORC/ type-raising
+%%%Somehow passive intransitive does not work here, but I did not forbid it for now.
+%%%Also, somehow object might be left inside, while another item outside is specified by the clause.
+%*************************
+%parantezlerle oynayıp semantic kısmı düzeltmek lazım
+%*************************
+(ORC01)	((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])\*vp[pos=-1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: m --> ((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])\*vp[pos=0,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: \m\n\p\y.m n p y;
+(ORC02)	((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])\*vp[pos=-1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: m --> ((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])\*vp[pos=1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: \m\n\p\y.m n p y;
+(ORC03)	((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])\*vp[pos=-1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: m --> ((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])\*vp[pos=2,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: \m\n\p\y.m n p y;
+(ORC04)	((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])\*vp[pos=-1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: m --> ((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])\*vp[pos=3,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: \m\n\p\y.m n p y;
+			
+(ORC05)	((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])\*vp[pos=?x2,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: m --> (((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])/*np[case=gen,agr=?x1])\*(vp[pos=?x2,verb=itr]/*np[case=nom,agr=?x1]))
+			/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: \m\n\p\x\y.m n (p x) y;
+(ORC06)	((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])\*vp[pos=?x2,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: m --> (((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=?x1])\*((vp[pos=?x2,verb=tr]/*np[case=nom,agr=?x1])/*np))
+			/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: \m\n\p\x\y.m n (p x) y;
+(ORC07)	((np[case=nom,clause=ORC,verb=itr]/*np[case=nom])\*vp[pos=?x2,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: m --> ((((np[case=nom,clause=ORC,verb=tr]/*np[case=nom])/*np[case=gen,agr=?x1])/*np[case=?x3])\*((vp[pos=?x2,verb=tr]/*np[case=nom,agr=?x1])/*np[case=?x3]))
+			/*(np[case=poss,agr=?x1]\*np[case=nom])
+			: \m\n\p\a\x\y.m n (p a y x);
+				
+%%%NOM: "gelindiğini gördüm", "senin geldiğini gördüm", "senin yoğurt yediğini gördüm"
+-dik 	c := (np[case=nom,clause=NOM,verb=itr]\*vp[pos=-1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: \n\p.!nominal_actual_event (n p);
+-ecek 	c := (np[case=nom,clause=NOM,verb=itr]\*vp[pos=-1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: \n\p.!nominal_hyp_event (n p);
+				
+%%% /NOM/ type-raising
+(NOM01)	(np[case=nom,clause=NOM,verb=itr]\*vp[pos=-1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: m --> (np[case=nom,clause=NOM,verb=itr]\*vp[pos=0,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: \m\n\p.m n p;
+(NOM02)	(np[case=nom,clause=NOM,verb=itr]\*vp[pos=-1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: m --> (np[case=nom,clause=NOM,verb=itr]\*vp[pos=1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: \m\n\p.m n p;
+(NOM03)	(np[case=nom,clause=NOM,verb=itr]\*vp[pos=-1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: m --> (np[case=nom,clause=NOM,verb=itr]\*vp[pos=2,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: \m\n\p.m n p;
+(NOM04)	(np[case=nom,clause=NOM,verb=itr]\*vp[pos=-1,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: m --> (np[case=nom,clause=NOM,verb=itr]\*vp[pos=3,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: \m\n\p.m n p;
+				
+(NOM05)	(np[case=nom,clause=NOM,verb=itr]\*vp[pos=?x2,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: m --> ((np[case=nom,clause=NOM,verb=itr]/*np[case=gen,agr=?x1])\*(vp[pos=?x2,verb=itr]/*np[case=nom,agr=?x1]))/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: \m\n\p\x.m n (p x);
+(NOM06)	(np[case=nom,clause=NOM,verb=itr]\*vp[pos=?x2,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: m --> (((np[case=nom,clause=NOM,verb=tr]/*np[case=gen,agr=?x1])/*np[case=?x3])\*((vp[pos=?x2,verb=tr]/*np[case=nom,agr=?x1])/*np[case=?x3]))/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: \m\n\p\a\x.m n (p a x);
+(NOM07)	(np[case=nom,clause=NOM,verb=itr]\*vp[pos=?x2,verb=itr])/*(np[case=poss,agr=?x1]\*np[case=nom])
+		: m --> ((((np[case=nom,clause=NOM,verb=tr]/*np[case=gen,agr=?x1])/*np[case=acc])/*np)\*(((vp[pos=?x2,verb=tr]/*np[case=nom,agr=?x1])/*np[case=acc])/*np))/*(np[case=poss,agr=?x1]\*np[case=nom])
+				: \m\n\p\b\a\x.m n (p b a x);
+
+%Agreements:
+%%Word order variations are taken care of by the person markers. This is the cleanest way I could find so far.
+%%Trying to replicate rules for verbs for each word order did not work, because that requires all the finite-verb inflectional suffixes to be replicated to accept each verb category.
+-m			c := agr[agr=1s] : !0;
+-n			c := agr[agr=2s] : !0;
+-0			c := agr[agr=3s] : !0;
+-k			c := agr[agr=1p] : !0;
+-niz		c := agr[agr=2p] : !0;
+-ler		c := agr[agr=3p] : !0;
+
+%%Agr /AGREEMENT/ type-raising
+%%%Only word orders starting with v are accounted for in agreement. Others are handled in SBJ and OBJ type-raising rules.
+(AGR01)	agr[agr=?x1] : n --> (s[agr=?x1,verb=itr]/*np[case=nom,agr=?x1])\*(vp[pos=4,verb=itr]/*np[case=nom]) %%%Intransitive vs
+				: \n\p\x.p x;
+(AGR02)	agr[agr=?x1] : n --> (s[agr=?x1,verb=itr]/*np[case=nom,agr=?x1])\*(vp[pos=5,verb=itr]/*np[case=nom]) %%%Intransitive vs
+				: \n\p\x.p x;
+(AGR11)	agr[agr=?x1] : n --> ((s[agr=?x1,verb=itr]/*s[pos=7])/*np[case=nom,agr=?x1])\*((vp[pos=4,verb=itr]/*s[pos=7])/*np[case=nom]) %%%Intransitive vs-s
+				: \n\p\x\s.p x s;
+(AGR21)	agr[agr=?x1] : n --> ((s[agr=?x1,verb=itr]/*s[pos=7])/*np[case=nom,agr=?x1])\*((vp[pos=5,verb=itr]/*s[pos=7])/*np[case=nom]) %%%Intransitive vs-s
+				: \n\p\x\s.p x s;
+
+(AGR03)	agr[agr=?x1] : n --> ((s[agr=?x1,verb=tr]/*np[case=?x2])/*np[case=nom,agr=?x1])\*((vp[pos=4,verb=tr]/*np[case=nom])/*np[case=?x2]) %%%Transitive vso
+				: \n\p\x\a.p a x;
+(AGR04)	agr[agr=?x1] : n --> ((s[agr=?x1,verb=tr]/*np[case=?x2])/*np[case=nom,agr=?x1])\*((vp[pos=5,verb=tr]/*np[case=nom])/*np[case=?x2]) %%%Transitive vso
+				: \n\p\x\a.p a x;
+(AGR13)	agr[agr=?x1] : n --> (((s[agr=?x1,verb=tr]/*s[pos=7])/*np[case=?x2])/*np[case=nom,agr=?x1])\*(((vp[pos=4,verb=tr]/*s[pos=7])/*np[case=nom])/*np[case=?x2]) %%%Transitive vso-s
+				: \n\p\x\a\s.p a x s;
+(AGR23)	agr[agr=?x1] : n --> (((s[agr=?x1,verb=tr]/*s[pos=7])/*np[case=?x2])/*np[case=nom,agr=?x1])\*(((vp[pos=5,verb=tr]/*s[pos=7])/*np[case=nom])/*np[case=?x2]) %%%Transitive vso-s
+				: \n\p\x\a\s.p a x s;
+
+(AGR05)	agr[agr=?x1] : n --> ((s[agr=?x1,verb=tr]/*np[case=nom,agr=?x1])/*np[case=?x2])\*((vp[pos=4,verb=tr]/*np[case=nom])/*np[case=?x2]) %%%Transitive vos
+				: \n\p\a\x.p a x;
+(AGR06)	agr[agr=?x1] : n --> ((s[agr=?x1,verb=tr]/*np[case=nom,agr=?x1])/*np[case=?x2])\*((vp[pos=5,verb=tr]/*np[case=nom])/*np[case=?x2]) %%%Transitive vos
+				: \n\p\a\x.p a x;
+(AGR15)	agr[agr=?x1] : n --> (((s[agr=?x1,verb=tr]/*s[pos=7])/*np[case=nom,agr=?x1])/*np[case=?x2])\*(((vp[pos=4,verb=tr]/*s[pos=7])/*np[case=nom])/*np[case=?x2]) %%%Transitive vos-s
+				: \n\p\a\x\s.p a x s;
+(AGR25)	agr[agr=?x1] : n --> (((s[agr=?x1,verb=tr]/*s[pos=7])/*np[case=nom,agr=?x1])/*np[case=?x2])\*(((vp[pos=5,verb=tr]/*s[pos=7])/*np[case=nom])/*np[case=?x2]) %%%Transitive vos-s
+				: \n\p\a\x\s.p a x s;
+
+(AGR07)	agr[agr=?x1] : n --> (((s[agr=?x1,verb=tr]/*np[case=nom,agr=?x1])/*np[case=?x2])/*np[case=?x3])\*(((vp[pos=4,verb=tr]/*np[case=nom])/*np[case=?x2])/*np[case=?x3]) %%%Transitive vos
+				: \n\p\a\b\x.p b a x;
+(AGR08)	agr[agr=?x1] : n --> (((s[agr=?x1,verb=tr]/*np[case=nom,agr=?x1])/*np[case=?x2])/*np[case=?x3])\*(((vp[pos=5,verb=tr]/*np[case=nom])/*np[case=?x2])/*np[case=?x3]) %%%Transitive vos
+				: \n\p\a\b\x.p b a x;
+(AGR17)	agr[agr=?x1] : n --> ((((s[agr=?x1,verb=tr]/*s[pos=7])/*np[case=nom,agr=?x1])/*np[case=?x2])/*np[case=?x3])\*((((vp[pos=4,verb=tr]/*s[pos=7])/*np[case=nom])/*np[case=?x2])/*np[case=?x3]) %%%Transitive vos-s
+				: \n\p\a\b\x\s.p b a x s;
+(AGR28)	agr[agr=?x1] : n --> ((((s[agr=?x1,verb=tr]/*s[pos=7])/*np[case=nom,agr=?x1])/*np[case=?x2])/*np[case=?x3])\*((((vp[pos=5,verb=tr]/*s[pos=7])/*np[case=nom])/*np[case=?x2])/*np[case=?x3]) %%%Transitive vos-s
+				: \n\p\a\b\x\s.p b a x s;
+
+%%Speech environment
+now 	n := np : !time_current;
+actual_world n := np : !world_actual;
+
+%Suffixes
+%%Non-finite verb suffix attempts
+%%Case markers integrated
+%%Possessive markers integrated
+%%Accompanying words integrated
+%%Negation markers sometimes integrated (no tense/aspect/modality markers for them to bind)
+%**********************
+%obsolete
+%**********************
+%-mesini		c := np[case=acc,clause=NOM,verb=?x9]\*vp[pos=-1,verb=?x9] 
+%		: \p.!fact p; %-me -i (poss) -i (acc)
+%-işini		c := np[case=acc,clause=NOM,verb=?x9]\*vp[pos=-1,verb=?x9] 
+%		: \p.!manner p; %-iş -i (poss) -i (acc)
+%-diğini		c := np[case=acc,clause=NOM,verb=?x9]\*vp[pos=-1,verb=?x9] 
+%		: \p.!actual_event p; %-dik -i (poss) -i (acc)
+%-eceğini	c := np[case=acc,clause=NOM,verb=?x9]\*vp[pos=-1,verb=?x9] 
+%		: \p.!hypoth_event p; %-ecek -i (poss) -i (acc)
+
+%%Non-finite verb inflection np type-raising
+(NOME01)	np[case=acc,clause=NOM,verb=?x9]\*vp[pos=-1,verb=?x9] 
+		: n --> np[case=acc,clause=NOM,verb=?x9]\*vp[pos=0,verb=?x9]
+		: \n\p.n p;
+(NOME02)	np[case=acc,clause=NOM,verb=?x9]\*vp[pos=-1,verb=?x9] 
+		: n --> np[case=acc,clause=NOM,verb=?x9]\*vp[pos=1,verb=?x9] 
+		: \n\p.n p;
+(NOME03)	np[case=acc,clause=NOM,verb=?x9]\*vp[pos=-1,verb=?x9] 
+		: n --> np[case=acc,clause=NOM,verb=?x9]\*vp[pos=2,verb=?x9] 
+		: \n\p.n p;
+
+(NOME04)	np[case=acc,clause=NOM,verb=?x9]\*vp[pos=?x1,verb=?x9]
+		: n --> (np[case=acc,clause=NOM,verb=?x9]/*np[case=gen,agr=?x1])\*(vp[pos=?x1,verb=?x9]/*np)
+		: \n\p\x.n (p x);
+(NOME05)	np[case=acc,clause=NOM,verb=?x9]\*vp[pos=?x1,verb=?x9]
+		: n --> ((np[case=acc,clause=NOM,verb=?x9]/*np[case=gen,agr=?x1])/*np)\*((vp[pos=?x1,verb=?x9]/*np)/*np)
+		: \n\p\a\x.n (p a x);
+(NOME06)	np[case=acc,clause=NOM,verb=?x9]\*vp[pos=?x1,verb=?x9]
+		: n --> (((np[case=acc,clause=NOM,verb=?x9]/*np[case=gen,agr=?x1])/*np)/*np)\*(((vp[pos=?x1,verb=?x9]/*np)/*np)/*np)
+		: \n\p\b\a\x.n (p b a x);
+
+%%converbs
+%%%w0 and t0 must be taken from the main verb for -iken, which is problematic
+-iken		c := vp[vp=time_conv,pos=converb,verb=?x9]\*vp[pos=4,verb=?x9] 
+			: \p\w0\t0.!while (p w0 t0); %-iken
+-iken		c := (vp[vp=time_conv,pos=converb,verb=?x9]/*np)\*(vp[pos=4,verb=?x9]/*np) 
+			: \p\x\w0\t0.!while (p x w0 t0);
+-iken		c := ((vp[vp=time_conv,pos=converb,verb=?x9]/*np)/*np)\*((vp[pos=4,verb=?x9]/*np)/*np) 					
+			: \p\x\y\w0\t0.!while (p x y w0 t0);
+-iken		c := (((vp[vp=time_conv,pos=converb,verb=?x9]/*np)/*np)/*np)\*(((vp[pos=4,verb=?x9]/*np)/*np)/*np) 	
+			: \p\x\y\z\w0\t0.!while (p x y z w0 t0);
+
+%%%others
+-erek 			c := vp[vp=manner_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p.!while p;
+-dikçe 			c := vp[vp=manner_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p.!the_more p;
+-diğinde 		c := vp[vp=time_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p\w0\t0.!when p;
+-diğinden_beri 	c := vp[vp=time_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p\w0\t0.!since p;
+-dikten_sonra 	c := vp[vp=time_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p\w0\t0.!after p;
+-eceğine_göre 	c := vp[vp=reason_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p.!since p;
+-eceği_için		c := vp[vp=reason_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p.!since p;
+-eceğinden_dolayı	c := vp[vp=reason_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p.!since p;
+-ecek_kadar		c := vp[vp=reason_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p.!since p;
+-meden 			c := vp[vp=manner_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p.!without p;
+-meden_önce		c := vp[vp=time_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p\w0\t0.!before p;
+-eli 			c := vp[vp=time_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p\w0\t0.!since p;
+-meyeli			c := vp[vp=time_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p\w0\t0.!since (!not p);
+-meksizin		c := vp[vp=manner_conv,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] : \p.!without p;
+
+%%Non-finite verb inflection np type-raising
+(NF01)	vp[vp=?x1,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] 
+		: n --> vp[vp=?x1,pos=converb,verb=?x9]\*vp[pos=0,verb=?x9] : \n\p.n p;
+(NF02)	vp[vp=?x1,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] 
+		: n --> vp[vp=?x1,pos=converb,verb=?x9]\*vp[pos=1,verb=?x9] : \n\p.n p;
+(NF03)	vp[vp=?x1,pos=converb,verb=?x9]\*vp[pos=-1,verb=?x9] 
+		: n --> vp[vp=?x1,pos=converb,verb=?x9]\*vp[pos=2,verb=?x9] : \n\p.n p;
+
+(NF04)	vp[vp=?x1,pos=converb,verb=?x9]\*vp[pos=?x2,verb=?x9] 
+		: n --> (vp[vp=?x1,pos=converb,verb=?x9]/*np[case=nom])\*(vp[pos=?x2,verb=?x9]/*np[case=nom]) 
+		: \n\p\x.n (p x);
+(NF05)	vp[vp=?x1,pos=converb,verb=?x9]\*vp[pos=?x2,verb=?x9] 
+		: n --> ((vp[vp=?x1,pos=converb,verb=?x9]/*np[case=nom])/*np[case=?x3])\*((vp[pos=?x2,verb=?x9]/*np[case=nom])/*np[case=?x3]) 
+		: \n\p\a\x.n (p a x);
+(NF06)	vp[vp=?x1,pos=converb,verb=?x9]\*vp[pos=?x2,verb=?x9] 
+		: n --> (((vp[vp=?x1,pos=converb,verb=?x9]/*np[case=nom])/*np[case=?x3])/*np[case=?x4])\*(((vp[pos=?x2,verb=?x9]/*np[case=nom])/*np[case=?x3])/*np[case=?x4])
+		: \n\p\b\a\x.n (p b a x);
+
+%%negation: non-finite negation
+-me	c := (np\*vp[pos=0,verb=?x9])/*(np\*vp[pos=0,verb=?x9]) 	: \n\p.n !not (p);
+-me	c := (np\*vp[pos=1,verb=?x9])/*(np\*vp[pos=1,verb=?x9]) 	: \n\p.n !not (p);
+-me	c := (np\*vp[pos=2,verb=?x9])/*(np\*vp[pos=2,verb=?x9]) 	: \n\p.n !not (p);
+
+-me	c := ((np/*np)\*vp[pos=0,verb=?x9])/*((np/*np)\*vp[pos=0,verb=?x9]) 	: \n\p.n !not (p);
+-me	c := ((np/*np)\*vp[pos=1,verb=?x9])/*((np/*np)\*vp[pos=1,verb=?x9]) 	: \n\p.n !not (p);
+-me	c := ((np/*np)\*vp[pos=2,verb=?x9])/*((np/*np)\*vp[pos=2,verb=?x9]) 	: \n\p.n !not (p);
+
+-me	c := (vp[vp=?x,pos=converb]\*vp[pos=0,verb=?x9])/*(vp[vp=?x,pos=converb]\*vp[pos=0,verb=?x9]) : \n\p.n !not (p);
+-me	c := (vp[vp=?x,pos=converb]\*vp[pos=1,verb=?x9])/*(vp[vp=?x,pos=converb]\*vp[pos=1,verb=?x9]) : \n\p.n !not (p);
+-me	c := (vp[vp=?x,pos=converb]\*vp[pos=2,verb=?x9])/*(vp[vp=?x,pos=converb]\*vp[pos=2,verb=?x9]) : \n\p.n !not (p);
+
+%%voices: causative, passive, reflexive, reciprocal
+-dir 	c := ((vp[pos=0,caus=true,verb=tr]/*np)/*np)\*(vp[pos=0,caus=false,verb=itr]/*np) 	
+		: \p\a\x\w0\t0.!init (p a w0 t0) x w0 t0;
+-t  	c := (((vp[vp=?x,pos=0,caus=false,verb=tr]/*np)/*np)/*np)
+			\*((vp[vp=?x,pos=0,caus=true,verb=tr]/*np)/*np) 	
+		: \p\a\b\x\w0\t0.!init (p a b w0 t0) x w0 t0;
+-il 	c := vp[vp=?x,pos=1,verb=itr]\*(vp[vp=?x,pos=0,verb=itr]/*np) 
+		: \p\w0\t0.p !anonymous w0 t0;
+-in 	c := (vp[vp=?x,pos=1,verb=itr]/*np)\*(vp[vp=?x,pos=0,verb=itr]/*np) 
+		: \p\x\w0\t0.p x x w0 t0;
+-iş 	c := ((vp[vp=?x,pos=1,verb=tr]/*np)/*np)\*(vp[vp=?x,pos=0,verb=itr]/*np) 
+		: \p\x2\x1\w0\t0.!and (p x2 x1 w0 t0) (p x1 x2 w0 t0);
+
+-dir 	c := (((vp[vp=?x,pos=0,caus=true,verb=?x9]/*np)/*np)/*np)\*((vp[vp=?x,pos=0,caus=false,verb=?x9]/*np)/*np) 			
+		: \p\b\a\x\w0\t0.!init (p b a w0 t0) x w0 t0;
+-t 		c := ((((vp[vp=?x,pos=0,caus=false,verb=?x9]/*np)/*np)/*np)/*np)\*(((vp[vp=?x,pos=0,caus=true,verb=?x9]/*np)/*np)/*np) 	
+		: \p\c\b\a\x\w0\t0.!init (p c b a w0 t0) x w0 t0;
+-il 	c := (vp[vp=?x,pos=1,verb=itr]/*np)\*((vp[vp=?x,pos=0,verb=tr]/*np)/*np) 
+		: \p\x\w0\t0.p x !anonymous w0 t0;
+-in 	c := ((vp[vp=?x,pos=1,verb=tr]/*np)/*np)\*((vp[vp=?x,pos=0,verb=tr]/*np)/*np) 
+		: \p\y\x\w0\t0.p y x x w0 t0;
+-iş 	c := (((vp[vp=?x,pos=1,verb=tr]/*np)/*np)/*np)\*((vp[vp=?x,pos=0,verb=tr]/*np)/*np) 
+		: \p\y\x2\x1\w0\t0.!and (p y x2 x1 w0 t0) (p y x1 x2 w0 t0);
+
+%%position 1
+-eme	c := vp[vp=?x,pos=2,verb=?x9]\*vp[vp=?x,pos=0,verb=?x9] 
+		: \p\w0\t0.!not (!exists w_pos (!and (!ability w0 w_pos) (p w_pos t0)));
+-eme	c := vp[vp=?x,pos=2,verb=?x9]\*vp[vp=?x,pos=1,verb=?x9] 
+		: \p\w0\t0.!not (!exists w_pos (!and (!ability w0 w_pos) (p w_pos t0)));
+
+-eme	c := (vp[vp=?x,pos=2,verb=?x9]/*np)\*(vp[vp=?x,pos=0,verb=?x9]/*np) 
+		: \p\x\w0\t0.!not (!exists w_pos (!and (!ability w0 w_pos) (p x w_pos t0)));
+-eme	c := (vp[vp=?x,pos=2,verb=?x9]/*np)\*(vp[vp=?x,pos=1,verb=?x9]/*np) 
+		: \p\x\w0\t0.!not (!exists w_pos (!and (!ability w0 w_pos) (p x w_pos t0)));
+
+-eme	c := ((vp[vp=?x,pos=2,verb=?x9]/*np)/*np)\*((vp[vp=?x,pos=0,verb=?x9]/*np)/*np) 
+		: \p\y\x\w0\t0.!not (!exists w_pos (!and (!ability w0 w_pos) (p y x w_pos t0)));
+-eme	c := ((vp[vp=?x,pos=2,verb=?x9]/*np)/*np)\*((vp[vp=?x,pos=1,verb=?x9]/*np)/*np) 
+		: \p\y\x\w0\t0.!not (!exists w_pos (!and (!ability w0 w_pos) (p y x w_pos t0)));
+			
+-eme	c := (((vp[vp=?x,pos=2,verb=?x9]/*np)/*np)/*np)\*(((vp[vp=?x,pos=0,verb=?x9]/*np)/*np)/*np) 
+		: \p\z\y\x\w0\t0.!not (!exists w_pos (!and (!ability w0 w_pos) (p z y x w_pos t0)));
+-eme	c := (((vp[vp=?x,pos=2,verb=?x9]/*np)/*np)/*np)\*(((vp[vp=?x,pos=1,verb=?x9]/*np)/*np)/*np) 
+		: \p\z\y\x\w0\t0.!not (!exists w_pos (!and (!ability w0 w_pos) (p z y x w_pos t0)));
+			
+%%Negation: Falls between voice suffixes and tense/aspect/modality suffixes
+%%Negation on the conditional marker had to be separately type-raised
+-me 	c := (vp[vp=?x,mod=true,neg=true,pos=3,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9])
+		/*(vp[vp=?x,mod=true,neg=false,pos=3,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9]) 
+		: \n\p.n (!not p); %-ebil %ok w cop
+-me	c := (vp[vp=?x,mod=false,neg=true,pos=4,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9])
+		/*(vp[vp=?x,mod=false,neg=false,pos=4,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9]) 
+		: \n\p.!not (n p); %-di
+-me	c := (vp[vp=?x,mod=true,neg=true,pos=4,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9])
+	    /*(vp[vp=?x,mod=true,neg=false,pos=4,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9]) 
+		: \n\p.n (!not p); %-meli %ok w cop
+-me	c := ((vp[vp=?x,mod=false,neg=true,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x,pos=-1,verb=?x9])
+	    /*((vp[vp=?x,mod=false,neg=false,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x,pos=-1,verb=?x9])
+		: \n\p\s.n ((!not p) s); %-se
+
+%% /NEGATION/ type-raising is not necessary, because the basic forms are applied on the basic form of the anticipated suffix and then be type-raised with that suffix's type-raising rules, since negation does not change syntactic category
+
+%%değil is incomplete
+değil	c := vp[vp=aux,mod=?x,pos=4,verb=?x9]\*vp[mod=?x,pos=4,verb=?x9] 
+	: \p\w0\t0.!not (p w0 t0);
+değil	c := (vp[vp=aux,mod=?x,pos=4,verb=?x9]/*np)\*(vp[mod=?x,pos=4,verb=?x9]/*np) 
+	: \p\x\w0\t0.!not (p x w0 t0);
+değil	c := ((vp[vp=aux,mod=?x,pos=4,verb=?x9]/*np)/*np)\*((vp[mod=?x,pos=4,verb=?x9]/*np)/*np) 
+	: \p\y\x\w0\t0.!not (p y x w0 t0);
+değil	c := (((vp[vp=aux,mod=?x,pos=4,verb=?x9]/*np)/*np)/*np)\*(((vp[mod=?x,pos=4,verb=?x9]/*np)/*np)/*np) 	
+	: \p\z\y\x\w0\t0.!not (p z y x w0 t0);
+
+%% Position 2: Probability
+%%%!ability,!probability,!phys_possibility,!deon_possibility,!epis_possibility
+%%%complex verbs: non-premeditative etc. not thoroughly tested
+-ebil 	c := vp[vp=?x,mod=true,pos=3,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\w0\t0.!exists w_pos (!and (!possibility w0 w_pos) (p w_pos t0));
+-iver 	c := vp[vp=?x,mod=false,pos=3,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\w0\t0.!and (p w0 t0) (!easy (p w0 t0));
+-eyaz	c := vp[vp=?x,mod=false,pos=3,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\w0\t0.!and (!not (p w0 t0)) (!close (p w0 w0 t0));
+-egel	c := vp[vp=?x,mod=false,pos=3,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\w0\t0.!exists t3 (!and (!earlier t0 t3) (p w0 (t3 t0)));
+-ekal	c := vp[vp=?x,mod=false,pos=3,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\w0\t0.!exists t3 (!and (!earlier t0 t3) (p w0 (t3 t0)));
+-edur	c := vp[vp=?x,mod=false,pos=3,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\w0\t0.!exists t3 (!and (!earlier t3 t0) (p w0 (t0 t3)));
+
+%% /POSITION 2/ type-raising
+%%%First, unapplicable pos=-1 is assigned each available pos feature value
+%%%Second, the resulting rules are converted to transitive, causative etc.
+%% \w0\t0 should not be injected a second time
+(P2S01) vp[vp=?x1,mod=?x2,pos=3,verb=?x9]\*vp[vp=?x1,pos=-1,verb=?x9] 
+	: n --> vp[vp=?x1,mod=?x2,pos=3,verb=?x9]\*vp[vp=?x1,pos=0,verb=?x9] 
+	: \n\p.n p;
+(P2S02) vp[vp=?x1,mod=?x2,pos=3,verb=?x9]\*vp[vp=?x1,pos=-1,verb=?x9] 
+	: n --> vp[vp=?x1,mod=?x2,pos=3,verb=?x9]\*vp[vp=?x1,pos=1,verb=?x9] 
+	: \n\p.n p;
+(P2S03) vp[vp=?x1,mod=?x2,pos=3,verb=?x9]\*vp[vp=?x1,pos=-1,verb=?x9] 
+	: n --> vp[vp=?x1,mod=?x2,pos=3,verb=?x9]\*vp[vp=?x1,pos=2,verb=?x9] 
+	: \n\p.n p;
+
+(P2S04) vp[vp=?x1,mod=?x2,pos=3,verb=?x9]\*vp[vp=?x1,pos=?x3,verb=?x9] 
+	: n --> (vp[vp=?x1,mod=?x2,pos=3,verb=?x9]/*np[case=nom])\*(vp[vp=?x1,pos=?x3,verb=?x9]/*np[case=nom])
+	: \n\p\x.n (p x);
+(P2S05) vp[vp=?x1,mod=?x2,pos=3,verb=?x9]\*vp[vp=?x1,pos=?x3,verb=?x9] 
+	: n --> ((vp[vp=?x1,mod=?x2,pos=3,verb=?x9]/*np[case=nom])/*np[case=?x4])\*((vp[vp=?x1,pos=?x3,verb=?x9]/*np[case=nom])/*np[case=?x4]) 
+	: \n\p\a\x.n (p a x);
+(P2S06) vp[vp=?x1,mod=?x2,pos=3,verb=?x9]\*vp[vp=?x1,pos=?x3,verb=?x9] 
+	: n --> (((vp[vp=?x1,mod=?x2,pos=3,verb=?x9]/*np[case=nom])/*np[case=?x4])/*np)\*(((vp[vp=?x1,pos=?x3,verb=?x9]/*np[case=nom])/*np[case=?x4])/*np) 
+	: \n\p\b\a\x.n (p b a x);
+
+%% Position 3: Finite verbs obligatorily contain a suffix from position 3
+%%%Simple aspect: perfective, perfective-evidential, imperfective, aorist, future
+%%%passive intransitive pos=0 için aslında pos=0'a gerek yok
+-di 	c := vp[vp=?x,mod=false,pos=4,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9]
+	: \p\w0\t0.!exists t (!and (!earlier t0 t) (p w0 t) (!know (p w0 t) !speaker w0 t));
+-miş 	c := vp[vp=?x,mod=false,pos=4,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9]
+	: \p\w0\t0.!exists t (!and (!earlier t0 t) (p w0 t) (!not (!know (p w0 t) !speaker w0 t)));
+-iyor 	c := vp[vp=?x,mod=false,pos=4,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\w0\t0.!exists t1 !exists t2 (!and (!earlier t0 t1) (!earlier t2 t0) (p w0 (t1 t2)));
+-mekte 	c := vp[vp=?x,mod=false,pos=4,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\w0\t0.!exists t1 !exists t2 (!and (!earlier t0 t1) (!earlier t2 t0) (p w0 (t1 t2)));
+-ir 	c := vp[vp=?x,mod=false,pos=4,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\w0\t0.!exists t (p w0 t);
+-z 	c := vp[vp=?x,mod=false,pos=4,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\w0\t0.!exists t (p w0 t);
+-ecek 	c := vp[vp=?x,mod=false,pos=4,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\w0\t0.!exists t (!and (!earlier t t0) (p w0 t));
+
+%%modalities: conditional, optative, obligative
+%%%modalities: passive intransitive pos=0 %redundant
+-se 	c := (vp[vp=?x,mod=false,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\s\w0\t0.!forall w_ref (!condition (p w_ref t0) (s w_ref t0)); 
+-e 	c := vp[vp=?x,mod=true,pos=4,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\w0\t0.!forall w_mod (!condition (!congruent !speaker w0 w_mod) (p w_mod t0));
+-meli 	c := vp[vp=?x,mod=true,pos=4,verb=?x9]\*vp[vp=?x,pos=-1,verb=?x9] 
+	: \p\w0\t0.!forall w_mod (!condition (!congruent !speaker w0 w_mod) (p w_mod t0));
+
+%% /POSITION 3/ type-raising
+%%%First, unapplicable pos=-1 is assigned each available pos feature value
+%%%Second, the resulting rules are converted to transitive, causative etc.
+%%%The conditional marker expects an s, so it had to be separately type-raised
+%% \w0\t0 should not be injected a second time
+(P3S01) vp[vp=?x1,mod=?x2,pos=4,verb=?x9]\*vp[vp=?x1,pos=-1,verb=?x9] 
+	: n --> vp[vp=?x1,mod=?x2,pos=4,verb=?x9]\*vp[vp=?x1,pos=0,verb=?x9] 
+	: \n\p.n p;
+(P3S02) vp[vp=?x1,mod=?x2,pos=4,verb=?x9]\*vp[vp=?x1,pos=-1,verb=?x9] 
+	: n --> vp[vp=?x1,mod=?x2,pos=4,verb=?x9]\*vp[vp=?x1,pos=1,verb=?x9] 
+	: \n\p.n p;
+(P3S03) vp[vp=?x1,mod=?x2,pos=4,verb=?x9]\*vp[vp=?x1,pos=-1,verb=?x9] 
+	: n --> vp[vp=?x1,mod=?x2,pos=4,verb=?x9]\*vp[vp=?x1,pos=2,verb=?x9] 
+	: \n\p.n p;
+(P3S04) vp[vp=?x1,mod=?x2,pos=4,verb=?x9]\*vp[vp=?x1,pos=-1,verb=?x9] 
+	: n --> vp[vp=?x1,mod=?x2,pos=4,verb=?x9]\*vp[vp=?x1,pos=3,verb=?x9] 
+	: \n\p.n p;
+
+(P3S05) vp[vp=?x1,mod=?x2,pos=4,verb=?x9]\*vp[vp=?x1,pos=?x3,verb=?x9] 
+	: n --> (vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*np[case=nom])\*(vp[vp=?x1,pos=?x3,verb=?x9]/*np[case=nom])
+	: \n\p\x.n (p x);
+(P3S06) vp[vp=?x1,mod=?x2,pos=4,verb=?x9]\*vp[vp=?x1,pos=?x3,verb=?x9] 
+	: n --> ((vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*np[case=nom])/*np[case=?x4])\*((vp[vp=?x1,pos=?x3,verb=?x9]/*np[case=nom])/*np[case=?x4]) 
+	: \n\p\a\x.n (p a x);
+(P3S07) vp[vp=?x1,mod=?x2,pos=4,verb=?x9]\*vp[vp=?x1,pos=?x3,verb=?x9] 
+	: n --> (((vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*np[case=nom])/*np[case=?x4])/*np)\*(((vp[vp=?x1,pos=?x3,verb=?x9]/*np[case=nom])/*np[case=?x4])/*np) 
+	: \n\p\b\a\x.n (p b a x);
+
+%%% /POSITION 3/ conditional marker type-raising
+%% \w0\t0 should not be injected a second time
+(P3SC01) (vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x1,pos=-1,verb=?x9] 
+	: n --> (vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x1,pos=0,verb=?x9] 
+	: \n\p\s.n p s;
+(P3SC02) (vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x1,pos=-1,verb=?x9] 
+	: n --> (vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x1,pos=1,verb=?x9] 
+	: \n\p\s.n p s;
+(P3SC03) (vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x1,pos=-1,verb=?x9] 
+	: n --> (vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x1,pos=2,verb=?x9] 
+	: \n\p\s.n p s;
+(P3SC04) (vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x1,pos=-1,verb=?x9] 
+	: n --> (vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x1,pos=3,verb=?x9] 
+	: \n\p\s.n p s;
+
+(P3SC05) (vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x1,pos=?x3,verb=?x9] 
+	: n --> ((vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])/*np[case=nom])\*(vp[vp=?x1,pos=?x3,verb=?x9]/*np[case=nom])
+	: \n\p\x\s.n (p x) s;
+(P3SC06) (vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x1,pos=?x3,verb=?x9] 
+	: n --> (((vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])/*np[case=nom])/*np[case=?x4])\*((vp[vp=?x1,pos=?x3,verb=?x9]/*np[case=nom])/*np[case=?x4]) 
+	: \n\p\a\x\s.n (p a x) s;
+(P3SC07) (vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])\*vp[vp=?x1,pos=?x3,verb=?x9] 
+	: n --> ((((vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[mod=false,pos=7])/*np[case=nom])/*np[case=?x4])/*np)\*(((vp[vp=?x1,pos=?x3,verb=?x9]/*np[case=nom])/*np[case=?x4])/*np) 
+	: \n\p\b\a\x\s.n (p b a x) s;
+
+%%position 4
+%%copular markers: past, evidential, conditional
+%%%after aspect
+-di 	c := (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]\*vp[vp=time_conv])\*vp[vp=?x1,mod=?x2,pos=-1,verb=?x9] 
+	: \p\v\w0\t0.!and (p w0 (v w0 t0)) (!earlier t0 (v w0 t0));
+-miş 	c := (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]\*vp[vp=time_conv])\*vp[vp=?x1,mod=?x2,pos=-1,verb=?x9] 
+	: \p\v\w0\t0.!and (p w0 (v w0 t0)) (!earlier t0 (v w0 t0));
+	
+%%%after conditional
+-di 	c := (vp[vp=?x1,mod=false,pos=5,verb=?x9]/*s[pos=7])\*(vp[vp=?x1,pos=-1,mod=false,verb=?x9]/*s[pos=7])
+	: \p\s\w0\t0.!exists t_ref (!and (!earlier t0 t_ref) (p w0 t_ref (s w0 t0)));
+-miş 	c := (vp[vp=?x1,mod=false,pos=5,verb=?x9]/*s[pos=7])\*(vp[vp=?x1,pos=-1,mod=false,verb=?x9]/*s[pos=7])
+	: \p\s\w0\t0.!exists t_ref (!and (!earlier t0 t_ref) (p w0 t_ref (s w0 t0)));
+
+%%%conditional after no copula
+-se 	c := (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/s[pos=7])\*vp[vp=?x1,mod=?x2,pos=4,verb=?x9] : \s1\s2\w0\t0.!forall w_ref (!condition (s1 w_ref t0) (s2 w_ref t0)); 
+
+%%% /POSITION 4/ type-raising
+%% \w0\t0 should not be injected a second time
+(P4S01) (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]\*vp[vp=time_conv])\*vp[vp=?x1,mod=?x2,pos=-1,verb=?x9] 
+	: n --> (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]\*vp[vp=time_conv])\*vp[vp=?x1,mod=?x2,pos=4,verb=?x9]
+	: \n\p\v.n p v;
+
+(P4S02) (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]\*vp[vp=time_conv])\*vp[vp=?x1,mod=?x2,pos=4,verb=?x9] 
+	: n --> ((vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*np[case=nom])\*vp[vp=time_conv])\*(vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*np[case=nom])
+	: \n\p\v\x.n (p x) v;
+(P4S03) (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]\*vp[vp=time_conv])\*vp[vp=?x1,mod=?x2,pos=4,verb=?x9] 
+	: n --> (((vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*np[case=nom])/*np[case=?x3])\*vp[vp=time_conv])\*((vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*np[case=nom])/*np[case=?x3])
+	: \n\p\v\a\x.n (p a x) v;
+(P4S04) (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]\*vp[vp=time_conv])\*vp[vp=?x1,mod=?x2,pos=4,verb=?x9] 
+	: n --> ((((vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*np[case=nom])/*np[case=?x3])/*np)\*vp[vp=time_conv])\*(((vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*np[case=nom])/*np[case=?x3])/*np)
+	: \n\p\v\b\a\x.n (p b a x) v;
+	
+(P4SC01) (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])\*(vp[vp=?x1,mod=?x2,pos=-1,verb=?x9]/*s[pos=7]) 
+	: n --> (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[mod=false,pos=7])\*(vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[pos=7])
+	: \n\p\s.n p s;
+
+(P4SC02) (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])\*(vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[pos=7]) 
+	: n --> ((vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])/*np[case=nom])\*((vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[pos=7])/*np[case=nom])
+	: \n\p\x\s.n (p x) s;
+(P4SC03) (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])\*(vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[pos=7]) 
+	: n --> (((vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])/*np[case=nom])/*np[case=?x3])\*(((vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[pos=7])/*np[case=nom])/*np[case=?x3])
+	: \n\p\a\x\s.n (p a x) s;
+(P4SC04) (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])\*(vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[pos=7]) 
+	: n --> ((((vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])/*np[case=nom])/*np[case=?x3])/*np)\*((((vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*s[pos=7])/*np[case=nom])/*np[case=?x3])/*np)
+	: \n\p\b\a\x\s.n (p b a x) s;
+
+%%% /POSITION 4/ conditonal type-raising
+%% \w0\t0 should not be injected a second time
+(P4C01) (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])\*vp[vp=?x1,mod=?x2,pos=-1,verb=?x9] 
+	: n --> (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])\*vp[vp=?x1,mod=?x2,pos=4,verb=?x9]
+	: \n\p\s.n p s;
+
+(P4C02) (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])\*vp[vp=?x1,mod=?x2,pos=4,verb=?x9] 
+	: n --> ((vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])/*np[case=nom])\*(vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*np[case=nom])
+	: \n\p\x\s.n (p x) s;
+(P4C03) (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])\*vp[vp=?x1,mod=?x2,pos=4,verb=?x9] 
+	: n --> (((vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])/*np[case=nom])/*np[case=?x3])\*((vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*np[case=nom])/*np[case=?x3])
+	: \n\p\a\x\s.n (p a x) s;
+(P4C04) (vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])\*vp[vp=?x1,mod=?x2,pos=4,verb=?x9] 
+	: n --> ((((vp[vp=?x1,mod=?x2,pos=5,verb=?x9]/*s[pos=7])/*np[case=nom])/*np[case=?x3])/*np)\*(((vp[vp=?x1,mod=?x2,pos=4,verb=?x9]/*np[case=nom])/*np[case=?x3])/*np)
+	: \n\p\b\a\x\s.n (p b a x) s;
+
+%%%super copular: whole sentence modal after aspect copula
+%**********************
+%not working currently, because it needs special SBJ and OBJ type-raises or abandoning whole sentence treatment
+%**********************
+-se 	c := (vp[vp=?x,mod=?x,pos=7,verb=?x9]/s[pos=7])\*vp[vp=?x,mod=?x,pos=5,verb=?x9] : \s1\s2\w0\t0.!forall w_ref (!condition (s1 w_ref t0) (s2 w_ref t0)); 
+
+%%generic agreement
+%******************************
+%Generic agreement markers will not be used, instead specific agreement markers will be type-raised to cover its place. The following rules are left here, so that the new rules can be modeled on them. 
+%******************************
+%%agreement: vp=point XX for relative clauses, this section is simplified. Also trying to move on from generic person markers to specific ones.
+%%%agreement: aspect pos=4
+-agr	c := s[mod=?x,pos=7,genmod=pos,verb=?x9]\*vp[mod=?x,pos=4,verb=?x9] : \p.p;
+-agr	c := (s[mod=?x,pos=7,genmod=pos,verb=?x9]/*np)\*(vp[mod=?x,pos=4,verb=?x9]/*np) : \p\x.p x;
+-agr	c := ((s[mod=?x,pos=7,genmod=pos,verb=?x9]/*np)/*np)\*((vp[mod=?x,pos=4,verb=?x9]/*np)/*np) : \p\x\y.p x y;
+-agr	c := (((s[mod=?x,pos=7,genmod=pos,verb=?x9]/*np)/*np)/*np)\*(((vp[mod=?x,pos=4,verb=?x9]/*np)/*np)/*np) : \p\x\y\z.p x y z;
+
+%%%agreement: conditional pos=4
+-agr	c := (s[mod=?x,pos=7,genmod=impos,verb=?x9]/s[pos=7])\*(vp[mod=?x,pos=4,verb=?x9]/s[pos=7]) : \p\s.p s;
+-agr	c := ((s[mod=?x,pos=7,genmod=impos,verb=?x9]/s[pos=7])/*np)\*((vp[mod=?x,pos=4]/s[pos=7])/*np) : \p\x\s.p x s;
+-agr	c := (((s[mod=?x,pos=7,genmod=impos,verb=?x9]/s[pos=7])/*np)/*np)\*(((vp[mod=?x,pos=4,verb=?x9]/s[pos=7])/*np)/*np) : \p\x\y\s.p x y s;
+-agr	c := ((((s[mod=?x,pos=7,genmod=impos,verb=?x9]/s[pos=7])/*np)/*np)/*np)\*((((vp[mod=?x,pos=4,verb=?x9]/s[pos=7])/*np)/*np)/*np) : \p\x\y\z\s.p x y z s;
+
+%%%agreement: aspect pos=5
+-agr	c := (s[mod=?x,pos=7,genmod=impos,verb=?x9]\vp[vp=time_conv])\*(vp[mod=?x,pos=5,verb=?x9]\vp[vp=time_conv]) 
+			: \p\v.p v;
+-agr	c := ((s[mod=?x,pos=7,genmod=impos,verb=?x9]/*np)\vp[vp=time_conv])\*((vp[mod=?x,pos=5,verb=?x9]/*np)\vp[vp=time_conv]) 
+			: \p\v\x.p v x;
+-agr	c := (((s[mod=?x,pos=7,genmod=impos,verb=?x9]/*np)/*np)\vp[vp=time_conv])\*(((vp[mod=?x,pos=5,verb=?x9]/*np)/*np)\vp[vp=time_conv]) 
+			: \p\v\x\y.p v x y;
+-agr	c := ((((s[mod=?x,pos=7,genmod=impos,verb=?x9]/*np)/*np)/*np)\vp[vp=time_conv])\*((((vp[mod=?x,pos=5,verb=?x9]/*np)/*np)/*np)\vp[vp=time_conv]) 
+			: \p\v\x\y\z.p v x y z;
+
+%%%agreement: conditional pos=5
+-agr	c := (s[mod=?x,pos=7,genmod=impos,verb=?x9]/s[pos=7])\*(vp[mod=?x,pos=5,verb=?x9]/s[pos=7]) : \p\s.p s;
+-agr	c := ((s[mod=?x,pos=7,genmod=impos,verb=?x9]/s[pos=7])/*np)\*((vp[mod=?x,pos=5,verb=?x9]/s[pos=7])/*np) : \p\x\s.p x s;
+-agr	c := (((s[mod=?x,pos=7,genmod=impos,verb=?x9]/s[pos=7])/*np)/*np)\*(((vp[mod=?x,pos=5,verb=?x9]/s[pos=7])/*np)/*np) : \p\x\y\s.p x y s;
+-agr	c := ((((s[mod=?x,pos=7,genmod=impos,verb=?x9]/s[pos=7])/*np)/*np)/*np)\*((((vp[mod=?x,pos=5,verb=?x9]/s[pos=7])/*np)/*np)/*np) : \p\x\y\z\s.p x y z s;
+
+%%%agreement: whole sentence conditional copular 
+-agr	c := ((s[mod=?x,pos=7,genmod=impos,verb=?x9]/s[pos=7])\*s[pos=4])\*((vp[mod=?x,pos=5,verb=?x9]/s[pos=7])\*s[pos=4]) : \p\s\x.p s x;
+
+%%%agreement: whole sentence super copular
+-agr	c := (s[mod=?x,pos=7,genmod=impos,verb=?x9]/s[pos=7])\*(vp[mod=?x,pos=7,verb=?x9]/s[pos=7]) : \p\s.p s;
+
+%%position 5
+%%generalized modality only comes after agreements, not following conditionals or any copular markers or known past
+%%need a feature to restrict generalized modality to following the remaining suffixes 
+%%%generalized modality: passive intransitive
+-dir	c := s[pos=7,genmod=impos,verb=?x9]\*s[pos=7,genmod=pos,verb=?x9] 
+			: \p\w0\t0.!exists w_gmod (!and (!probability w0 w_gmod) (p w_gmod t0));
+
+%%%generalized modality: intransitive
+-dir	c := (s[pos=7,genmod=impos,verb=?x9]/*np)\*(s[pos=7,genmod=pos,verb=?x9]/*np) 
+			: \p\x\w0\t0.!exists w_gmod (!and (!probability w0 w_gmod) (p x w_gmod t0));
+
+%%%generalized modality: transitive
+-dir	c := ((s[pos=7,genmod=impos,verb=?x9]/*np)/*np)\*((s[pos=7,genmod=pos,verb=?x9]/*np)/*np) 
+			: \p\x\y\w0\t0.!exists w_gmod (!and (!probability w0 w_gmod) (p x y w_gmod t0));
+
+%%%generalized modality: transitive causative
+-dir	c := (((s[pos=7,genmod=impos,verb=?x9]/*np)/*np)/*np)\*(((s[pos=7,genmod=pos,verb=?x9]/*np)/*np)/*np) 
+			: \p\x\y\w0\t0.!exists w_gmod (!and (!probability w0 w_gmod) (p x y w_gmod t0));
+
