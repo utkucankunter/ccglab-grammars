@@ -1,0 +1,125 @@
+
+* (ccg-deduce '(ahmet gel -se -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-SE) := ((VP/S)\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM S
+             (LAM W0
+              (LAM T0
+               ((FORALL W_REF)
+                ((CONDITION (((P X) W_REF) T0)) ((S W_REF) T0))))))))
+<     (GEL)(-SE) := (VP/S)\NP
+        : ((LAM P
+            (LAM X
+             (LAM S
+              (LAM W0
+               (LAM T0
+                ((FORALL W_REF)
+                 ((CONDITION (((P X) W_REF) T0)) ((S W_REF) T0))))))))
+           (LAM X (COME X)))
+LEX   (-AGR) := ((S/S)\NP)\*((VP/S)\NP)
+        : (LAM P (LAM X (LAM S ((P X) S))))
+<     (GEL -SE)(-AGR) := (S/S)\NP
+        : ((LAM P (LAM X (LAM S ((P X) S))))
+           ((LAM P
+             (LAM X
+              (LAM S
+               (LAM W0
+                (LAM T0
+                 ((FORALL W_REF)
+                  ((CONDITION (((P X) W_REF) T0)) ((S W_REF) T0))))))))
+            (LAM X (COME X))))
+<     (AHMET)(GEL -SE -AGR) := S/S
+        : (((LAM P (LAM X (LAM S ((P X) S))))
+            ((LAM P
+              (LAM X
+               (LAM S
+                (LAM W0
+                 (LAM T0
+                  ((FORALL W_REF)
+                   ((CONDITION (((P X) W_REF) T0)) ((S W_REF) T0))))))))
+             (LAM X (COME X))))
+           AHMET)
+
+Final LF, normal-order evaluated: 
+
+    (LAM S
+     (LAM W0
+      (LAM T0
+       ((FORALL W_REF)
+        ((CONDITION (((COME AHMET) W_REF) T0)) ((S W_REF) T0)))))) =
+    (\ S . \ W0 . \ T0 . FORALL W_REF
+     (CONDITION (COME AHMET W_REF T0) (S W_REF T0)))
+
+Derivation 2
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-SE) := ((VP/S)\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM S
+             (LAM W0
+              (LAM T0
+               ((FORALL W_REF)
+                ((CONDITION (((P X) W_REF) T0)) ((S W_REF) T0))))))))
+<     (GEL)(-SE) := (VP/S)\NP
+        : ((LAM P
+            (LAM X
+             (LAM S
+              (LAM W0
+               (LAM T0
+                ((FORALL W_REF)
+                 ((CONDITION (((P X) W_REF) T0)) ((S W_REF) T0))))))))
+           (LAM X (COME X)))
+<     (AHMET)(GEL -SE) := VP/S
+        : (((LAM P
+             (LAM X
+              (LAM S
+               (LAM W0
+                (LAM T0
+                 ((FORALL W_REF)
+                  ((CONDITION (((P X) W_REF) T0)) ((S W_REF) T0))))))))
+            (LAM X (COME X)))
+           AHMET)
+LEX   (-AGR) := (S/S)\*(VP/S)
+        : (LAM P (LAM S (P S)))
+<     (AHMET GEL -SE)(-AGR) := S/S
+        : ((LAM P (LAM S (P S)))
+           (((LAM P
+              (LAM X
+               (LAM S
+                (LAM W0
+                 (LAM T0
+                  ((FORALL W_REF)
+                   ((CONDITION (((P X) W_REF) T0)) ((S W_REF) T0))))))))
+             (LAM X (COME X)))
+            AHMET))
+
+Final LF, normal-order evaluated: 
+
+    (LAM S
+     (LAM W0
+      (LAM T0
+       ((FORALL W_REF)
+        ((CONDITION (((COME AHMET) W_REF) T0)) ((S W_REF) T0)))))) =
+    (\ S . \ W0 . \ T0 . FORALL W_REF
+     (CONDITION (COME AHMET W_REF T0) (S W_REF T0)))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

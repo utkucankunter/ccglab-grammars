@@ -1,0 +1,227 @@
+
+* (ccg-deduce '(hırsız konuş -di -se -agr ahmet de hırsız hapse_gir -meden_önce konuş -ir -di -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (HıRSıZ) := NP
+        : ROBBER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-DI) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS T)
+               (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+<     (KONUŞ)(-DI) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                 ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+           (LAM X (SPEAK X)))
+<     (HıRSıZ)(KONUŞ -DI) := VP
+        : (((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                  ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+            (LAM X (SPEAK X)))
+           ROBBER)
+LEX   (-SE) := (VP/S)\*VP
+        : (LAM S1
+           (LAM S2
+            (LAM W0
+             (LAM T0
+              ((FORALL W_REF) ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+<     (HıRSıZ KONUŞ -DI)(-SE) := VP/S
+        : ((LAM S1
+            (LAM S2
+             (LAM W0
+              (LAM T0
+               ((FORALL W_REF)
+                ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+           (((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                   ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+             (LAM X (SPEAK X)))
+            ROBBER))
+LEX   (-AGR) := (S/S)\*(VP/S)
+        : (LAM P (LAM S (P S)))
+<     (HıRSıZ KONUŞ -DI -SE)(-AGR) := S/S
+        : ((LAM P (LAM S (P S)))
+           ((LAM S1
+             (LAM S2
+              (LAM W0
+               (LAM T0
+                ((FORALL W_REF)
+                 ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+            (((LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                    ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+              (LAM X (SPEAK X)))
+             ROBBER)))
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (DE) := NP\*NP
+        : (LAM X X)
+<     (AHMET)(DE) := NP
+        : ((LAM X X) AHMET)
+LEX   (HıRSıZ) := NP
+        : ROBBER
+LEX   (HAPSE_GIR) := VP\NP
+        : (LAM X (GO_TO_JAIL X))
+<     (HıRSıZ)(HAPSE_GIR) := VP
+        : ((LAM X (GO_TO_JAIL X)) ROBBER)
+LEX   (-MEDEN_ÖNCE) := VP\*VP
+        : (LAM P (LAM W0 (LAM T0 (BEFORE P))))
+<     (HıRSıZ HAPSE_GIR)(-MEDEN_ÖNCE) := VP
+        : ((LAM P (LAM W0 (LAM T0 (BEFORE P)))) ((LAM X (GO_TO_JAIL X)) ROBBER))
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-IR) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+<     (KONUŞ)(-IR) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+           (LAM X (SPEAK X)))
+LEX   (-DI) := ((VP\NP)\\VP)\\(VP\NP)
+        : (LAM P
+           (LAM V
+            (LAM X
+             (LAM W0
+              (LAM T0
+               (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                 ((V W0) T0))))))))
+<     (KONUŞ -IR)(-DI) := (VP\NP)\\VP
+        : ((LAM P
+            (LAM V
+             (LAM X
+              (LAM W0
+               (LAM T0
+                (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                 ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                  ((V W0) T0))))))))
+           ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+            (LAM X (SPEAK X))))
+LEX   (-AGR) := ((S\NP)\VP)\\((VP\NP)\VP)
+        : (LAM P (LAM V (LAM X ((P V) X))))
+<     (KONUŞ -IR -DI)(-AGR) := (S\NP)\VP
+        : ((LAM P (LAM V (LAM X ((P V) X))))
+           ((LAM P
+             (LAM V
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                  ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                   ((V W0) T0))))))))
+            ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+             (LAM X (SPEAK X)))))
+<     (HıRSıZ HAPSE_GIR -MEDEN_ÖNCE)(KONUŞ -IR -DI -AGR) := S\NP
+        : (((LAM P (LAM V (LAM X ((P V) X))))
+            ((LAM P
+              (LAM V
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                   ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                    ((V W0) T0))))))))
+             ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+              (LAM X (SPEAK X)))))
+           ((LAM P (LAM W0 (LAM T0 (BEFORE P))))
+            ((LAM X (GO_TO_JAIL X)) ROBBER)))
+<     (AHMET DE)(HıRSıZ HAPSE_GIR -MEDEN_ÖNCE KONUŞ -IR -DI -AGR) := S
+        : ((((LAM P (LAM V (LAM X ((P V) X))))
+             ((LAM P
+               (LAM V
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                    ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                     ((V W0) T0))))))))
+              ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+               (LAM X (SPEAK X)))))
+            ((LAM P (LAM W0 (LAM T0 (BEFORE P))))
+             ((LAM X (GO_TO_JAIL X)) ROBBER)))
+           ((LAM X X) AHMET))
+>     (HıRSıZ KONUŞ -DI -SE -AGR)(AHMET DE HıRSıZ HAPSE_GIR -MEDEN_ÖNCE KONUŞ -IR -DI -AGR) := S
+        : (((LAM P (LAM S (P S)))
+            ((LAM S1
+              (LAM S2
+               (LAM W0
+                (LAM T0
+                 ((FORALL W_REF)
+                  ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+             (((LAM P
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS T)
+                    (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                     ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+               (LAM X (SPEAK X)))
+              ROBBER)))
+           ((((LAM P (LAM V (LAM X ((P V) X))))
+              ((LAM P
+                (LAM V
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    (((AND (((P X) W0) ((V W0) T0)))
+                      ((EARLIER T0) ((V W0) T0)))
+                     ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                      ((V W0) T0))))))))
+               ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+                (LAM X (SPEAK X)))))
+             ((LAM P (LAM W0 (LAM T0 (BEFORE P))))
+              ((LAM X (GO_TO_JAIL X)) ROBBER)))
+            ((LAM X X) AHMET)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((FORALL W_REF)
+       ((CONDITION
+         ((EXISTS T)
+          (((AND ((EARLIER T0) T)) (((SPEAK ROBBER) W_REF) T))
+           ((((KNOW (((SPEAK ROBBER) W_REF) T)) SPEAKER) W_REF) T))))
+        (((AND ((EXISTS T) (((SPEAK AHMET) W_REF) T)))
+          ((EARLIER T0) (BEFORE (GO_TO_JAIL ROBBER))))
+         ((((KNOW ((EXISTS T) (((SPEAK AHMET) W_REF) T))) SPEAKER) W_REF)
+          (BEFORE (GO_TO_JAIL ROBBER)))))))) =
+    (\ W0 . \ T0 . FORALL W_REF
+     (CONDITION
+      (EXISTS T
+       (AND (EARLIER T0 T) (SPEAK ROBBER W_REF T)
+        (KNOW (SPEAK ROBBER W_REF T) SPEAKER W_REF T)))
+      (AND (EXISTS T (SPEAK AHMET W_REF T))
+       (EARLIER T0 (BEFORE (GO_TO_JAIL ROBBER)))
+       (KNOW (EXISTS T (SPEAK AHMET W_REF T)) SPEAKER W_REF
+        (BEFORE (GO_TO_JAIL ROBBER))))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

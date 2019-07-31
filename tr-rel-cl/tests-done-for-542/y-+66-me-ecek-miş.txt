@@ -1,0 +1,160 @@
+
+* (ccg-deduce '(ahmet sen_okuldayken gel -me -ecek -miş -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (SEN_OKULDAYKEN) := VP
+        : (LAM W0 (LAM T0 (TIME HEARER_AT_SCHOOL)))
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-ME) := ((VP\NP)\\(VP\NP))/*((VP\NP)\\(VP\NP))
+        : (LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+LEX   (-ECEK) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0 ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T)))))))
+>     (-ME)(-ECEK) := (VP\NP)\\(VP\NP)
+        : ((LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+           (LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0 ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T))))))))
+<     (GEL)(-ME -ECEK) := VP\NP
+        : (((LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+            (LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T))))))))
+           (LAM X (COME X)))
+LEX   (-MIŞ) := ((VP\NP)\\VP)\\(VP\NP)
+        : (LAM P
+           (LAM V
+            (LAM X
+             (LAM W0
+              (LAM T0
+               (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                (NOT
+                 ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                  ((V W0) T0)))))))))
+<     (GEL -ME -ECEK)(-MIŞ) := (VP\NP)\\VP
+        : ((LAM P
+            (LAM V
+             (LAM X
+              (LAM W0
+               (LAM T0
+                (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                 (NOT
+                  ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                   ((V W0) T0)))))))))
+           (((LAM N
+              (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+             (LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T))))))))
+            (LAM X (COME X))))
+LEX   (-AGR) := ((S\NP)\VP)\\((VP\NP)\VP)
+        : (LAM P (LAM V (LAM X ((P V) X))))
+<     (GEL -ME -ECEK -MIŞ)(-AGR) := (S\NP)\VP
+        : ((LAM P (LAM V (LAM X ((P V) X))))
+           ((LAM P
+             (LAM V
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                  (NOT
+                   ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                    ((V W0) T0)))))))))
+            (((LAM N
+               (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+              (LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T))))))))
+             (LAM X (COME X)))))
+<     (SEN_OKULDAYKEN)(GEL -ME -ECEK -MIŞ -AGR) := S\NP
+        : (((LAM P (LAM V (LAM X ((P V) X))))
+            ((LAM P
+              (LAM V
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                   (NOT
+                    ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                     ((V W0) T0)))))))))
+             (((LAM N
+                (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+               (LAM P
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T))))))))
+              (LAM X (COME X)))))
+           (LAM W0 (LAM T0 (TIME HEARER_AT_SCHOOL))))
+<     (AHMET)(SEN_OKULDAYKEN GEL -ME -ECEK -MIŞ -AGR) := S
+        : ((((LAM P (LAM V (LAM X ((P V) X))))
+             ((LAM P
+               (LAM V
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                    (NOT
+                     ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                      ((V W0) T0)))))))))
+              (((LAM N
+                 (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+                (LAM P
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T))))))))
+               (LAM X (COME X)))))
+            (LAM W0 (LAM T0 (TIME HEARER_AT_SCHOOL))))
+           AHMET)
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      (((AND
+         (NOT
+          ((EXISTS T)
+           ((AND ((EARLIER T) (TIME HEARER_AT_SCHOOL)))
+            (((COME AHMET) W0) T)))))
+        ((EARLIER T0) (TIME HEARER_AT_SCHOOL)))
+       (NOT
+        ((((KNOW
+            (NOT
+             ((EXISTS T)
+              ((AND ((EARLIER T) (TIME HEARER_AT_SCHOOL)))
+               (((COME AHMET) W0) T)))))
+           SPEAKER)
+          W0)
+         (TIME HEARER_AT_SCHOOL)))))) =
+    (\ W0 . \ T0 . AND
+     (NOT
+      (EXISTS T (AND (EARLIER T (TIME HEARER_AT_SCHOOL)) (COME AHMET W0 T))))
+     (EARLIER T0 (TIME HEARER_AT_SCHOOL))
+     (NOT
+      (KNOW
+       (NOT
+        (EXISTS T (AND (EARLIER T (TIME HEARER_AT_SCHOOL)) (COME AHMET W0 T))))
+       SPEAKER W0 (TIME HEARER_AT_SCHOOL))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

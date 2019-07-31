@@ -1,0 +1,39 @@
+
+* (ccg-deduce '(ahmet gel -ir -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-IR) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+<     (GEL)(-IR) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+           (LAM X (COME X)))
+LEX   (-AGR) := (S\NP)\\(VP\NP)
+        : (LAM P (LAM X (P X)))
+<     (GEL -IR)(-AGR) := S\NP
+        : ((LAM P (LAM X (P X)))
+           ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+            (LAM X (COME X))))
+<     (AHMET)(GEL -IR -AGR) := S
+        : (((LAM P (LAM X (P X)))
+            ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+             (LAM X (COME X))))
+           AHMET)
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0 (LAM T0 ((EXISTS T) (((COME AHMET) W0) T)))) =
+    (\ W0 . \ T0 . EXISTS T (COME AHMET W0 T))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

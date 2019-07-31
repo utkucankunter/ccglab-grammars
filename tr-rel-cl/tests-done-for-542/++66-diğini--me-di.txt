@@ -1,0 +1,133 @@
+
+* (ccg-deduce '(ben hırsızın konuş -diğini duy -me -di -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (BEN) := NP
+        : SPEAKER
+LEX   (HıRSıZıN) := NP
+        : ROBBER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+<     (HıRSıZıN)(KONUŞ) := VP
+        : ((LAM X (SPEAK X)) ROBBER)
+LEX   (-DIĞINI) := NP\*VP
+        : (LAM P (ACTUAL_EVENT P))
+<     (HıRSıZıN KONUŞ)(-DIĞINI) := NP
+        : ((LAM P (ACTUAL_EVENT P)) ((LAM X (SPEAK X)) ROBBER))
+LEX   (DUY) := (VP\NP)\NP
+        : (LAM Y (LAM X ((HEAR Y) X)))
+LEX   (-ME) := (((VP\NP)\NP)\\((VP\NP)\NP))/*(((VP\NP)\NP)\\((VP\NP)\NP))
+        : (LAM N
+           (LAM P
+            (LAM Y (LAM X (LAM W0 (LAM T0 (NOT (((((N P) Y) X) W0) T0))))))))
+LEX   (-DI) := ((VP\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM Y
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                 ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T))))))))
+>     (-ME)(-DI) := ((VP\NP)\NP)\\((VP\NP)\NP)
+        : ((LAM N
+            (LAM P
+             (LAM Y (LAM X (LAM W0 (LAM T0 (NOT (((((N P) Y) X) W0) T0))))))))
+           (LAM P
+            (LAM Y
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                  ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+<     (DUY)(-ME -DI) := (VP\NP)\NP
+        : (((LAM N
+             (LAM P
+              (LAM Y (LAM X (LAM W0 (LAM T0 (NOT (((((N P) Y) X) W0) T0))))))))
+            (LAM P
+             (LAM Y
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                   ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+           (LAM Y (LAM X ((HEAR Y) X))))
+LEX   (-AGR) := ((S\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P (LAM X (LAM Y ((P X) Y))))
+<     (DUY -ME -DI)(-AGR) := (S\NP)\NP
+        : ((LAM P (LAM X (LAM Y ((P X) Y))))
+           (((LAM N
+              (LAM P
+               (LAM Y
+                (LAM X (LAM W0 (LAM T0 (NOT (((((N P) Y) X) W0) T0))))))))
+             (LAM P
+              (LAM Y
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                    ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+            (LAM Y (LAM X ((HEAR Y) X)))))
+<     (HıRSıZıN KONUŞ -DIĞINI)(DUY -ME -DI -AGR) := S\NP
+        : (((LAM P (LAM X (LAM Y ((P X) Y))))
+            (((LAM N
+               (LAM P
+                (LAM Y
+                 (LAM X (LAM W0 (LAM T0 (NOT (((((N P) Y) X) W0) T0))))))))
+              (LAM P
+               (LAM Y
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS T)
+                    (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                     ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+             (LAM Y (LAM X ((HEAR Y) X)))))
+           ((LAM P (ACTUAL_EVENT P)) ((LAM X (SPEAK X)) ROBBER)))
+<     (BEN)(HıRSıZıN KONUŞ -DIĞINI DUY -ME -DI -AGR) := S
+        : ((((LAM P (LAM X (LAM Y ((P X) Y))))
+             (((LAM N
+                (LAM P
+                 (LAM Y
+                  (LAM X (LAM W0 (LAM T0 (NOT (((((N P) Y) X) W0) T0))))))))
+               (LAM P
+                (LAM Y
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((EXISTS T)
+                     (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                      ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+              (LAM Y (LAM X ((HEAR Y) X)))))
+            ((LAM P (ACTUAL_EVENT P)) ((LAM X (SPEAK X)) ROBBER)))
+           SPEAKER)
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      (NOT
+       ((EXISTS T)
+        (((AND ((EARLIER T0) T))
+          ((((HEAR (ACTUAL_EVENT (SPEAK ROBBER))) SPEAKER) W0) T))
+         ((((KNOW ((((HEAR (ACTUAL_EVENT (SPEAK ROBBER))) SPEAKER) W0) T))
+            SPEAKER)
+           W0)
+          T)))))) =
+    (\ W0 . \ T0 . NOT
+     (EXISTS T
+      (AND (EARLIER T0 T) (HEAR (ACTUAL_EVENT (SPEAK ROBBER)) SPEAKER W0 T)
+       (KNOW (HEAR (ACTUAL_EVENT (SPEAK ROBBER)) SPEAKER W0 T) SPEAKER W0 T))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

@@ -1,0 +1,225 @@
+
+* (ccg-deduce '(ben hırsızın konuş -diğini ahmet gel -diğinde öğren -miş -di -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (BEN) := NP
+        : SPEAKER
+LEX   (HıRSıZıN) := NP
+        : ROBBER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+<     (HıRSıZıN)(KONUŞ) := VP
+        : ((LAM X (SPEAK X)) ROBBER)
+LEX   (-DIĞINI) := NP\*VP
+        : (LAM P (ACTUAL_EVENT P))
+<     (HıRSıZıN KONUŞ)(-DIĞINI) := NP
+        : ((LAM P (ACTUAL_EVENT P)) ((LAM X (SPEAK X)) ROBBER))
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+<     (AHMET)(GEL) := VP
+        : ((LAM X (COME X)) AHMET)
+LEX   (-DIĞINDE) := VP\*VP
+        : (LAM P (LAM W0 (LAM T0 (WHEN P))))
+<     (AHMET GEL)(-DIĞINDE) := VP
+        : ((LAM P (LAM W0 (LAM T0 (WHEN P)))) ((LAM X (COME X)) AHMET))
+LEX   (ÖĞREN) := (VP\NP)\NP
+        : (LAM Y (LAM X ((LEARN Y) X)))
+LEX   (-MIŞ) := ((VP\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM Y
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                 (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+<     (ÖĞREN)(-MIŞ) := (VP\NP)\NP
+        : ((LAM P
+            (LAM Y
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                  (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+           (LAM Y (LAM X ((LEARN Y) X))))
+LEX   (-DI) := (((VP\NP)\NP)\\VP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM V
+            (LAM X
+             (LAM Y
+              (LAM W0
+               (LAM T0
+                (((AND ((((P X) Y) W0) ((V W0) T0)))
+                  ((EARLIER T0) ((V W0) T0)))
+                 ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                  ((V W0) T0)))))))))
+<     (ÖĞREN -MIŞ)(-DI) := ((VP\NP)\NP)\\VP
+        : ((LAM P
+            (LAM V
+             (LAM X
+              (LAM Y
+               (LAM W0
+                (LAM T0
+                 (((AND ((((P X) Y) W0) ((V W0) T0)))
+                   ((EARLIER T0) ((V W0) T0)))
+                  ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                   ((V W0) T0)))))))))
+           ((LAM P
+             (LAM Y
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                   (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+            (LAM Y (LAM X ((LEARN Y) X)))))
+LEX   (-AGR) := (((S\NP)\NP)\VP)\\(((VP\NP)\NP)\VP)
+        : (LAM P (LAM V (LAM X (LAM Y (((P V) X) Y)))))
+<     (ÖĞREN -MIŞ -DI)(-AGR) := ((S\NP)\NP)\VP
+        : ((LAM P (LAM V (LAM X (LAM Y (((P V) X) Y)))))
+           ((LAM P
+             (LAM V
+              (LAM X
+               (LAM Y
+                (LAM W0
+                 (LAM T0
+                  (((AND ((((P X) Y) W0) ((V W0) T0)))
+                    ((EARLIER T0) ((V W0) T0)))
+                   ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                    ((V W0) T0)))))))))
+            ((LAM P
+              (LAM Y
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                    (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+             (LAM Y (LAM X ((LEARN Y) X))))))
+<     (AHMET GEL -DIĞINDE)(ÖĞREN -MIŞ -DI -AGR) := (S\NP)\NP
+        : (((LAM P (LAM V (LAM X (LAM Y (((P V) X) Y)))))
+            ((LAM P
+              (LAM V
+               (LAM X
+                (LAM Y
+                 (LAM W0
+                  (LAM T0
+                   (((AND ((((P X) Y) W0) ((V W0) T0)))
+                     ((EARLIER T0) ((V W0) T0)))
+                    ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                     ((V W0) T0)))))))))
+             ((LAM P
+               (LAM Y
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS T)
+                    (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                     (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+              (LAM Y (LAM X ((LEARN Y) X))))))
+           ((LAM P (LAM W0 (LAM T0 (WHEN P)))) ((LAM X (COME X)) AHMET)))
+<     (HıRSıZıN KONUŞ -DIĞINI)(AHMET GEL -DIĞINDE ÖĞREN -MIŞ -DI -AGR) := S\NP
+        : ((((LAM P (LAM V (LAM X (LAM Y (((P V) X) Y)))))
+             ((LAM P
+               (LAM V
+                (LAM X
+                 (LAM Y
+                  (LAM W0
+                   (LAM T0
+                    (((AND ((((P X) Y) W0) ((V W0) T0)))
+                      ((EARLIER T0) ((V W0) T0)))
+                     ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                      ((V W0) T0)))))))))
+              ((LAM P
+                (LAM Y
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((EXISTS T)
+                     (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                      (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+               (LAM Y (LAM X ((LEARN Y) X))))))
+            ((LAM P (LAM W0 (LAM T0 (WHEN P)))) ((LAM X (COME X)) AHMET)))
+           ((LAM P (ACTUAL_EVENT P)) ((LAM X (SPEAK X)) ROBBER)))
+<     (BEN)(HıRSıZıN KONUŞ -DIĞINI AHMET GEL -DIĞINDE ÖĞREN -MIŞ -DI -AGR) := S
+        : (((((LAM P (LAM V (LAM X (LAM Y (((P V) X) Y)))))
+              ((LAM P
+                (LAM V
+                 (LAM X
+                  (LAM Y
+                   (LAM W0
+                    (LAM T0
+                     (((AND ((((P X) Y) W0) ((V W0) T0)))
+                       ((EARLIER T0) ((V W0) T0)))
+                      ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                       ((V W0) T0)))))))))
+               ((LAM P
+                 (LAM Y
+                  (LAM X
+                   (LAM W0
+                    (LAM T0
+                     ((EXISTS T)
+                      (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                       (NOT
+                        ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+                (LAM Y (LAM X ((LEARN Y) X))))))
+             ((LAM P (LAM W0 (LAM T0 (WHEN P)))) ((LAM X (COME X)) AHMET)))
+            ((LAM P (ACTUAL_EVENT P)) ((LAM X (SPEAK X)) ROBBER)))
+           SPEAKER)
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      (((AND
+         ((EXISTS T)
+          (((AND ((EARLIER (WHEN (COME AHMET))) T))
+            ((((LEARN (ACTUAL_EVENT (SPEAK ROBBER))) SPEAKER) W0) T))
+           (NOT
+            ((((KNOW ((((LEARN (ACTUAL_EVENT (SPEAK ROBBER))) SPEAKER) W0) T))
+               SPEAKER)
+              W0)
+             T)))))
+        ((EARLIER T0) (WHEN (COME AHMET))))
+       ((((KNOW
+           ((EXISTS T)
+            (((AND ((EARLIER (WHEN (COME AHMET))) T))
+              ((((LEARN (ACTUAL_EVENT (SPEAK ROBBER))) SPEAKER) W0) T))
+             (NOT
+              ((((KNOW
+                  ((((LEARN (ACTUAL_EVENT (SPEAK ROBBER))) SPEAKER) W0) T))
+                 SPEAKER)
+                W0)
+               T)))))
+          SPEAKER)
+         W0)
+        (WHEN (COME AHMET)))))) =
+    (\ W0 . \ T0 . AND
+     (EXISTS T
+      (AND (EARLIER (WHEN (COME AHMET)) T)
+       (LEARN (ACTUAL_EVENT (SPEAK ROBBER)) SPEAKER W0 T)
+       (NOT
+        (KNOW (LEARN (ACTUAL_EVENT (SPEAK ROBBER)) SPEAKER W0 T) SPEAKER W0
+         T))))
+     (EARLIER T0 (WHEN (COME AHMET)))
+     (KNOW
+      (EXISTS T
+       (AND (EARLIER (WHEN (COME AHMET)) T)
+        (LEARN (ACTUAL_EVENT (SPEAK ROBBER)) SPEAKER W0 T)
+        (NOT
+         (KNOW (LEARN (ACTUAL_EVENT (SPEAK ROBBER)) SPEAKER W0 T) SPEAKER W0
+          T))))
+      SPEAKER W0 (WHEN (COME AHMET))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

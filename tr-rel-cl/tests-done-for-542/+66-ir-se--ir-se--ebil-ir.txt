@@ -1,0 +1,439 @@
+
+* (ccg-deduce '(komiser konuş -ir -se -agr polis konuş -ir -se -agr hırsız konuş -ebil -ir -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (KOMISER) := NP
+        : OFFICER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-IR) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+<     (KONUŞ)(-IR) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+           (LAM X (SPEAK X)))
+<     (KOMISER)(KONUŞ -IR) := VP
+        : (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+            (LAM X (SPEAK X)))
+           OFFICER)
+LEX   (-SE) := (VP/S)\*VP
+        : (LAM S1
+           (LAM S2
+            (LAM W0
+             (LAM T0
+              ((FORALL W_REF) ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+<     (KOMISER KONUŞ -IR)(-SE) := VP/S
+        : ((LAM S1
+            (LAM S2
+             (LAM W0
+              (LAM T0
+               ((FORALL W_REF)
+                ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+           (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+             (LAM X (SPEAK X)))
+            OFFICER))
+LEX   (-AGR) := (S/S)\*(VP/S)
+        : (LAM P (LAM S (P S)))
+<     (KOMISER KONUŞ -IR -SE)(-AGR) := S/S
+        : ((LAM P (LAM S (P S)))
+           ((LAM S1
+             (LAM S2
+              (LAM W0
+               (LAM T0
+                ((FORALL W_REF)
+                 ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+            (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+              (LAM X (SPEAK X)))
+             OFFICER)))
+LEX   (POLIS) := NP
+        : POLICEMAN
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-IR) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+<     (KONUŞ)(-IR) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+           (LAM X (SPEAK X)))
+<     (POLIS)(KONUŞ -IR) := VP
+        : (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+            (LAM X (SPEAK X)))
+           POLICEMAN)
+LEX   (-SE) := (VP/S)\*VP
+        : (LAM S1
+           (LAM S2
+            (LAM W0
+             (LAM T0
+              ((FORALL W_REF) ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+<     (POLIS KONUŞ -IR)(-SE) := VP/S
+        : ((LAM S1
+            (LAM S2
+             (LAM W0
+              (LAM T0
+               ((FORALL W_REF)
+                ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+           (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+             (LAM X (SPEAK X)))
+            POLICEMAN))
+LEX   (-AGR) := (S/S)\*(VP/S)
+        : (LAM P (LAM S (P S)))
+<     (POLIS KONUŞ -IR -SE)(-AGR) := S/S
+        : ((LAM P (LAM S (P S)))
+           ((LAM S1
+             (LAM S2
+              (LAM W0
+               (LAM T0
+                ((FORALL W_REF)
+                 ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+            (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+              (LAM X (SPEAK X)))
+             POLICEMAN)))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-EBIL) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS W_POS)
+               ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+<     (KONUŞ)(-EBIL) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS W_POS)
+                ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+           (LAM X (SPEAK X)))
+LEX   (-IR) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+<     (KONUŞ -EBIL)(-IR) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+           ((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS W_POS)
+                 ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+            (LAM X (SPEAK X))))
+LEX   (-AGR) := (S\NP)\\(VP\NP)
+        : (LAM P (LAM X (P X)))
+<     (KONUŞ -EBIL -IR)(-AGR) := S\NP
+        : ((LAM P (LAM X (P X)))
+           ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+            ((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS W_POS)
+                  ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+             (LAM X (SPEAK X)))))
+<     (HıRSıZ)(KONUŞ -EBIL -IR -AGR) := S
+        : (((LAM P (LAM X (P X)))
+            ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+             ((LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS W_POS)
+                   ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+              (LAM X (SPEAK X)))))
+           ROBBER)
+>     (POLIS KONUŞ -IR -SE -AGR)(HıRSıZ KONUŞ -EBIL -IR -AGR) := S
+        : (((LAM P (LAM S (P S)))
+            ((LAM S1
+              (LAM S2
+               (LAM W0
+                (LAM T0
+                 ((FORALL W_REF)
+                  ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+             (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+               (LAM X (SPEAK X)))
+              POLICEMAN)))
+           (((LAM P (LAM X (P X)))
+             ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+              ((LAM P
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS W_POS)
+                    ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+               (LAM X (SPEAK X)))))
+            ROBBER))
+>     (KOMISER KONUŞ -IR -SE -AGR)(POLIS KONUŞ -IR -SE -AGR HıRSıZ KONUŞ -EBIL -IR -AGR) := S
+        : (((LAM P (LAM S (P S)))
+            ((LAM S1
+              (LAM S2
+               (LAM W0
+                (LAM T0
+                 ((FORALL W_REF)
+                  ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+             (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+               (LAM X (SPEAK X)))
+              OFFICER)))
+           (((LAM P (LAM S (P S)))
+             ((LAM S1
+               (LAM S2
+                (LAM W0
+                 (LAM T0
+                  ((FORALL W_REF)
+                   ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+              (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+                (LAM X (SPEAK X)))
+               POLICEMAN)))
+            (((LAM P (LAM X (P X)))
+              ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+               ((LAM P
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((EXISTS W_POS)
+                     ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+                (LAM X (SPEAK X)))))
+             ROBBER)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((FORALL W_REF)
+       ((CONDITION ((EXISTS T) (((SPEAK OFFICER) W_REF) T)))
+        ((FORALL W_REF)
+         ((CONDITION ((EXISTS T) (((SPEAK POLICEMAN) W_REF) T)))
+          ((EXISTS T)
+           ((EXISTS W_POS)
+            ((AND ((POSSIBILITY W_REF) W_POS))
+             (((SPEAK ROBBER) W_POS) T)))))))))) =
+    (\ W0 . \ T0 . FORALL W_REF
+     (CONDITION (EXISTS T (SPEAK OFFICER W_REF T))
+      (FORALL W_REF
+       (CONDITION (EXISTS T (SPEAK POLICEMAN W_REF T))
+        (EXISTS T
+         (EXISTS W_POS
+          (AND (POSSIBILITY W_REF W_POS) (SPEAK ROBBER W_POS T))))))))
+
+Derivation 2
+--------------
+LEX   (KOMISER) := NP
+        : OFFICER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-IR) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+<     (KONUŞ)(-IR) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+           (LAM X (SPEAK X)))
+<     (KOMISER)(KONUŞ -IR) := VP
+        : (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+            (LAM X (SPEAK X)))
+           OFFICER)
+LEX   (-SE) := (VP/S)\*VP
+        : (LAM S1
+           (LAM S2
+            (LAM W0
+             (LAM T0
+              ((FORALL W_REF) ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+<     (KOMISER KONUŞ -IR)(-SE) := VP/S
+        : ((LAM S1
+            (LAM S2
+             (LAM W0
+              (LAM T0
+               ((FORALL W_REF)
+                ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+           (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+             (LAM X (SPEAK X)))
+            OFFICER))
+LEX   (-AGR) := (S/S)\*(VP/S)
+        : (LAM P (LAM S (P S)))
+<     (KOMISER KONUŞ -IR -SE)(-AGR) := S/S
+        : ((LAM P (LAM S (P S)))
+           ((LAM S1
+             (LAM S2
+              (LAM W0
+               (LAM T0
+                ((FORALL W_REF)
+                 ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+            (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+              (LAM X (SPEAK X)))
+             OFFICER)))
+LEX   (POLIS) := NP
+        : POLICEMAN
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-IR) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+<     (KONUŞ)(-IR) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+           (LAM X (SPEAK X)))
+<     (POLIS)(KONUŞ -IR) := VP
+        : (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+            (LAM X (SPEAK X)))
+           POLICEMAN)
+LEX   (-SE) := (VP/S)\*VP
+        : (LAM S1
+           (LAM S2
+            (LAM W0
+             (LAM T0
+              ((FORALL W_REF) ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+<     (POLIS KONUŞ -IR)(-SE) := VP/S
+        : ((LAM S1
+            (LAM S2
+             (LAM W0
+              (LAM T0
+               ((FORALL W_REF)
+                ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+           (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+             (LAM X (SPEAK X)))
+            POLICEMAN))
+LEX   (-AGR) := (S/S)\*(VP/S)
+        : (LAM P (LAM S (P S)))
+<     (POLIS KONUŞ -IR -SE)(-AGR) := S/S
+        : ((LAM P (LAM S (P S)))
+           ((LAM S1
+             (LAM S2
+              (LAM W0
+               (LAM T0
+                ((FORALL W_REF)
+                 ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+            (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+              (LAM X (SPEAK X)))
+             POLICEMAN)))
+>B    (KOMISER KONUŞ -IR -SE -AGR)(POLIS KONUŞ -IR -SE -AGR) := S/S
+        : (LAM X
+           (((LAM P (LAM S (P S)))
+             ((LAM S1
+               (LAM S2
+                (LAM W0
+                 (LAM T0
+                  ((FORALL W_REF)
+                   ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+              (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+                (LAM X (SPEAK X)))
+               OFFICER)))
+            (((LAM P (LAM S (P S)))
+              ((LAM S1
+                (LAM S2
+                 (LAM W0
+                  (LAM T0
+                   ((FORALL W_REF)
+                    ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+               (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+                 (LAM X (SPEAK X)))
+                POLICEMAN)))
+             X)))
+LEX   (HıRSıZ) := NP
+        : ROBBER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-EBIL) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS W_POS)
+               ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+<     (KONUŞ)(-EBIL) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS W_POS)
+                ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+           (LAM X (SPEAK X)))
+LEX   (-IR) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+<     (KONUŞ -EBIL)(-IR) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+           ((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS W_POS)
+                 ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+            (LAM X (SPEAK X))))
+LEX   (-AGR) := (S\NP)\\(VP\NP)
+        : (LAM P (LAM X (P X)))
+<     (KONUŞ -EBIL -IR)(-AGR) := S\NP
+        : ((LAM P (LAM X (P X)))
+           ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+            ((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS W_POS)
+                  ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+             (LAM X (SPEAK X)))))
+<     (HıRSıZ)(KONUŞ -EBIL -IR -AGR) := S
+        : (((LAM P (LAM X (P X)))
+            ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+             ((LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS W_POS)
+                   ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+              (LAM X (SPEAK X)))))
+           ROBBER)
+>     (KOMISER KONUŞ -IR -SE -AGR POLIS KONUŞ -IR -SE -AGR)(HıRSıZ KONUŞ -EBIL -IR -AGR) := S
+        : ((LAM X
+            (((LAM P (LAM S (P S)))
+              ((LAM S1
+                (LAM S2
+                 (LAM W0
+                  (LAM T0
+                   ((FORALL W_REF)
+                    ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+               (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+                 (LAM X (SPEAK X)))
+                OFFICER)))
+             (((LAM P (LAM S (P S)))
+               ((LAM S1
+                 (LAM S2
+                  (LAM W0
+                   (LAM T0
+                    ((FORALL W_REF)
+                     ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+                (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+                  (LAM X (SPEAK X)))
+                 POLICEMAN)))
+              X)))
+           (((LAM P (LAM X (P X)))
+             ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+              ((LAM P
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS W_POS)
+                    ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+               (LAM X (SPEAK X)))))
+            ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((FORALL W_REF)
+       ((CONDITION ((EXISTS T) (((SPEAK OFFICER) W_REF) T)))
+        ((FORALL W_REF)
+         ((CONDITION ((EXISTS T) (((SPEAK POLICEMAN) W_REF) T)))
+          ((EXISTS T)
+           ((EXISTS W_POS)
+            ((AND ((POSSIBILITY W_REF) W_POS))
+             (((SPEAK ROBBER) W_POS) T)))))))))) =
+    (\ W0 . \ T0 . FORALL W_REF
+     (CONDITION (EXISTS T (SPEAK OFFICER W_REF T))
+      (FORALL W_REF
+       (CONDITION (EXISTS T (SPEAK POLICEMAN W_REF T))
+        (EXISTS T
+         (EXISTS W_POS
+          (AND (POSSIBILITY W_REF W_POS) (SPEAK ROBBER W_POS T))))))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

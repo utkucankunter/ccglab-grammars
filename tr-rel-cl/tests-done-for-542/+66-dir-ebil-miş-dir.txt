@@ -1,0 +1,667 @@
+
+* (ccg-deduce '(polis hırsızı konuş -dir -ebil -miş -agr -dir))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (POLIS) := NP
+        : POLICEMAN
+LEX   (HıRSıZı) := NP
+        : ROBBER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-DIR) := ((VP\NP)\NP)\\(VP\NP)
+        : (LAM P
+           (LAM A
+            (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+<     (KONUŞ)(-DIR) := (VP\NP)\NP
+        : ((LAM P
+            (LAM A
+             (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+           (LAM X (SPEAK X)))
+LEX   (-EBIL) := ((VP\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM Y
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS W_POS)
+                ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+<     (KONUŞ -DIR)(-EBIL) := (VP\NP)\NP
+        : ((LAM P
+            (LAM Y
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS W_POS)
+                 ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+           ((LAM P
+             (LAM A
+              (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+            (LAM X (SPEAK X))))
+LEX   (-MIŞ) := ((VP\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM Y
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                 (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+<     (KONUŞ -DIR -EBIL)(-MIŞ) := (VP\NP)\NP
+        : ((LAM P
+            (LAM Y
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                  (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+           ((LAM P
+             (LAM Y
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS W_POS)
+                  ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+            ((LAM P
+              (LAM A
+               (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+             (LAM X (SPEAK X)))))
+LEX   (-AGR) := ((S\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P (LAM X (LAM Y ((P X) Y))))
+<     (KONUŞ -DIR -EBIL -MIŞ)(-AGR) := (S\NP)\NP
+        : ((LAM P (LAM X (LAM Y ((P X) Y))))
+           ((LAM P
+             (LAM Y
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                   (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+            ((LAM P
+              (LAM Y
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS W_POS)
+                   ((AND ((POSSIBILITY W0) W_POS))
+                    ((((P Y) X) W_POS) T0))))))))
+             ((LAM P
+               (LAM A
+                (LAM X
+                 (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+              (LAM X (SPEAK X))))))
+LEX   (-DIR) := ((S\NP)\NP)\*((S\NP)\NP)
+        : (LAM P
+           (LAM X
+            (LAM Y
+             (LAM W0
+              (LAM T0
+               ((EXISTS W_GMOD)
+                ((AND ((PROBABILITY W0) W_GMOD)) ((((P X) Y) W_GMOD) T0))))))))
+<     (KONUŞ -DIR -EBIL -MIŞ -AGR)(-DIR) := (S\NP)\NP
+        : ((LAM P
+            (LAM X
+             (LAM Y
+              (LAM W0
+               (LAM T0
+                ((EXISTS W_GMOD)
+                 ((AND ((PROBABILITY W0) W_GMOD))
+                  ((((P X) Y) W_GMOD) T0))))))))
+           ((LAM P (LAM X (LAM Y ((P X) Y))))
+            ((LAM P
+              (LAM Y
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                    (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+             ((LAM P
+               (LAM Y
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS W_POS)
+                    ((AND ((POSSIBILITY W0) W_POS))
+                     ((((P Y) X) W_POS) T0))))))))
+              ((LAM P
+                (LAM A
+                 (LAM X
+                  (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+               (LAM X (SPEAK X)))))))
+<     (HıRSıZı)(KONUŞ -DIR -EBIL -MIŞ -AGR -DIR) := S\NP
+        : (((LAM P
+             (LAM X
+              (LAM Y
+               (LAM W0
+                (LAM T0
+                 ((EXISTS W_GMOD)
+                  ((AND ((PROBABILITY W0) W_GMOD))
+                   ((((P X) Y) W_GMOD) T0))))))))
+            ((LAM P (LAM X (LAM Y ((P X) Y))))
+             ((LAM P
+               (LAM Y
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS T)
+                    (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                     (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+              ((LAM P
+                (LAM Y
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((EXISTS W_POS)
+                     ((AND ((POSSIBILITY W0) W_POS))
+                      ((((P Y) X) W_POS) T0))))))))
+               ((LAM P
+                 (LAM A
+                  (LAM X
+                   (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                (LAM X (SPEAK X)))))))
+           ROBBER)
+<     (POLIS)(HıRSıZı KONUŞ -DIR -EBIL -MIŞ -AGR -DIR) := S
+        : ((((LAM P
+              (LAM X
+               (LAM Y
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS W_GMOD)
+                   ((AND ((PROBABILITY W0) W_GMOD))
+                    ((((P X) Y) W_GMOD) T0))))))))
+             ((LAM P (LAM X (LAM Y ((P X) Y))))
+              ((LAM P
+                (LAM Y
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((EXISTS T)
+                     (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                      (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+               ((LAM P
+                 (LAM Y
+                  (LAM X
+                   (LAM W0
+                    (LAM T0
+                     ((EXISTS W_POS)
+                      ((AND ((POSSIBILITY W0) W_POS))
+                       ((((P Y) X) W_POS) T0))))))))
+                ((LAM P
+                  (LAM A
+                   (LAM X
+                    (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                 (LAM X (SPEAK X)))))))
+            ROBBER)
+           POLICEMAN)
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((EXISTS W_GMOD)
+       ((AND ((PROBABILITY W0) W_GMOD))
+        ((EXISTS T)
+         (((AND ((EARLIER T0) T))
+           ((EXISTS W_POS)
+            ((AND ((POSSIBILITY W_GMOD) W_POS))
+             ((((INIT (((SPEAK ROBBER) W_POS) T)) POLICEMAN) W_POS) T))))
+          (NOT
+           ((((KNOW
+               ((EXISTS W_POS)
+                ((AND ((POSSIBILITY W_GMOD) W_POS))
+                 ((((INIT (((SPEAK ROBBER) W_POS) T)) POLICEMAN) W_POS) T))))
+              SPEAKER)
+             W_GMOD)
+            T)))))))) =
+    (\ W0 . \ T0 . EXISTS W_GMOD
+     (AND (PROBABILITY W0 W_GMOD)
+      (EXISTS T
+       (AND (EARLIER T0 T)
+        (EXISTS W_POS
+         (AND (POSSIBILITY W_GMOD W_POS)
+          (INIT (SPEAK ROBBER W_POS T) POLICEMAN W_POS T)))
+        (NOT
+         (KNOW
+          (EXISTS W_POS
+           (AND (POSSIBILITY W_GMOD W_POS)
+            (INIT (SPEAK ROBBER W_POS T) POLICEMAN W_POS T)))
+          SPEAKER W_GMOD T))))))
+
+Derivation 2
+--------------
+LEX   (POLIS) := NP
+        : POLICEMAN
+LEX   (HıRSıZı) := NP
+        : ROBBER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-DIR) := ((VP\NP)\NP)\\(VP\NP)
+        : (LAM P
+           (LAM A
+            (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+<     (KONUŞ)(-DIR) := (VP\NP)\NP
+        : ((LAM P
+            (LAM A
+             (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+           (LAM X (SPEAK X)))
+LEX   (-EBIL) := ((VP\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM Y
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS W_POS)
+                ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+<     (KONUŞ -DIR)(-EBIL) := (VP\NP)\NP
+        : ((LAM P
+            (LAM Y
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS W_POS)
+                 ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+           ((LAM P
+             (LAM A
+              (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+            (LAM X (SPEAK X))))
+LEX   (-MIŞ) := ((VP\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM Y
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                 (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+<     (KONUŞ -DIR -EBIL)(-MIŞ) := (VP\NP)\NP
+        : ((LAM P
+            (LAM Y
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                  (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+           ((LAM P
+             (LAM Y
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS W_POS)
+                  ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+            ((LAM P
+              (LAM A
+               (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+             (LAM X (SPEAK X)))))
+LEX   (-AGR) := ((S\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P (LAM X (LAM Y ((P X) Y))))
+<     (KONUŞ -DIR -EBIL -MIŞ)(-AGR) := (S\NP)\NP
+        : ((LAM P (LAM X (LAM Y ((P X) Y))))
+           ((LAM P
+             (LAM Y
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                   (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+            ((LAM P
+              (LAM Y
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS W_POS)
+                   ((AND ((POSSIBILITY W0) W_POS))
+                    ((((P Y) X) W_POS) T0))))))))
+             ((LAM P
+               (LAM A
+                (LAM X
+                 (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+              (LAM X (SPEAK X))))))
+<     (HıRSıZı)(KONUŞ -DIR -EBIL -MIŞ -AGR) := S\NP
+        : (((LAM P (LAM X (LAM Y ((P X) Y))))
+            ((LAM P
+              (LAM Y
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                    (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+             ((LAM P
+               (LAM Y
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS W_POS)
+                    ((AND ((POSSIBILITY W0) W_POS))
+                     ((((P Y) X) W_POS) T0))))))))
+              ((LAM P
+                (LAM A
+                 (LAM X
+                  (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+               (LAM X (SPEAK X))))))
+           ROBBER)
+LEX   (-DIR) := (S\NP)\*(S\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS W_GMOD)
+               ((AND ((PROBABILITY W0) W_GMOD)) (((P X) W_GMOD) T0)))))))
+<     (HıRSıZı KONUŞ -DIR -EBIL -MIŞ -AGR)(-DIR) := S\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS W_GMOD)
+                ((AND ((PROBABILITY W0) W_GMOD)) (((P X) W_GMOD) T0)))))))
+           (((LAM P (LAM X (LAM Y ((P X) Y))))
+             ((LAM P
+               (LAM Y
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS T)
+                    (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                     (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+              ((LAM P
+                (LAM Y
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((EXISTS W_POS)
+                     ((AND ((POSSIBILITY W0) W_POS))
+                      ((((P Y) X) W_POS) T0))))))))
+               ((LAM P
+                 (LAM A
+                  (LAM X
+                   (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                (LAM X (SPEAK X))))))
+            ROBBER))
+<     (POLIS)(HıRSıZı KONUŞ -DIR -EBIL -MIŞ -AGR -DIR) := S
+        : (((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS W_GMOD)
+                 ((AND ((PROBABILITY W0) W_GMOD)) (((P X) W_GMOD) T0)))))))
+            (((LAM P (LAM X (LAM Y ((P X) Y))))
+              ((LAM P
+                (LAM Y
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((EXISTS T)
+                     (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                      (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+               ((LAM P
+                 (LAM Y
+                  (LAM X
+                   (LAM W0
+                    (LAM T0
+                     ((EXISTS W_POS)
+                      ((AND ((POSSIBILITY W0) W_POS))
+                       ((((P Y) X) W_POS) T0))))))))
+                ((LAM P
+                  (LAM A
+                   (LAM X
+                    (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                 (LAM X (SPEAK X))))))
+             ROBBER))
+           POLICEMAN)
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((EXISTS W_GMOD)
+       ((AND ((PROBABILITY W0) W_GMOD))
+        ((EXISTS T)
+         (((AND ((EARLIER T0) T))
+           ((EXISTS W_POS)
+            ((AND ((POSSIBILITY W_GMOD) W_POS))
+             ((((INIT (((SPEAK ROBBER) W_POS) T)) POLICEMAN) W_POS) T))))
+          (NOT
+           ((((KNOW
+               ((EXISTS W_POS)
+                ((AND ((POSSIBILITY W_GMOD) W_POS))
+                 ((((INIT (((SPEAK ROBBER) W_POS) T)) POLICEMAN) W_POS) T))))
+              SPEAKER)
+             W_GMOD)
+            T)))))))) =
+    (\ W0 . \ T0 . EXISTS W_GMOD
+     (AND (PROBABILITY W0 W_GMOD)
+      (EXISTS T
+       (AND (EARLIER T0 T)
+        (EXISTS W_POS
+         (AND (POSSIBILITY W_GMOD W_POS)
+          (INIT (SPEAK ROBBER W_POS T) POLICEMAN W_POS T)))
+        (NOT
+         (KNOW
+          (EXISTS W_POS
+           (AND (POSSIBILITY W_GMOD W_POS)
+            (INIT (SPEAK ROBBER W_POS T) POLICEMAN W_POS T)))
+          SPEAKER W_GMOD T))))))
+
+Derivation 3
+--------------
+LEX   (POLIS) := NP
+        : POLICEMAN
+LEX   (HıRSıZı) := NP
+        : ROBBER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-DIR) := ((VP\NP)\NP)\\(VP\NP)
+        : (LAM P
+           (LAM A
+            (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+<     (KONUŞ)(-DIR) := (VP\NP)\NP
+        : ((LAM P
+            (LAM A
+             (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+           (LAM X (SPEAK X)))
+LEX   (-EBIL) := ((VP\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM Y
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS W_POS)
+                ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+<     (KONUŞ -DIR)(-EBIL) := (VP\NP)\NP
+        : ((LAM P
+            (LAM Y
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS W_POS)
+                 ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+           ((LAM P
+             (LAM A
+              (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+            (LAM X (SPEAK X))))
+LEX   (-MIŞ) := ((VP\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM Y
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                 (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+<     (KONUŞ -DIR -EBIL)(-MIŞ) := (VP\NP)\NP
+        : ((LAM P
+            (LAM Y
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                  (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+           ((LAM P
+             (LAM Y
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS W_POS)
+                  ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+            ((LAM P
+              (LAM A
+               (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+             (LAM X (SPEAK X)))))
+LEX   (-AGR) := ((S\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P (LAM X (LAM Y ((P X) Y))))
+<     (KONUŞ -DIR -EBIL -MIŞ)(-AGR) := (S\NP)\NP
+        : ((LAM P (LAM X (LAM Y ((P X) Y))))
+           ((LAM P
+             (LAM Y
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                   (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+            ((LAM P
+              (LAM Y
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS W_POS)
+                   ((AND ((POSSIBILITY W0) W_POS))
+                    ((((P Y) X) W_POS) T0))))))))
+             ((LAM P
+               (LAM A
+                (LAM X
+                 (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+              (LAM X (SPEAK X))))))
+<     (HıRSıZı)(KONUŞ -DIR -EBIL -MIŞ -AGR) := S\NP
+        : (((LAM P (LAM X (LAM Y ((P X) Y))))
+            ((LAM P
+              (LAM Y
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                    (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+             ((LAM P
+               (LAM Y
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS W_POS)
+                    ((AND ((POSSIBILITY W0) W_POS))
+                     ((((P Y) X) W_POS) T0))))))))
+              ((LAM P
+                (LAM A
+                 (LAM X
+                  (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+               (LAM X (SPEAK X))))))
+           ROBBER)
+<     (POLIS)(HıRSıZı KONUŞ -DIR -EBIL -MIŞ -AGR) := S
+        : ((((LAM P (LAM X (LAM Y ((P X) Y))))
+             ((LAM P
+               (LAM Y
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS T)
+                    (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                     (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+              ((LAM P
+                (LAM Y
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((EXISTS W_POS)
+                     ((AND ((POSSIBILITY W0) W_POS))
+                      ((((P Y) X) W_POS) T0))))))))
+               ((LAM P
+                 (LAM A
+                  (LAM X
+                   (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                (LAM X (SPEAK X))))))
+            ROBBER)
+           POLICEMAN)
+LEX   (-DIR) := S\*S
+        : (LAM P
+           (LAM W0
+            (LAM T0
+             ((EXISTS W_GMOD)
+              ((AND ((PROBABILITY W0) W_GMOD)) ((P W_GMOD) T0))))))
+<     (POLIS HıRSıZı KONUŞ -DIR -EBIL -MIŞ -AGR)(-DIR) := S
+        : ((LAM P
+            (LAM W0
+             (LAM T0
+              ((EXISTS W_GMOD)
+               ((AND ((PROBABILITY W0) W_GMOD)) ((P W_GMOD) T0))))))
+           ((((LAM P (LAM X (LAM Y ((P X) Y))))
+              ((LAM P
+                (LAM Y
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((EXISTS T)
+                     (((AND ((EARLIER T0) T)) ((((P Y) X) W0) T))
+                      (NOT ((((KNOW ((((P Y) X) W0) T)) SPEAKER) W0) T)))))))))
+               ((LAM P
+                 (LAM Y
+                  (LAM X
+                   (LAM W0
+                    (LAM T0
+                     ((EXISTS W_POS)
+                      ((AND ((POSSIBILITY W0) W_POS))
+                       ((((P Y) X) W_POS) T0))))))))
+                ((LAM P
+                  (LAM A
+                   (LAM X
+                    (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                 (LAM X (SPEAK X))))))
+             ROBBER)
+            POLICEMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((EXISTS W_GMOD)
+       ((AND ((PROBABILITY W0) W_GMOD))
+        ((EXISTS T)
+         (((AND ((EARLIER T0) T))
+           ((EXISTS W_POS)
+            ((AND ((POSSIBILITY W_GMOD) W_POS))
+             ((((INIT (((SPEAK ROBBER) W_POS) T)) POLICEMAN) W_POS) T))))
+          (NOT
+           ((((KNOW
+               ((EXISTS W_POS)
+                ((AND ((POSSIBILITY W_GMOD) W_POS))
+                 ((((INIT (((SPEAK ROBBER) W_POS) T)) POLICEMAN) W_POS) T))))
+              SPEAKER)
+             W_GMOD)
+            T)))))))) =
+    (\ W0 . \ T0 . EXISTS W_GMOD
+     (AND (PROBABILITY W0 W_GMOD)
+      (EXISTS T
+       (AND (EARLIER T0 T)
+        (EXISTS W_POS
+         (AND (POSSIBILITY W_GMOD W_POS)
+          (INIT (SPEAK ROBBER W_POS T) POLICEMAN W_POS T)))
+        (NOT
+         (KNOW
+          (EXISTS W_POS
+           (AND (POSSIBILITY W_GMOD W_POS)
+            (INIT (SPEAK ROBBER W_POS T) POLICEMAN W_POS T)))
+          SPEAKER W_GMOD T))))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

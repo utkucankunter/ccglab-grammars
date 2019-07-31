@@ -1,0 +1,29 @@
+
+* (ccg-deduce '(hırsız hapse_gir -meden_önce))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (HıRSıZ) := NP
+        : ROBBER
+LEX   (HAPSE_GIR) := VP\NP
+        : (LAM X (GO_TO_JAIL X))
+<     (HıRSıZ)(HAPSE_GIR) := VP
+        : ((LAM X (GO_TO_JAIL X)) ROBBER)
+LEX   (-MEDEN_ÖNCE) := VP\*VP
+        : (LAM P (LAM W0 (LAM T0 (BEFORE P))))
+<     (HıRSıZ HAPSE_GIR)(-MEDEN_ÖNCE) := VP
+        : ((LAM P (LAM W0 (LAM T0 (BEFORE P)))) ((LAM X (GO_TO_JAIL X)) ROBBER))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0 (LAM T0 (BEFORE (GO_TO_JAIL ROBBER)))) =
+    (\ W0 . \ T0 . BEFORE (GO_TO_JAIL ROBBER))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

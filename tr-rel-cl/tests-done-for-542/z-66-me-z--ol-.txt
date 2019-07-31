@@ -1,0 +1,87 @@
+
+* (ccg-deduce '(sen gel -me -z ol))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (SEN) := NP
+        : HEARER
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-ME) := ((VP\NP)\\(VP\NP))/*((VP\NP)\\(VP\NP))
+        : (LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+LEX   (-Z) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+>     (-ME)(-Z) := (VP\NP)\\(VP\NP)
+        : ((LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+           (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T)))))))
+<     (GEL)(-ME -Z) := VP\NP
+        : (((LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+            (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T)))))))
+           (LAM X (COME X)))
+LEX   (OL) := (VP\NP)\*(VP\NP)
+        : (LAM P (LAM X (AUX (((P X) W0) T0))))
+<     (GEL -ME -Z)(OL) := VP\NP
+        : ((LAM P (LAM X (AUX (((P X) W0) T0))))
+           (((LAM N
+              (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+             (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T)))))))
+            (LAM X (COME X))))
+<     (SEN)(GEL -ME -Z OL) := VP
+        : (((LAM P (LAM X (AUX (((P X) W0) T0))))
+            (((LAM N
+               (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+              (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T)))))))
+             (LAM X (COME X))))
+           HEARER)
+
+Final LF, normal-order evaluated: 
+
+    (AUX (NOT ((EXISTS T) (((COME HEARER) W0) T)))) =
+    (AUX (NOT (EXISTS T (COME HEARER W0 T))))
+
+Derivation 2
+--------------
+LEX   (SEN) := NP
+        : HEARER
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-ME) := ((VP\NP)\\(VP\NP))/*((VP\NP)\\(VP\NP))
+        : (LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+LEX   (-Z) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+>     (-ME)(-Z) := (VP\NP)\\(VP\NP)
+        : ((LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+           (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T)))))))
+<     (GEL)(-ME -Z) := VP\NP
+        : (((LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+            (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T)))))))
+           (LAM X (COME X)))
+<     (SEN)(GEL -ME -Z) := VP
+        : ((((LAM N
+              (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+             (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T)))))))
+            (LAM X (COME X)))
+           HEARER)
+LEX   (OL) := VP\*VP
+        : (LAM P (AUX ((P W0) T0)))
+<     (SEN GEL -ME -Z)(OL) := VP
+        : ((LAM P (AUX ((P W0) T0)))
+           ((((LAM N
+               (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+              (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T)))))))
+             (LAM X (COME X)))
+            HEARER))
+
+Final LF, normal-order evaluated: 
+
+    (AUX (NOT ((EXISTS T) (((COME HEARER) W0) T)))) =
+    (AUX (NOT (EXISTS T (COME HEARER W0 T))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

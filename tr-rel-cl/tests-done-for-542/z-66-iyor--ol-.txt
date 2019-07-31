@@ -1,0 +1,125 @@
+
+* (ccg-deduce '(ahmet gel -iyor ol))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-IYOR) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((((EXISTS T1) EXISTS) T2)
+               (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                (((P X) W0) (T1 T2))))))))
+<     (GEL)(-IYOR) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((((EXISTS T1) EXISTS) T2)
+                (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                 (((P X) W0) (T1 T2))))))))
+           (LAM X (COME X)))
+LEX   (OL) := (VP\NP)\*(VP\NP)
+        : (LAM P (LAM X (AUX (((P X) W0) T0))))
+<     (GEL -IYOR)(OL) := VP\NP
+        : ((LAM P (LAM X (AUX (((P X) W0) T0))))
+           ((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((((EXISTS T1) EXISTS) T2)
+                 (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                  (((P X) W0) (T1 T2))))))))
+            (LAM X (COME X))))
+<     (AHMET)(GEL -IYOR OL) := VP
+        : (((LAM P (LAM X (AUX (((P X) W0) T0))))
+            ((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((((EXISTS T1) EXISTS) T2)
+                  (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                   (((P X) W0) (T1 T2))))))))
+             (LAM X (COME X))))
+           AHMET)
+
+Final LF, normal-order evaluated: 
+
+    (AUX
+     ((((EXISTS T1) EXISTS) T2)
+      (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+       (((COME AHMET) W0) (T1 T2))))) =
+    (AUX
+     (EXISTS T1 EXISTS T2
+      (AND (EARLIER T0 T1) (EARLIER T2 T0) (COME AHMET W0 (T1 T2)))))
+
+Derivation 2
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-IYOR) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((((EXISTS T1) EXISTS) T2)
+               (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                (((P X) W0) (T1 T2))))))))
+<     (GEL)(-IYOR) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((((EXISTS T1) EXISTS) T2)
+                (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                 (((P X) W0) (T1 T2))))))))
+           (LAM X (COME X)))
+<     (AHMET)(GEL -IYOR) := VP
+        : (((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((((EXISTS T1) EXISTS) T2)
+                 (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                  (((P X) W0) (T1 T2))))))))
+            (LAM X (COME X)))
+           AHMET)
+LEX   (OL) := VP\*VP
+        : (LAM P (AUX ((P W0) T0)))
+<     (AHMET GEL -IYOR)(OL) := VP
+        : ((LAM P (AUX ((P W0) T0)))
+           (((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((((EXISTS T1) EXISTS) T2)
+                  (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                   (((P X) W0) (T1 T2))))))))
+             (LAM X (COME X)))
+            AHMET))
+
+Final LF, normal-order evaluated: 
+
+    (AUX
+     ((((EXISTS T1) EXISTS) T2)
+      (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+       (((COME AHMET) W0) (T1 T2))))) =
+    (AUX
+     (EXISTS T1 EXISTS T2
+      (AND (EARLIER T0 T1) (EARLIER T2 T0) (COME AHMET W0 (T1 T2)))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

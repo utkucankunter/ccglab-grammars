@@ -1,0 +1,87 @@
+
+* (ccg-deduce '(ahmet gel -me -miş -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-ME) := ((VP\NP)\\(VP\NP))/*((VP\NP)\\(VP\NP))
+        : (LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+LEX   (-MIŞ) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS T)
+               (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+>     (-ME)(-MIŞ) := (VP\NP)\\(VP\NP)
+        : ((LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+           (LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                 (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))))
+<     (GEL)(-ME -MIŞ) := VP\NP
+        : (((LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+            (LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                  (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))))
+           (LAM X (COME X)))
+LEX   (-AGR) := (S\NP)\\(VP\NP)
+        : (LAM P (LAM X (P X)))
+<     (GEL -ME -MIŞ)(-AGR) := S\NP
+        : ((LAM P (LAM X (P X)))
+           (((LAM N
+              (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+             (LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                   (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))))
+            (LAM X (COME X))))
+<     (AHMET)(GEL -ME -MIŞ -AGR) := S
+        : (((LAM P (LAM X (P X)))
+            (((LAM N
+               (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+              (LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                    (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))))
+             (LAM X (COME X))))
+           AHMET)
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      (NOT
+       ((EXISTS T)
+        (((AND ((EARLIER T0) T)) (((COME AHMET) W0) T))
+         (NOT ((((KNOW (((COME AHMET) W0) T)) SPEAKER) W0) T))))))) =
+    (\ W0 . \ T0 . NOT
+     (EXISTS T
+      (AND (EARLIER T0 T) (COME AHMET W0 T)
+       (NOT (KNOW (COME AHMET W0 T) SPEAKER W0 T)))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

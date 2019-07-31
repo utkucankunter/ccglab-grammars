@@ -1,0 +1,727 @@
+
+* (ccg-deduce '(polis hırsızı hapisteyken konuş -dir -ebil -meli -di -se -agr polis hırsızı hapisteyken konuş -dir -ebil -meli -di -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (POLIS) := NP
+        : POLICEMAN
+LEX   (HıRSıZı) := NP
+        : ROBBER
+LEX   (HAPISTEYKEN) := VP
+        : (LAM W0 (LAM T0 (TIME WAS_IN_JAIL)))
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-DIR) := ((VP\NP)\NP)\\(VP\NP)
+        : (LAM P
+           (LAM A
+            (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+<     (KONUŞ)(-DIR) := (VP\NP)\NP
+        : ((LAM P
+            (LAM A
+             (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+           (LAM X (SPEAK X)))
+LEX   (-EBIL) := ((VP\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM Y
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS W_POS)
+                ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+<     (KONUŞ -DIR)(-EBIL) := (VP\NP)\NP
+        : ((LAM P
+            (LAM Y
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS W_POS)
+                 ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+           ((LAM P
+             (LAM A
+              (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+            (LAM X (SPEAK X))))
+LEX   (-MELI) := ((VP\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM X
+            (LAM Y
+             (LAM W0
+              (LAM T0
+               ((FORALL W_MOD)
+                ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                 ((((P X) Y) W_MOD) T0))))))))
+<     (KONUŞ -DIR -EBIL)(-MELI) := (VP\NP)\NP
+        : ((LAM P
+            (LAM X
+             (LAM Y
+              (LAM W0
+               (LAM T0
+                ((FORALL W_MOD)
+                 ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                  ((((P X) Y) W_MOD) T0))))))))
+           ((LAM P
+             (LAM Y
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS W_POS)
+                  ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+            ((LAM P
+              (LAM A
+               (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+             (LAM X (SPEAK X)))))
+LEX   (-DI) := (((VP\NP)\NP)\\VP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM V
+            (LAM X
+             (LAM Y
+              (LAM W0
+               (LAM T0
+                (((AND ((((P X) Y) W0) ((V W0) T0)))
+                  ((EARLIER T0) ((V W0) T0)))
+                 ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                  ((V W0) T0)))))))))
+<     (KONUŞ -DIR -EBIL -MELI)(-DI) := ((VP\NP)\NP)\\VP
+        : ((LAM P
+            (LAM V
+             (LAM X
+              (LAM Y
+               (LAM W0
+                (LAM T0
+                 (((AND ((((P X) Y) W0) ((V W0) T0)))
+                   ((EARLIER T0) ((V W0) T0)))
+                  ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                   ((V W0) T0)))))))))
+           ((LAM P
+             (LAM X
+              (LAM Y
+               (LAM W0
+                (LAM T0
+                 ((FORALL W_MOD)
+                  ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                   ((((P X) Y) W_MOD) T0))))))))
+            ((LAM P
+              (LAM Y
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS W_POS)
+                   ((AND ((POSSIBILITY W0) W_POS))
+                    ((((P Y) X) W_POS) T0))))))))
+             ((LAM P
+               (LAM A
+                (LAM X
+                 (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+              (LAM X (SPEAK X))))))
+<     (HAPISTEYKEN)(KONUŞ -DIR -EBIL -MELI -DI) := (VP\NP)\NP
+        : (((LAM P
+             (LAM V
+              (LAM X
+               (LAM Y
+                (LAM W0
+                 (LAM T0
+                  (((AND ((((P X) Y) W0) ((V W0) T0)))
+                    ((EARLIER T0) ((V W0) T0)))
+                   ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                    ((V W0) T0)))))))))
+            ((LAM P
+              (LAM X
+               (LAM Y
+                (LAM W0
+                 (LAM T0
+                  ((FORALL W_MOD)
+                   ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                    ((((P X) Y) W_MOD) T0))))))))
+             ((LAM P
+               (LAM Y
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS W_POS)
+                    ((AND ((POSSIBILITY W0) W_POS))
+                     ((((P Y) X) W_POS) T0))))))))
+              ((LAM P
+                (LAM A
+                 (LAM X
+                  (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+               (LAM X (SPEAK X))))))
+           (LAM W0 (LAM T0 (TIME WAS_IN_JAIL))))
+<     (HıRSıZı)(HAPISTEYKEN KONUŞ -DIR -EBIL -MELI -DI) := VP\NP
+        : ((((LAM P
+              (LAM V
+               (LAM X
+                (LAM Y
+                 (LAM W0
+                  (LAM T0
+                   (((AND ((((P X) Y) W0) ((V W0) T0)))
+                     ((EARLIER T0) ((V W0) T0)))
+                    ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                     ((V W0) T0)))))))))
+             ((LAM P
+               (LAM X
+                (LAM Y
+                 (LAM W0
+                  (LAM T0
+                   ((FORALL W_MOD)
+                    ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                     ((((P X) Y) W_MOD) T0))))))))
+              ((LAM P
+                (LAM Y
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((EXISTS W_POS)
+                     ((AND ((POSSIBILITY W0) W_POS))
+                      ((((P Y) X) W_POS) T0))))))))
+               ((LAM P
+                 (LAM A
+                  (LAM X
+                   (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                (LAM X (SPEAK X))))))
+            (LAM W0 (LAM T0 (TIME WAS_IN_JAIL))))
+           ROBBER)
+<     (POLIS)(HıRSıZı HAPISTEYKEN KONUŞ -DIR -EBIL -MELI -DI) := VP
+        : (((((LAM P
+               (LAM V
+                (LAM X
+                 (LAM Y
+                  (LAM W0
+                   (LAM T0
+                    (((AND ((((P X) Y) W0) ((V W0) T0)))
+                      ((EARLIER T0) ((V W0) T0)))
+                     ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                      ((V W0) T0)))))))))
+              ((LAM P
+                (LAM X
+                 (LAM Y
+                  (LAM W0
+                   (LAM T0
+                    ((FORALL W_MOD)
+                     ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                      ((((P X) Y) W_MOD) T0))))))))
+               ((LAM P
+                 (LAM Y
+                  (LAM X
+                   (LAM W0
+                    (LAM T0
+                     ((EXISTS W_POS)
+                      ((AND ((POSSIBILITY W0) W_POS))
+                       ((((P Y) X) W_POS) T0))))))))
+                ((LAM P
+                  (LAM A
+                   (LAM X
+                    (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                 (LAM X (SPEAK X))))))
+             (LAM W0 (LAM T0 (TIME WAS_IN_JAIL))))
+            ROBBER)
+           POLICEMAN)
+LEX   (-SE) := (VP/S)\*VP
+        : (LAM S1
+           (LAM S2
+            (LAM W0
+             (LAM T0
+              ((FORALL W_REF) ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+<     (POLIS HıRSıZı HAPISTEYKEN KONUŞ -DIR -EBIL -MELI -DI)(-SE) := VP/S
+        : ((LAM S1
+            (LAM S2
+             (LAM W0
+              (LAM T0
+               ((FORALL W_REF)
+                ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+           (((((LAM P
+                (LAM V
+                 (LAM X
+                  (LAM Y
+                   (LAM W0
+                    (LAM T0
+                     (((AND ((((P X) Y) W0) ((V W0) T0)))
+                       ((EARLIER T0) ((V W0) T0)))
+                      ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                       ((V W0) T0)))))))))
+               ((LAM P
+                 (LAM X
+                  (LAM Y
+                   (LAM W0
+                    (LAM T0
+                     ((FORALL W_MOD)
+                      ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                       ((((P X) Y) W_MOD) T0))))))))
+                ((LAM P
+                  (LAM Y
+                   (LAM X
+                    (LAM W0
+                     (LAM T0
+                      ((EXISTS W_POS)
+                       ((AND ((POSSIBILITY W0) W_POS))
+                        ((((P Y) X) W_POS) T0))))))))
+                 ((LAM P
+                   (LAM A
+                    (LAM X
+                     (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                  (LAM X (SPEAK X))))))
+              (LAM W0 (LAM T0 (TIME WAS_IN_JAIL))))
+             ROBBER)
+            POLICEMAN))
+LEX   (-AGR) := (S/S)\*(VP/S)
+        : (LAM P (LAM S (P S)))
+<     (POLIS HıRSıZı HAPISTEYKEN KONUŞ -DIR -EBIL -MELI -DI -SE)(-AGR) := S/S
+        : ((LAM P (LAM S (P S)))
+           ((LAM S1
+             (LAM S2
+              (LAM W0
+               (LAM T0
+                ((FORALL W_REF)
+                 ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+            (((((LAM P
+                 (LAM V
+                  (LAM X
+                   (LAM Y
+                    (LAM W0
+                     (LAM T0
+                      (((AND ((((P X) Y) W0) ((V W0) T0)))
+                        ((EARLIER T0) ((V W0) T0)))
+                       ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                        ((V W0) T0)))))))))
+                ((LAM P
+                  (LAM X
+                   (LAM Y
+                    (LAM W0
+                     (LAM T0
+                      ((FORALL W_MOD)
+                       ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                        ((((P X) Y) W_MOD) T0))))))))
+                 ((LAM P
+                   (LAM Y
+                    (LAM X
+                     (LAM W0
+                      (LAM T0
+                       ((EXISTS W_POS)
+                        ((AND ((POSSIBILITY W0) W_POS))
+                         ((((P Y) X) W_POS) T0))))))))
+                  ((LAM P
+                    (LAM A
+                     (LAM X
+                      (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                   (LAM X (SPEAK X))))))
+               (LAM W0 (LAM T0 (TIME WAS_IN_JAIL))))
+              ROBBER)
+             POLICEMAN)))
+LEX   (POLIS) := NP
+        : POLICEMAN
+LEX   (HıRSıZı) := NP
+        : ROBBER
+LEX   (HAPISTEYKEN) := VP
+        : (LAM W0 (LAM T0 (TIME WAS_IN_JAIL)))
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-DIR) := ((VP\NP)\NP)\\(VP\NP)
+        : (LAM P
+           (LAM A
+            (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+<     (KONUŞ)(-DIR) := (VP\NP)\NP
+        : ((LAM P
+            (LAM A
+             (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+           (LAM X (SPEAK X)))
+LEX   (-EBIL) := ((VP\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM Y
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS W_POS)
+                ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+<     (KONUŞ -DIR)(-EBIL) := (VP\NP)\NP
+        : ((LAM P
+            (LAM Y
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS W_POS)
+                 ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+           ((LAM P
+             (LAM A
+              (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+            (LAM X (SPEAK X))))
+LEX   (-MELI) := ((VP\NP)\NP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM X
+            (LAM Y
+             (LAM W0
+              (LAM T0
+               ((FORALL W_MOD)
+                ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                 ((((P X) Y) W_MOD) T0))))))))
+<     (KONUŞ -DIR -EBIL)(-MELI) := (VP\NP)\NP
+        : ((LAM P
+            (LAM X
+             (LAM Y
+              (LAM W0
+               (LAM T0
+                ((FORALL W_MOD)
+                 ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                  ((((P X) Y) W_MOD) T0))))))))
+           ((LAM P
+             (LAM Y
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS W_POS)
+                  ((AND ((POSSIBILITY W0) W_POS)) ((((P Y) X) W_POS) T0))))))))
+            ((LAM P
+              (LAM A
+               (LAM X (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+             (LAM X (SPEAK X)))))
+LEX   (-DI) := (((VP\NP)\NP)\\VP)\\((VP\NP)\NP)
+        : (LAM P
+           (LAM V
+            (LAM X
+             (LAM Y
+              (LAM W0
+               (LAM T0
+                (((AND ((((P X) Y) W0) ((V W0) T0)))
+                  ((EARLIER T0) ((V W0) T0)))
+                 ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                  ((V W0) T0)))))))))
+<     (KONUŞ -DIR -EBIL -MELI)(-DI) := ((VP\NP)\NP)\\VP
+        : ((LAM P
+            (LAM V
+             (LAM X
+              (LAM Y
+               (LAM W0
+                (LAM T0
+                 (((AND ((((P X) Y) W0) ((V W0) T0)))
+                   ((EARLIER T0) ((V W0) T0)))
+                  ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                   ((V W0) T0)))))))))
+           ((LAM P
+             (LAM X
+              (LAM Y
+               (LAM W0
+                (LAM T0
+                 ((FORALL W_MOD)
+                  ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                   ((((P X) Y) W_MOD) T0))))))))
+            ((LAM P
+              (LAM Y
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS W_POS)
+                   ((AND ((POSSIBILITY W0) W_POS))
+                    ((((P Y) X) W_POS) T0))))))))
+             ((LAM P
+               (LAM A
+                (LAM X
+                 (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+              (LAM X (SPEAK X))))))
+LEX   (-AGR) := (((S\NP)\NP)\VP)\\(((VP\NP)\NP)\VP)
+        : (LAM P (LAM V (LAM X (LAM Y (((P V) X) Y)))))
+<     (KONUŞ -DIR -EBIL -MELI -DI)(-AGR) := ((S\NP)\NP)\VP
+        : ((LAM P (LAM V (LAM X (LAM Y (((P V) X) Y)))))
+           ((LAM P
+             (LAM V
+              (LAM X
+               (LAM Y
+                (LAM W0
+                 (LAM T0
+                  (((AND ((((P X) Y) W0) ((V W0) T0)))
+                    ((EARLIER T0) ((V W0) T0)))
+                   ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                    ((V W0) T0)))))))))
+            ((LAM P
+              (LAM X
+               (LAM Y
+                (LAM W0
+                 (LAM T0
+                  ((FORALL W_MOD)
+                   ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                    ((((P X) Y) W_MOD) T0))))))))
+             ((LAM P
+               (LAM Y
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS W_POS)
+                    ((AND ((POSSIBILITY W0) W_POS))
+                     ((((P Y) X) W_POS) T0))))))))
+              ((LAM P
+                (LAM A
+                 (LAM X
+                  (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+               (LAM X (SPEAK X)))))))
+<     (HAPISTEYKEN)(KONUŞ -DIR -EBIL -MELI -DI -AGR) := (S\NP)\NP
+        : (((LAM P (LAM V (LAM X (LAM Y (((P V) X) Y)))))
+            ((LAM P
+              (LAM V
+               (LAM X
+                (LAM Y
+                 (LAM W0
+                  (LAM T0
+                   (((AND ((((P X) Y) W0) ((V W0) T0)))
+                     ((EARLIER T0) ((V W0) T0)))
+                    ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                     ((V W0) T0)))))))))
+             ((LAM P
+               (LAM X
+                (LAM Y
+                 (LAM W0
+                  (LAM T0
+                   ((FORALL W_MOD)
+                    ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                     ((((P X) Y) W_MOD) T0))))))))
+              ((LAM P
+                (LAM Y
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((EXISTS W_POS)
+                     ((AND ((POSSIBILITY W0) W_POS))
+                      ((((P Y) X) W_POS) T0))))))))
+               ((LAM P
+                 (LAM A
+                  (LAM X
+                   (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                (LAM X (SPEAK X)))))))
+           (LAM W0 (LAM T0 (TIME WAS_IN_JAIL))))
+<     (HıRSıZı)(HAPISTEYKEN KONUŞ -DIR -EBIL -MELI -DI -AGR) := S\NP
+        : ((((LAM P (LAM V (LAM X (LAM Y (((P V) X) Y)))))
+             ((LAM P
+               (LAM V
+                (LAM X
+                 (LAM Y
+                  (LAM W0
+                   (LAM T0
+                    (((AND ((((P X) Y) W0) ((V W0) T0)))
+                      ((EARLIER T0) ((V W0) T0)))
+                     ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                      ((V W0) T0)))))))))
+              ((LAM P
+                (LAM X
+                 (LAM Y
+                  (LAM W0
+                   (LAM T0
+                    ((FORALL W_MOD)
+                     ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                      ((((P X) Y) W_MOD) T0))))))))
+               ((LAM P
+                 (LAM Y
+                  (LAM X
+                   (LAM W0
+                    (LAM T0
+                     ((EXISTS W_POS)
+                      ((AND ((POSSIBILITY W0) W_POS))
+                       ((((P Y) X) W_POS) T0))))))))
+                ((LAM P
+                  (LAM A
+                   (LAM X
+                    (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                 (LAM X (SPEAK X)))))))
+            (LAM W0 (LAM T0 (TIME WAS_IN_JAIL))))
+           ROBBER)
+<     (POLIS)(HıRSıZı HAPISTEYKEN KONUŞ -DIR -EBIL -MELI -DI -AGR) := S
+        : (((((LAM P (LAM V (LAM X (LAM Y (((P V) X) Y)))))
+              ((LAM P
+                (LAM V
+                 (LAM X
+                  (LAM Y
+                   (LAM W0
+                    (LAM T0
+                     (((AND ((((P X) Y) W0) ((V W0) T0)))
+                       ((EARLIER T0) ((V W0) T0)))
+                      ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                       ((V W0) T0)))))))))
+               ((LAM P
+                 (LAM X
+                  (LAM Y
+                   (LAM W0
+                    (LAM T0
+                     ((FORALL W_MOD)
+                      ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                       ((((P X) Y) W_MOD) T0))))))))
+                ((LAM P
+                  (LAM Y
+                   (LAM X
+                    (LAM W0
+                     (LAM T0
+                      ((EXISTS W_POS)
+                       ((AND ((POSSIBILITY W0) W_POS))
+                        ((((P Y) X) W_POS) T0))))))))
+                 ((LAM P
+                   (LAM A
+                    (LAM X
+                     (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                  (LAM X (SPEAK X)))))))
+             (LAM W0 (LAM T0 (TIME WAS_IN_JAIL))))
+            ROBBER)
+           POLICEMAN)
+>     (POLIS HıRSıZı HAPISTEYKEN KONUŞ -DIR -EBIL -MELI -DI -SE -AGR)(POLIS HıRSıZı HAPISTEYKEN KONUŞ -DIR -EBIL -MELI -DI -AGR) := S
+        : (((LAM P (LAM S (P S)))
+            ((LAM S1
+              (LAM S2
+               (LAM W0
+                (LAM T0
+                 ((FORALL W_REF)
+                  ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+             (((((LAM P
+                  (LAM V
+                   (LAM X
+                    (LAM Y
+                     (LAM W0
+                      (LAM T0
+                       (((AND ((((P X) Y) W0) ((V W0) T0)))
+                         ((EARLIER T0) ((V W0) T0)))
+                        ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                         ((V W0) T0)))))))))
+                 ((LAM P
+                   (LAM X
+                    (LAM Y
+                     (LAM W0
+                      (LAM T0
+                       ((FORALL W_MOD)
+                        ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                         ((((P X) Y) W_MOD) T0))))))))
+                  ((LAM P
+                    (LAM Y
+                     (LAM X
+                      (LAM W0
+                       (LAM T0
+                        ((EXISTS W_POS)
+                         ((AND ((POSSIBILITY W0) W_POS))
+                          ((((P Y) X) W_POS) T0))))))))
+                   ((LAM P
+                     (LAM A
+                      (LAM X
+                       (LAM W0
+                        (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                    (LAM X (SPEAK X))))))
+                (LAM W0 (LAM T0 (TIME WAS_IN_JAIL))))
+               ROBBER)
+              POLICEMAN)))
+           (((((LAM P (LAM V (LAM X (LAM Y (((P V) X) Y)))))
+               ((LAM P
+                 (LAM V
+                  (LAM X
+                   (LAM Y
+                    (LAM W0
+                     (LAM T0
+                      (((AND ((((P X) Y) W0) ((V W0) T0)))
+                        ((EARLIER T0) ((V W0) T0)))
+                       ((((KNOW ((((P X) Y) W0) ((V W0) T0))) SPEAKER) W0)
+                        ((V W0) T0)))))))))
+                ((LAM P
+                  (LAM X
+                   (LAM Y
+                    (LAM W0
+                     (LAM T0
+                      ((FORALL W_MOD)
+                       ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                        ((((P X) Y) W_MOD) T0))))))))
+                 ((LAM P
+                   (LAM Y
+                    (LAM X
+                     (LAM W0
+                      (LAM T0
+                       ((EXISTS W_POS)
+                        ((AND ((POSSIBILITY W0) W_POS))
+                         ((((P Y) X) W_POS) T0))))))))
+                  ((LAM P
+                    (LAM A
+                     (LAM X
+                      (LAM W0 (LAM T0 ((((INIT (((P A) W0) T0)) X) W0) T0))))))
+                   (LAM X (SPEAK X)))))))
+              (LAM W0 (LAM T0 (TIME WAS_IN_JAIL))))
+             ROBBER)
+            POLICEMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((FORALL W_REF)
+       ((CONDITION
+         (((AND
+            ((FORALL W_MOD)
+             ((CONDITION (((CONGRUENT SPEAKER) W_REF) W_MOD))
+              ((EXISTS W_POS)
+               ((AND ((POSSIBILITY W_MOD) W_POS))
+                ((((INIT (((SPEAK ROBBER) W_POS) (TIME WAS_IN_JAIL)))
+                   POLICEMAN)
+                  W_POS)
+                 (TIME WAS_IN_JAIL)))))))
+           ((EARLIER T0) (TIME WAS_IN_JAIL)))
+          ((((KNOW
+              ((FORALL W_MOD)
+               ((CONDITION (((CONGRUENT SPEAKER) W_REF) W_MOD))
+                ((EXISTS W_POS)
+                 ((AND ((POSSIBILITY W_MOD) W_POS))
+                  ((((INIT (((SPEAK ROBBER) W_POS) (TIME WAS_IN_JAIL)))
+                     POLICEMAN)
+                    W_POS)
+                   (TIME WAS_IN_JAIL)))))))
+             SPEAKER)
+            W_REF)
+           (TIME WAS_IN_JAIL))))
+        (((AND
+           ((FORALL W_MOD)
+            ((CONDITION (((CONGRUENT SPEAKER) W_REF) W_MOD))
+             ((EXISTS W_POS)
+              ((AND ((POSSIBILITY W_MOD) W_POS))
+               ((((INIT (((SPEAK ROBBER) W_POS) (TIME WAS_IN_JAIL))) POLICEMAN)
+                 W_POS)
+                (TIME WAS_IN_JAIL)))))))
+          ((EARLIER T0) (TIME WAS_IN_JAIL)))
+         ((((KNOW
+             ((FORALL W_MOD)
+              ((CONDITION (((CONGRUENT SPEAKER) W_REF) W_MOD))
+               ((EXISTS W_POS)
+                ((AND ((POSSIBILITY W_MOD) W_POS))
+                 ((((INIT (((SPEAK ROBBER) W_POS) (TIME WAS_IN_JAIL)))
+                    POLICEMAN)
+                   W_POS)
+                  (TIME WAS_IN_JAIL)))))))
+            SPEAKER)
+           W_REF)
+          (TIME WAS_IN_JAIL))))))) =
+    (\ W0 . \ T0 . FORALL W_REF
+     (CONDITION
+      (AND
+       (FORALL W_MOD
+        (CONDITION (CONGRUENT SPEAKER W_REF W_MOD)
+         (EXISTS W_POS
+          (AND (POSSIBILITY W_MOD W_POS)
+           (INIT (SPEAK ROBBER W_POS (TIME WAS_IN_JAIL)) POLICEMAN W_POS
+            (TIME WAS_IN_JAIL))))))
+       (EARLIER T0 (TIME WAS_IN_JAIL))
+       (KNOW
+        (FORALL W_MOD
+         (CONDITION (CONGRUENT SPEAKER W_REF W_MOD)
+          (EXISTS W_POS
+           (AND (POSSIBILITY W_MOD W_POS)
+            (INIT (SPEAK ROBBER W_POS (TIME WAS_IN_JAIL)) POLICEMAN W_POS
+             (TIME WAS_IN_JAIL))))))
+        SPEAKER W_REF (TIME WAS_IN_JAIL)))
+      (AND
+       (FORALL W_MOD
+        (CONDITION (CONGRUENT SPEAKER W_REF W_MOD)
+         (EXISTS W_POS
+          (AND (POSSIBILITY W_MOD W_POS)
+           (INIT (SPEAK ROBBER W_POS (TIME WAS_IN_JAIL)) POLICEMAN W_POS
+            (TIME WAS_IN_JAIL))))))
+       (EARLIER T0 (TIME WAS_IN_JAIL))
+       (KNOW
+        (FORALL W_MOD
+         (CONDITION (CONGRUENT SPEAKER W_REF W_MOD)
+          (EXISTS W_POS
+           (AND (POSSIBILITY W_MOD W_POS)
+            (INIT (SPEAK ROBBER W_POS (TIME WAS_IN_JAIL)) POLICEMAN W_POS
+             (TIME WAS_IN_JAIL))))))
+        SPEAKER W_REF (TIME WAS_IN_JAIL)))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

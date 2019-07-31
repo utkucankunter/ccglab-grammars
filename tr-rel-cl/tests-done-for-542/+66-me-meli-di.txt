@@ -1,0 +1,170 @@
+
+* (ccg-deduce '(ahmet parti_baslamadan gel -me -meli -di -agr))
+No lex entry for PARTI_BASLAMADAN! Exiting without parse.
+NIL
+* (dribble)
+
+* (ccg-deduce '(ahmet sen_okuldayken gel -me -meli -di -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (SEN_OKULDAYKEN) := VP
+        : (LAM W0 (LAM T0 (TIME HEARER_AT_SCHOOL)))
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-ME) := ((VP\NP)\\(VP\NP))/*((VP\NP)\\(VP\NP))
+        : (LAM N (LAM P (LAM X ((N NOT) (P X)))))
+LEX   (-MELI) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((FORALL W_MOD)
+               ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                (((P X) W_MOD) T0)))))))
+>     (-ME)(-MELI) := (VP\NP)\\(VP\NP)
+        : ((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+           (LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((FORALL W_MOD)
+                ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                 (((P X) W_MOD) T0))))))))
+<     (GEL)(-ME -MELI) := VP\NP
+        : (((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+            (LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((FORALL W_MOD)
+                 ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                  (((P X) W_MOD) T0))))))))
+           (LAM X (COME X)))
+LEX   (-DI) := ((VP\NP)\\VP)\\(VP\NP)
+        : (LAM P
+           (LAM V
+            (LAM X
+             (LAM W0
+              (LAM T0
+               (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                 ((V W0) T0))))))))
+<     (GEL -ME -MELI)(-DI) := (VP\NP)\\VP
+        : ((LAM P
+            (LAM V
+             (LAM X
+              (LAM W0
+               (LAM T0
+                (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                 ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                  ((V W0) T0))))))))
+           (((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+             (LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((FORALL W_MOD)
+                  ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                   (((P X) W_MOD) T0))))))))
+            (LAM X (COME X))))
+LEX   (-AGR) := ((S\NP)\VP)\\((VP\NP)\VP)
+        : (LAM P (LAM V (LAM X ((P V) X))))
+<     (GEL -ME -MELI -DI)(-AGR) := (S\NP)\VP
+        : ((LAM P (LAM V (LAM X ((P V) X))))
+           ((LAM P
+             (LAM V
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                  ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                   ((V W0) T0))))))))
+            (((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+              (LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((FORALL W_MOD)
+                   ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                    (((P X) W_MOD) T0))))))))
+             (LAM X (COME X)))))
+<     (SEN_OKULDAYKEN)(GEL -ME -MELI -DI -AGR) := S\NP
+        : (((LAM P (LAM V (LAM X ((P V) X))))
+            ((LAM P
+              (LAM V
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                   ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                    ((V W0) T0))))))))
+             (((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+               (LAM P
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((FORALL W_MOD)
+                    ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                     (((P X) W_MOD) T0))))))))
+              (LAM X (COME X)))))
+           (LAM W0 (LAM T0 (TIME HEARER_AT_SCHOOL))))
+<     (AHMET)(SEN_OKULDAYKEN GEL -ME -MELI -DI -AGR) := S
+        : ((((LAM P (LAM V (LAM X ((P V) X))))
+             ((LAM P
+               (LAM V
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                    ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                     ((V W0) T0))))))))
+              (((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+                (LAM P
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((FORALL W_MOD)
+                     ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                      (((P X) W_MOD) T0))))))))
+               (LAM X (COME X)))))
+            (LAM W0 (LAM T0 (TIME HEARER_AT_SCHOOL))))
+           AHMET)
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      (((AND
+         ((FORALL W_MOD)
+          ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+           (((NOT (COME AHMET)) W_MOD) (TIME HEARER_AT_SCHOOL)))))
+        ((EARLIER T0) (TIME HEARER_AT_SCHOOL)))
+       ((((KNOW
+           ((FORALL W_MOD)
+            ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+             (((NOT (COME AHMET)) W_MOD) (TIME HEARER_AT_SCHOOL)))))
+          SPEAKER)
+         W0)
+        (TIME HEARER_AT_SCHOOL))))) =
+    (\ W0 . \ T0 . AND
+     (FORALL W_MOD
+      (CONDITION (CONGRUENT SPEAKER W0 W_MOD)
+       (NOT (COME AHMET) W_MOD (TIME HEARER_AT_SCHOOL))))
+     (EARLIER T0 (TIME HEARER_AT_SCHOOL))
+     (KNOW
+      (FORALL W_MOD
+       (CONDITION (CONGRUENT SPEAKER W0 W_MOD)
+        (NOT (COME AHMET) W_MOD (TIME HEARER_AT_SCHOOL))))
+      SPEAKER W0 (TIME HEARER_AT_SCHOOL)))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

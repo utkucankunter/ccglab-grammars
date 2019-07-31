@@ -1,0 +1,21 @@
+
+* (ccg-deduce '(gel))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+
+Final LF, normal-order evaluated: 
+
+    (LAM X (COME X)) =
+    (\ X . COME X)
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

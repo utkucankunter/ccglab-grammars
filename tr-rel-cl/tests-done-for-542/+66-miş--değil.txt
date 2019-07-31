@@ -1,0 +1,159 @@
+
+* (ccg-deduce '(ahmet gel -miş değil -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-MIŞ) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS T)
+               (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+<     (GEL)(-MIŞ) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                 (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+           (LAM X (COME X)))
+LEX   (DEĞIL) := (VP\NP)\*(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 (NOT (((P X) W0) T0))))))
+<     (GEL -MIŞ)(DEĞIL) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 (NOT (((P X) W0) T0))))))
+           ((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                  (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+            (LAM X (COME X))))
+<     (AHMET)(GEL -MIŞ DEĞIL) := VP
+        : (((LAM P (LAM X (LAM W0 (LAM T0 (NOT (((P X) W0) T0))))))
+            ((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                   (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+             (LAM X (COME X))))
+           AHMET)
+LEX   (-AGR) := S\*VP
+        : (LAM P P)
+<     (AHMET GEL -MIŞ DEĞIL)(-AGR) := S
+        : ((LAM P P)
+           (((LAM P (LAM X (LAM W0 (LAM T0 (NOT (((P X) W0) T0))))))
+             ((LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                    (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+              (LAM X (COME X))))
+            AHMET))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      (NOT
+       ((EXISTS T)
+        (((AND ((EARLIER T0) T)) (((COME AHMET) W0) T))
+         (NOT ((((KNOW (((COME AHMET) W0) T)) SPEAKER) W0) T))))))) =
+    (\ W0 . \ T0 . NOT
+     (EXISTS T
+      (AND (EARLIER T0 T) (COME AHMET W0 T)
+       (NOT (KNOW (COME AHMET W0 T) SPEAKER W0 T)))))
+
+Derivation 2
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-MIŞ) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS T)
+               (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+<     (GEL)(-MIŞ) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                 (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+           (LAM X (COME X)))
+<     (AHMET)(GEL -MIŞ) := VP
+        : (((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                  (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+            (LAM X (COME X)))
+           AHMET)
+LEX   (DEĞIL) := VP\*VP
+        : (LAM P (LAM W0 (LAM T0 (NOT ((P W0) T0)))))
+<     (AHMET GEL -MIŞ)(DEĞIL) := VP
+        : ((LAM P (LAM W0 (LAM T0 (NOT ((P W0) T0)))))
+           (((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                   (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+             (LAM X (COME X)))
+            AHMET))
+LEX   (-AGR) := S\*VP
+        : (LAM P P)
+<     (AHMET GEL -MIŞ DEĞIL)(-AGR) := S
+        : ((LAM P P)
+           ((LAM P (LAM W0 (LAM T0 (NOT ((P W0) T0)))))
+            (((LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                    (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+              (LAM X (COME X)))
+             AHMET)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      (NOT
+       ((EXISTS T)
+        (((AND ((EARLIER T0) T)) (((COME AHMET) W0) T))
+         (NOT ((((KNOW (((COME AHMET) W0) T)) SPEAKER) W0) T))))))) =
+    (\ W0 . \ T0 . NOT
+     (EXISTS T
+      (AND (EARLIER T0 T) (COME AHMET W0 T)
+       (NOT (KNOW (COME AHMET W0 T) SPEAKER W0 T)))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

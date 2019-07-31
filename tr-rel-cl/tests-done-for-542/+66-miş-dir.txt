@@ -1,0 +1,191 @@
+
+* (ccg-deduce '(ahmet sen_okuldayken gel -miş -agr -dir))
+
+NIL
+* (dribble)
+
+* (ccg-deduce '(ahmet gel -miş -agr -dir))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-MIŞ) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS T)
+               (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+<     (GEL)(-MIŞ) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                 (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+           (LAM X (COME X)))
+LEX   (-AGR) := (S\NP)\\(VP\NP)
+        : (LAM P (LAM X (P X)))
+<     (GEL -MIŞ)(-AGR) := S\NP
+        : ((LAM P (LAM X (P X)))
+           ((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                  (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+            (LAM X (COME X))))
+LEX   (-DIR) := (S\NP)\*(S\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS W_GMOD)
+               ((AND ((PROBABILITY W0) W_GMOD)) (((P X) W_GMOD) T0)))))))
+<     (GEL -MIŞ -AGR)(-DIR) := S\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS W_GMOD)
+                ((AND ((PROBABILITY W0) W_GMOD)) (((P X) W_GMOD) T0)))))))
+           ((LAM P (LAM X (P X)))
+            ((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                   (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+             (LAM X (COME X)))))
+<     (AHMET)(GEL -MIŞ -AGR -DIR) := S
+        : (((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS W_GMOD)
+                 ((AND ((PROBABILITY W0) W_GMOD)) (((P X) W_GMOD) T0)))))))
+            ((LAM P (LAM X (P X)))
+             ((LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                    (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+              (LAM X (COME X)))))
+           AHMET)
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((EXISTS W_GMOD)
+       ((AND ((PROBABILITY W0) W_GMOD))
+        ((EXISTS T)
+         (((AND ((EARLIER T0) T)) (((COME AHMET) W_GMOD) T))
+          (NOT ((((KNOW (((COME AHMET) W_GMOD) T)) SPEAKER) W_GMOD) T)))))))) =
+    (\ W0 . \ T0 . EXISTS W_GMOD
+     (AND (PROBABILITY W0 W_GMOD)
+      (EXISTS T
+       (AND (EARLIER T0 T) (COME AHMET W_GMOD T)
+        (NOT (KNOW (COME AHMET W_GMOD T) SPEAKER W_GMOD T))))))
+
+Derivation 2
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-MIŞ) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS T)
+               (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+<     (GEL)(-MIŞ) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                 (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+           (LAM X (COME X)))
+LEX   (-AGR) := (S\NP)\\(VP\NP)
+        : (LAM P (LAM X (P X)))
+<     (GEL -MIŞ)(-AGR) := S\NP
+        : ((LAM P (LAM X (P X)))
+           ((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                  (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+            (LAM X (COME X))))
+<     (AHMET)(GEL -MIŞ -AGR) := S
+        : (((LAM P (LAM X (P X)))
+            ((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                   (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+             (LAM X (COME X))))
+           AHMET)
+LEX   (-DIR) := S\*S
+        : (LAM P
+           (LAM W0
+            (LAM T0
+             ((EXISTS W_GMOD)
+              ((AND ((PROBABILITY W0) W_GMOD)) ((P W_GMOD) T0))))))
+<     (AHMET GEL -MIŞ -AGR)(-DIR) := S
+        : ((LAM P
+            (LAM W0
+             (LAM T0
+              ((EXISTS W_GMOD)
+               ((AND ((PROBABILITY W0) W_GMOD)) ((P W_GMOD) T0))))))
+           (((LAM P (LAM X (P X)))
+             ((LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                    (NOT ((((KNOW (((P X) W0) T)) SPEAKER) W0) T))))))))
+              (LAM X (COME X))))
+            AHMET))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((EXISTS W_GMOD)
+       ((AND ((PROBABILITY W0) W_GMOD))
+        ((EXISTS T)
+         (((AND ((EARLIER T0) T)) (((COME AHMET) W_GMOD) T))
+          (NOT ((((KNOW (((COME AHMET) W_GMOD) T)) SPEAKER) W_GMOD) T)))))))) =
+    (\ W0 . \ T0 . EXISTS W_GMOD
+     (AND (PROBABILITY W0 W_GMOD)
+      (EXISTS T
+       (AND (EARLIER T0 T) (COME AHMET W_GMOD T)
+        (NOT (KNOW (COME AHMET W_GMOD T) SPEAKER W_GMOD T))))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

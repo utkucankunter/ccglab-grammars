@@ -1,0 +1,104 @@
+
+* (ccg-deduce '(ahmet gel -di -se -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-DI) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS T)
+               (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+<     (GEL)(-DI) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                 ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+           (LAM X (COME X)))
+<     (AHMET)(GEL -DI) := VP
+        : (((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                  ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+            (LAM X (COME X)))
+           AHMET)
+LEX   (-SE) := (VP/S)\*VP
+        : (LAM S1
+           (LAM S2
+            (LAM W0
+             (LAM T0
+              ((FORALL W_REF) ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+<     (AHMET GEL -DI)(-SE) := VP/S
+        : ((LAM S1
+            (LAM S2
+             (LAM W0
+              (LAM T0
+               ((FORALL W_REF)
+                ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+           (((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                   ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+             (LAM X (COME X)))
+            AHMET))
+LEX   (-AGR) := (S/S)\*(VP/S)
+        : (LAM P (LAM S (P S)))
+<     (AHMET GEL -DI -SE)(-AGR) := S/S
+        : ((LAM P (LAM S (P S)))
+           ((LAM S1
+             (LAM S2
+              (LAM W0
+               (LAM T0
+                ((FORALL W_REF)
+                 ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+            (((LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T)
+                   (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                    ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+              (LAM X (COME X)))
+             AHMET)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM S
+     (LAM W0
+      (LAM T0
+       ((FORALL W_REF)
+        ((CONDITION
+          ((EXISTS T)
+           (((AND ((EARLIER T0) T)) (((COME AHMET) W_REF) T))
+            ((((KNOW (((COME AHMET) W_REF) T)) SPEAKER) W_REF) T))))
+         ((S W_REF) T0)))))) =
+    (\ S . \ W0 . \ T0 . FORALL W_REF
+     (CONDITION
+      (EXISTS T
+       (AND (EARLIER T0 T) (COME AHMET W_REF T)
+        (KNOW (COME AHMET W_REF T) SPEAKER W_REF T)))
+      (S W_REF T0)))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

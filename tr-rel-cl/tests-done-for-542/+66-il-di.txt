@@ -1,0 +1,77 @@
+
+* (ccg-deduce '(hırsız yakala -il -di -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (HıRSıZ) := NP
+        : ROBBER
+LEX   (YAKALA) := (VP\NP)\NP
+        : (LAM Y (LAM X ((CATCH Y) X)))
+LEX   (-IL) := (VP\NP)\\((VP\NP)\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((((P X) ANONYMOUS) W0) T0)))))
+<     (YAKALA)(-IL) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 ((((P X) ANONYMOUS) W0) T0)))))
+           (LAM Y (LAM X ((CATCH Y) X))))
+LEX   (-DI) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS T)
+               (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+<     (YAKALA -IL)(-DI) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                 ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+           ((LAM P (LAM X (LAM W0 (LAM T0 ((((P X) ANONYMOUS) W0) T0)))))
+            (LAM Y (LAM X ((CATCH Y) X)))))
+LEX   (-AGR) := (S\NP)\\(VP\NP)
+        : (LAM P (LAM X (P X)))
+<     (YAKALA -IL -DI)(-AGR) := S\NP
+        : ((LAM P (LAM X (P X)))
+           ((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                  ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+            ((LAM P (LAM X (LAM W0 (LAM T0 ((((P X) ANONYMOUS) W0) T0)))))
+             (LAM Y (LAM X ((CATCH Y) X))))))
+<     (HıRSıZ)(YAKALA -IL -DI -AGR) := S
+        : (((LAM P (LAM X (P X)))
+            ((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                   ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+             ((LAM P (LAM X (LAM W0 (LAM T0 ((((P X) ANONYMOUS) W0) T0)))))
+              (LAM Y (LAM X ((CATCH Y) X))))))
+           ROBBER)
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((EXISTS T)
+       (((AND ((EARLIER T0) T)) ((((CATCH ROBBER) ANONYMOUS) W0) T))
+        ((((KNOW ((((CATCH ROBBER) ANONYMOUS) W0) T)) SPEAKER) W0) T))))) =
+    (\ W0 . \ T0 . EXISTS T
+     (AND (EARLIER T0 T) (CATCH ROBBER ANONYMOUS W0 T)
+      (KNOW (CATCH ROBBER ANONYMOUS W0 T) SPEAKER W0 T)))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

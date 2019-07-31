@@ -1,0 +1,114 @@
+
+* (ccg-deduce '(hırsız konuş -ir -se -agr ahmet hapse_gir -me -z -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (HıRSıZ) := NP
+        : ROBBER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-IR) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+<     (KONUŞ)(-IR) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+           (LAM X (SPEAK X)))
+<     (HıRSıZ)(KONUŞ -IR) := VP
+        : (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+            (LAM X (SPEAK X)))
+           ROBBER)
+LEX   (-SE) := (VP/S)\*VP
+        : (LAM S1
+           (LAM S2
+            (LAM W0
+             (LAM T0
+              ((FORALL W_REF) ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+<     (HıRSıZ KONUŞ -IR)(-SE) := VP/S
+        : ((LAM S1
+            (LAM S2
+             (LAM W0
+              (LAM T0
+               ((FORALL W_REF)
+                ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+           (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+             (LAM X (SPEAK X)))
+            ROBBER))
+LEX   (-AGR) := (S/S)\*(VP/S)
+        : (LAM P (LAM S (P S)))
+<     (HıRSıZ KONUŞ -IR -SE)(-AGR) := S/S
+        : ((LAM P (LAM S (P S)))
+           ((LAM S1
+             (LAM S2
+              (LAM W0
+               (LAM T0
+                ((FORALL W_REF)
+                 ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+            (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+              (LAM X (SPEAK X)))
+             ROBBER)))
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (HAPSE_GIR) := VP\NP
+        : (LAM X (GO_TO_JAIL X))
+LEX   (-ME) := ((VP\NP)\\(VP\NP))/*((VP\NP)\\(VP\NP))
+        : (LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+LEX   (-Z) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+>     (-ME)(-Z) := (VP\NP)\\(VP\NP)
+        : ((LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+           (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T)))))))
+<     (HAPSE_GIR)(-ME -Z) := VP\NP
+        : (((LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+            (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T)))))))
+           (LAM X (GO_TO_JAIL X)))
+LEX   (-AGR) := (S\NP)\\(VP\NP)
+        : (LAM P (LAM X (P X)))
+<     (HAPSE_GIR -ME -Z)(-AGR) := S\NP
+        : ((LAM P (LAM X (P X)))
+           (((LAM N
+              (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+             (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T)))))))
+            (LAM X (GO_TO_JAIL X))))
+<     (AHMET)(HAPSE_GIR -ME -Z -AGR) := S
+        : (((LAM P (LAM X (P X)))
+            (((LAM N
+               (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+              (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T)))))))
+             (LAM X (GO_TO_JAIL X))))
+           AHMET)
+>     (HıRSıZ KONUŞ -IR -SE -AGR)(AHMET HAPSE_GIR -ME -Z -AGR) := S
+        : (((LAM P (LAM S (P S)))
+            ((LAM S1
+              (LAM S2
+               (LAM W0
+                (LAM T0
+                 ((FORALL W_REF)
+                  ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+             (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+               (LAM X (SPEAK X)))
+              ROBBER)))
+           (((LAM P (LAM X (P X)))
+             (((LAM N
+                (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+               (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T)))))))
+              (LAM X (GO_TO_JAIL X))))
+            AHMET))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((FORALL W_REF)
+       ((CONDITION ((EXISTS T) (((SPEAK ROBBER) W_REF) T)))
+        (NOT ((EXISTS T) (((GO_TO_JAIL AHMET) W_REF) T))))))) =
+    (\ W0 . \ T0 . FORALL W_REF
+     (CONDITION (EXISTS T (SPEAK ROBBER W_REF T))
+      (NOT (EXISTS T (GO_TO_JAIL AHMET W_REF T)))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

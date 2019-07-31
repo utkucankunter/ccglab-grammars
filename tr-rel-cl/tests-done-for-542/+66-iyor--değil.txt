@@ -1,0 +1,157 @@
+
+* (ccg-deduce '(polis gel -iyor değil -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (POLIS) := NP
+        : POLICEMAN
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-IYOR) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((((EXISTS T1) EXISTS) T2)
+               (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                (((P X) W0) (T1 T2))))))))
+<     (GEL)(-IYOR) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((((EXISTS T1) EXISTS) T2)
+                (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                 (((P X) W0) (T1 T2))))))))
+           (LAM X (COME X)))
+LEX   (DEĞIL) := (VP\NP)\*(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 (NOT (((P X) W0) T0))))))
+<     (GEL -IYOR)(DEĞIL) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 (NOT (((P X) W0) T0))))))
+           ((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((((EXISTS T1) EXISTS) T2)
+                 (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                  (((P X) W0) (T1 T2))))))))
+            (LAM X (COME X))))
+<     (POLIS)(GEL -IYOR DEĞIL) := VP
+        : (((LAM P (LAM X (LAM W0 (LAM T0 (NOT (((P X) W0) T0))))))
+            ((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((((EXISTS T1) EXISTS) T2)
+                  (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                   (((P X) W0) (T1 T2))))))))
+             (LAM X (COME X))))
+           POLICEMAN)
+LEX   (-AGR) := S\*VP
+        : (LAM P P)
+<     (POLIS GEL -IYOR DEĞIL)(-AGR) := S
+        : ((LAM P P)
+           (((LAM P (LAM X (LAM W0 (LAM T0 (NOT (((P X) W0) T0))))))
+             ((LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((((EXISTS T1) EXISTS) T2)
+                   (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                    (((P X) W0) (T1 T2))))))))
+              (LAM X (COME X))))
+            POLICEMAN))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      (NOT
+       ((((EXISTS T1) EXISTS) T2)
+        (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+         (((COME POLICEMAN) W0) (T1 T2))))))) =
+    (\ W0 . \ T0 . NOT
+     (EXISTS T1 EXISTS T2
+      (AND (EARLIER T0 T1) (EARLIER T2 T0) (COME POLICEMAN W0 (T1 T2)))))
+
+Derivation 2
+--------------
+LEX   (POLIS) := NP
+        : POLICEMAN
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-IYOR) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((((EXISTS T1) EXISTS) T2)
+               (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                (((P X) W0) (T1 T2))))))))
+<     (GEL)(-IYOR) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((((EXISTS T1) EXISTS) T2)
+                (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                 (((P X) W0) (T1 T2))))))))
+           (LAM X (COME X)))
+<     (POLIS)(GEL -IYOR) := VP
+        : (((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((((EXISTS T1) EXISTS) T2)
+                 (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                  (((P X) W0) (T1 T2))))))))
+            (LAM X (COME X)))
+           POLICEMAN)
+LEX   (DEĞIL) := VP\*VP
+        : (LAM P (LAM W0 (LAM T0 (NOT ((P W0) T0)))))
+<     (POLIS GEL -IYOR)(DEĞIL) := VP
+        : ((LAM P (LAM W0 (LAM T0 (NOT ((P W0) T0)))))
+           (((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((((EXISTS T1) EXISTS) T2)
+                  (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                   (((P X) W0) (T1 T2))))))))
+             (LAM X (COME X)))
+            POLICEMAN))
+LEX   (-AGR) := S\*VP
+        : (LAM P P)
+<     (POLIS GEL -IYOR DEĞIL)(-AGR) := S
+        : ((LAM P P)
+           ((LAM P (LAM W0 (LAM T0 (NOT ((P W0) T0)))))
+            (((LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((((EXISTS T1) EXISTS) T2)
+                   (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                    (((P X) W0) (T1 T2))))))))
+              (LAM X (COME X)))
+             POLICEMAN)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      (NOT
+       ((((EXISTS T1) EXISTS) T2)
+        (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+         (((COME POLICEMAN) W0) (T1 T2))))))) =
+    (\ W0 . \ T0 . NOT
+     (EXISTS T1 EXISTS T2
+      (AND (EARLIER T0 T1) (EARLIER T2 T0) (COME POLICEMAN W0 (T1 T2)))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

@@ -1,0 +1,343 @@
+
+* (ccg-deduce '(polis hırsız konuş -ir -iken gül -iyor -di -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (POLIS) := NP
+        : POLICEMAN
+LEX   (HıRSıZ) := NP
+        : ROBBER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-IR) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+<     (KONUŞ)(-IR) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+           (LAM X (SPEAK X)))
+LEX   (-IKEN) := (VP\*NP)\*(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 (WHILE (((P X) W0) T0))))))
+<     (KONUŞ -IR)(-IKEN) := VP\*NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 (WHILE (((P X) W0) T0))))))
+           ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+            (LAM X (SPEAK X))))
+<     (HıRSıZ)(KONUŞ -IR -IKEN) := VP
+        : (((LAM P (LAM X (LAM W0 (LAM T0 (WHILE (((P X) W0) T0))))))
+            ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+             (LAM X (SPEAK X))))
+           ROBBER)
+LEX   (GÜL) := VP\NP
+        : (LAM X (LAUGH X))
+LEX   (-IYOR) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((((EXISTS T1) EXISTS) T2)
+               (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                (((P X) W0) (T1 T2))))))))
+<     (GÜL)(-IYOR) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((((EXISTS T1) EXISTS) T2)
+                (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                 (((P X) W0) (T1 T2))))))))
+           (LAM X (LAUGH X)))
+LEX   (-DI) := ((VP\NP)\\VP)\\(VP\NP)
+        : (LAM P
+           (LAM V
+            (LAM X
+             (LAM W0
+              (LAM T0
+               (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                 ((V W0) T0))))))))
+<     (GÜL -IYOR)(-DI) := (VP\NP)\\VP
+        : ((LAM P
+            (LAM V
+             (LAM X
+              (LAM W0
+               (LAM T0
+                (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                 ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                  ((V W0) T0))))))))
+           ((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((((EXISTS T1) EXISTS) T2)
+                 (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                  (((P X) W0) (T1 T2))))))))
+            (LAM X (LAUGH X))))
+LEX   (-AGR) := ((S\NP)\VP)\\((VP\NP)\VP)
+        : (LAM P (LAM V (LAM X ((P V) X))))
+<     (GÜL -IYOR -DI)(-AGR) := (S\NP)\VP
+        : ((LAM P (LAM V (LAM X ((P V) X))))
+           ((LAM P
+             (LAM V
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                  ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                   ((V W0) T0))))))))
+            ((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((((EXISTS T1) EXISTS) T2)
+                  (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                   (((P X) W0) (T1 T2))))))))
+             (LAM X (LAUGH X)))))
+<     (HıRSıZ KONUŞ -IR -IKEN)(GÜL -IYOR -DI -AGR) := S\NP
+        : (((LAM P (LAM V (LAM X ((P V) X))))
+            ((LAM P
+              (LAM V
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                   ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                    ((V W0) T0))))))))
+             ((LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((((EXISTS T1) EXISTS) T2)
+                   (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                    (((P X) W0) (T1 T2))))))))
+              (LAM X (LAUGH X)))))
+           (((LAM P (LAM X (LAM W0 (LAM T0 (WHILE (((P X) W0) T0))))))
+             ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+              (LAM X (SPEAK X))))
+            ROBBER))
+<     (POLIS)(HıRSıZ KONUŞ -IR -IKEN GÜL -IYOR -DI -AGR) := S
+        : ((((LAM P (LAM V (LAM X ((P V) X))))
+             ((LAM P
+               (LAM V
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                    ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                     ((V W0) T0))))))))
+              ((LAM P
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((((EXISTS T1) EXISTS) T2)
+                    (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                     (((P X) W0) (T1 T2))))))))
+               (LAM X (LAUGH X)))))
+            (((LAM P (LAM X (LAM W0 (LAM T0 (WHILE (((P X) W0) T0))))))
+              ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+               (LAM X (SPEAK X))))
+             ROBBER))
+           POLICEMAN)
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      (((AND
+         ((((EXISTS T1) EXISTS) T2)
+          (((AND ((EARLIER (WHILE ((EXISTS T) (((SPEAK ROBBER) W0) T)))) T1))
+            ((EARLIER T2) (WHILE ((EXISTS T) (((SPEAK ROBBER) W0) T)))))
+           (((LAUGH POLICEMAN) W0) (T1 T2)))))
+        ((EARLIER T0) (WHILE ((EXISTS T) (((SPEAK ROBBER) W0) T)))))
+       ((((KNOW
+           ((((EXISTS T1) EXISTS) T2)
+            (((AND ((EARLIER (WHILE ((EXISTS T) (((SPEAK ROBBER) W0) T)))) T1))
+              ((EARLIER T2) (WHILE ((EXISTS T) (((SPEAK ROBBER) W0) T)))))
+             (((LAUGH POLICEMAN) W0) (T1 T2)))))
+          SPEAKER)
+         W0)
+        (WHILE ((EXISTS T) (((SPEAK ROBBER) W0) T))))))) =
+    (\ W0 . \ T0 . AND
+     (EXISTS T1 EXISTS T2
+      (AND (EARLIER (WHILE (EXISTS T (SPEAK ROBBER W0 T))) T1)
+       (EARLIER T2 (WHILE (EXISTS T (SPEAK ROBBER W0 T))))
+       (LAUGH POLICEMAN W0 (T1 T2))))
+     (EARLIER T0 (WHILE (EXISTS T (SPEAK ROBBER W0 T))))
+     (KNOW
+      (EXISTS T1 EXISTS T2
+       (AND (EARLIER (WHILE (EXISTS T (SPEAK ROBBER W0 T))) T1)
+        (EARLIER T2 (WHILE (EXISTS T (SPEAK ROBBER W0 T))))
+        (LAUGH POLICEMAN W0 (T1 T2))))
+      SPEAKER W0 (WHILE (EXISTS T (SPEAK ROBBER W0 T)))))
+
+Derivation 2
+--------------
+LEX   (POLIS) := NP
+        : POLICEMAN
+LEX   (HıRSıZ) := NP
+        : ROBBER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-IR) := (VP\NP)\\(VP\NP)
+        : (LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+<     (KONUŞ)(-IR) := VP\NP
+        : ((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+           (LAM X (SPEAK X)))
+<     (HıRSıZ)(KONUŞ -IR) := VP
+        : (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+            (LAM X (SPEAK X)))
+           ROBBER)
+LEX   (-IKEN) := VP\*VP
+        : (LAM P (LAM W0 (LAM T0 (WHILE ((P W0) T0)))))
+<     (HıRSıZ KONUŞ -IR)(-IKEN) := VP
+        : ((LAM P (LAM W0 (LAM T0 (WHILE ((P W0) T0)))))
+           (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+             (LAM X (SPEAK X)))
+            ROBBER))
+LEX   (GÜL) := VP\NP
+        : (LAM X (LAUGH X))
+LEX   (-IYOR) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((((EXISTS T1) EXISTS) T2)
+               (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                (((P X) W0) (T1 T2))))))))
+<     (GÜL)(-IYOR) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((((EXISTS T1) EXISTS) T2)
+                (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                 (((P X) W0) (T1 T2))))))))
+           (LAM X (LAUGH X)))
+LEX   (-DI) := ((VP\NP)\\VP)\\(VP\NP)
+        : (LAM P
+           (LAM V
+            (LAM X
+             (LAM W0
+              (LAM T0
+               (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                 ((V W0) T0))))))))
+<     (GÜL -IYOR)(-DI) := (VP\NP)\\VP
+        : ((LAM P
+            (LAM V
+             (LAM X
+              (LAM W0
+               (LAM T0
+                (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                 ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                  ((V W0) T0))))))))
+           ((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((((EXISTS T1) EXISTS) T2)
+                 (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                  (((P X) W0) (T1 T2))))))))
+            (LAM X (LAUGH X))))
+LEX   (-AGR) := ((S\NP)\VP)\\((VP\NP)\VP)
+        : (LAM P (LAM V (LAM X ((P V) X))))
+<     (GÜL -IYOR -DI)(-AGR) := (S\NP)\VP
+        : ((LAM P (LAM V (LAM X ((P V) X))))
+           ((LAM P
+             (LAM V
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                  ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                   ((V W0) T0))))))))
+            ((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((((EXISTS T1) EXISTS) T2)
+                  (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                   (((P X) W0) (T1 T2))))))))
+             (LAM X (LAUGH X)))))
+<     (HıRSıZ KONUŞ -IR -IKEN)(GÜL -IYOR -DI -AGR) := S\NP
+        : (((LAM P (LAM V (LAM X ((P V) X))))
+            ((LAM P
+              (LAM V
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                   ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                    ((V W0) T0))))))))
+             ((LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((((EXISTS T1) EXISTS) T2)
+                   (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                    (((P X) W0) (T1 T2))))))))
+              (LAM X (LAUGH X)))))
+           ((LAM P (LAM W0 (LAM T0 (WHILE ((P W0) T0)))))
+            (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+              (LAM X (SPEAK X)))
+             ROBBER)))
+<     (POLIS)(HıRSıZ KONUŞ -IR -IKEN GÜL -IYOR -DI -AGR) := S
+        : ((((LAM P (LAM V (LAM X ((P V) X))))
+             ((LAM P
+               (LAM V
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   (((AND (((P X) W0) ((V W0) T0))) ((EARLIER T0) ((V W0) T0)))
+                    ((((KNOW (((P X) W0) ((V W0) T0))) SPEAKER) W0)
+                     ((V W0) T0))))))))
+              ((LAM P
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((((EXISTS T1) EXISTS) T2)
+                    (((AND ((EARLIER T0) T1)) ((EARLIER T2) T0))
+                     (((P X) W0) (T1 T2))))))))
+               (LAM X (LAUGH X)))))
+            ((LAM P (LAM W0 (LAM T0 (WHILE ((P W0) T0)))))
+             (((LAM P (LAM X (LAM W0 (LAM T0 ((EXISTS T) (((P X) W0) T))))))
+               (LAM X (SPEAK X)))
+              ROBBER)))
+           POLICEMAN)
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      (((AND
+         ((((EXISTS T1) EXISTS) T2)
+          (((AND ((EARLIER (WHILE ((EXISTS T) (((SPEAK ROBBER) W0) T)))) T1))
+            ((EARLIER T2) (WHILE ((EXISTS T) (((SPEAK ROBBER) W0) T)))))
+           (((LAUGH POLICEMAN) W0) (T1 T2)))))
+        ((EARLIER T0) (WHILE ((EXISTS T) (((SPEAK ROBBER) W0) T)))))
+       ((((KNOW
+           ((((EXISTS T1) EXISTS) T2)
+            (((AND ((EARLIER (WHILE ((EXISTS T) (((SPEAK ROBBER) W0) T)))) T1))
+              ((EARLIER T2) (WHILE ((EXISTS T) (((SPEAK ROBBER) W0) T)))))
+             (((LAUGH POLICEMAN) W0) (T1 T2)))))
+          SPEAKER)
+         W0)
+        (WHILE ((EXISTS T) (((SPEAK ROBBER) W0) T))))))) =
+    (\ W0 . \ T0 . AND
+     (EXISTS T1 EXISTS T2
+      (AND (EARLIER (WHILE (EXISTS T (SPEAK ROBBER W0 T))) T1)
+       (EARLIER T2 (WHILE (EXISTS T (SPEAK ROBBER W0 T))))
+       (LAUGH POLICEMAN W0 (T1 T2))))
+     (EARLIER T0 (WHILE (EXISTS T (SPEAK ROBBER W0 T))))
+     (KNOW
+      (EXISTS T1 EXISTS T2
+       (AND (EARLIER (WHILE (EXISTS T (SPEAK ROBBER W0 T))) T1)
+        (EARLIER T2 (WHILE (EXISTS T (SPEAK ROBBER W0 T))))
+        (LAUGH POLICEMAN W0 (T1 T2))))
+      SPEAKER W0 (WHILE (EXISTS T (SPEAK ROBBER W0 T)))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

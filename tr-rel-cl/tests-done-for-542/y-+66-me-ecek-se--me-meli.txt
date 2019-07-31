@@ -1,0 +1,196 @@
+
+* (ccg-deduce '(ahmet gel -me -ecek -se -agr sen de gel -me -meli -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (AHMET) := NP
+        : AHMET
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-ME) := ((VP\NP)\\(VP\NP))/*((VP\NP)\\(VP\NP))
+        : (LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+LEX   (-ECEK) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0 ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T)))))))
+>     (-ME)(-ECEK) := (VP\NP)\\(VP\NP)
+        : ((LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+           (LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0 ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T))))))))
+<     (GEL)(-ME -ECEK) := VP\NP
+        : (((LAM N (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+            (LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T))))))))
+           (LAM X (COME X)))
+<     (AHMET)(GEL -ME -ECEK) := VP
+        : ((((LAM N
+              (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+             (LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T))))))))
+            (LAM X (COME X)))
+           AHMET)
+LEX   (-SE) := (VP/S)\*VP
+        : (LAM S1
+           (LAM S2
+            (LAM W0
+             (LAM T0
+              ((FORALL W_REF) ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+<     (AHMET GEL -ME -ECEK)(-SE) := VP/S
+        : ((LAM S1
+            (LAM S2
+             (LAM W0
+              (LAM T0
+               ((FORALL W_REF)
+                ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+           ((((LAM N
+               (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+              (LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T))))))))
+             (LAM X (COME X)))
+            AHMET))
+LEX   (-AGR) := (S/S)\*(VP/S)
+        : (LAM P (LAM S (P S)))
+<     (AHMET GEL -ME -ECEK -SE)(-AGR) := S/S
+        : ((LAM P (LAM S (P S)))
+           ((LAM S1
+             (LAM S2
+              (LAM W0
+               (LAM T0
+                ((FORALL W_REF)
+                 ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+            ((((LAM N
+                (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+               (LAM P
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T))))))))
+              (LAM X (COME X)))
+             AHMET)))
+LEX   (SEN) := NP
+        : HEARER
+LEX   (DE) := NP\*NP
+        : (LAM X X)
+<     (SEN)(DE) := NP
+        : ((LAM X X) HEARER)
+LEX   (GEL) := VP\NP
+        : (LAM X (COME X))
+LEX   (-ME) := ((VP\NP)\\(VP\NP))/*((VP\NP)\\(VP\NP))
+        : (LAM N (LAM P (LAM X ((N NOT) (P X)))))
+LEX   (-MELI) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((FORALL W_MOD)
+               ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                (((P X) W_MOD) T0)))))))
+>     (-ME)(-MELI) := (VP\NP)\\(VP\NP)
+        : ((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+           (LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((FORALL W_MOD)
+                ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                 (((P X) W_MOD) T0))))))))
+<     (GEL)(-ME -MELI) := VP\NP
+        : (((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+            (LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((FORALL W_MOD)
+                 ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                  (((P X) W_MOD) T0))))))))
+           (LAM X (COME X)))
+LEX   (-AGR) := (S\NP)\\(VP\NP)
+        : (LAM P (LAM X (P X)))
+<     (GEL -ME -MELI)(-AGR) := S\NP
+        : ((LAM P (LAM X (P X)))
+           (((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+             (LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((FORALL W_MOD)
+                  ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                   (((P X) W_MOD) T0))))))))
+            (LAM X (COME X))))
+<     (SEN DE)(GEL -ME -MELI -AGR) := S
+        : (((LAM P (LAM X (P X)))
+            (((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+              (LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((FORALL W_MOD)
+                   ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                    (((P X) W_MOD) T0))))))))
+             (LAM X (COME X))))
+           ((LAM X X) HEARER))
+>     (AHMET GEL -ME -ECEK -SE -AGR)(SEN DE GEL -ME -MELI -AGR) := S
+        : (((LAM P (LAM S (P S)))
+            ((LAM S1
+              (LAM S2
+               (LAM W0
+                (LAM T0
+                 ((FORALL W_REF)
+                  ((CONDITION ((S1 W_REF) T0)) ((S2 W_REF) T0)))))))
+             ((((LAM N
+                 (LAM P (LAM X (LAM W0 (LAM T0 (NOT ((((N P) X) W0) T0)))))))
+                (LAM P
+                 (LAM X
+                  (LAM W0
+                   (LAM T0
+                    ((EXISTS T) ((AND ((EARLIER T) T0)) (((P X) W0) T))))))))
+               (LAM X (COME X)))
+              AHMET)))
+           (((LAM P (LAM X (P X)))
+             (((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+               (LAM P
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((FORALL W_MOD)
+                    ((CONDITION (((CONGRUENT SPEAKER) W0) W_MOD))
+                     (((P X) W_MOD) T0))))))))
+              (LAM X (COME X))))
+            ((LAM X X) HEARER)))
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((FORALL W_REF)
+       ((CONDITION
+         (NOT ((EXISTS T) ((AND ((EARLIER T) T0)) (((COME AHMET) W_REF) T)))))
+        ((FORALL W_MOD)
+         ((CONDITION (((CONGRUENT SPEAKER) W_REF) W_MOD))
+          (((NOT (COME HEARER)) W_MOD) T0))))))) =
+    (\ W0 . \ T0 . FORALL W_REF
+     (CONDITION (NOT (EXISTS T (AND (EARLIER T T0) (COME AHMET W_REF T))))
+      (FORALL W_MOD
+       (CONDITION (CONGRUENT SPEAKER W_REF W_MOD)
+        (NOT (COME HEARER) W_MOD T0)))))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)

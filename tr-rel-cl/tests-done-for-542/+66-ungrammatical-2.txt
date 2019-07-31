@@ -1,0 +1,20 @@
+
+* (ccg-deduce '(polis gel -me -me -di -agr))
+
+NIL
+* (ccg-deduce '(polis gel -ebil -agr))
+
+NIL
+* (ccg-deduce '(polis gel -dir -ebil -agr))
+
+NIL
+* (ccg-deduce '(polis gel -ebil -se -di -miş -agr))
+
+NIL
+* (ccg-deduce '(polis gel -se -se -di -agr))
+
+NIL
+* (ccg-deduce '(polis gel -miş -di -agr değil))
+
+NIL
+* (dribble)

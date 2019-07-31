@@ -1,0 +1,11 @@
+
+* (ccg-deduce '(sen gel -iyor -di ol))
+
+NIL
+* (ccg-deduce '(sen gel -iyor -agr ol))
+
+NIL
+* (ccg-deduce '(sen gel ol))
+
+NIL
+* (dribble)

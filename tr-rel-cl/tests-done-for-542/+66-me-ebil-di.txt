@@ -1,0 +1,127 @@
+
+* (ccg-deduce '(hırsız konuş -me -ebil -di -agr))
+
+T
+* (cky-show-deduction)
+
+
+Derivation 1
+--------------
+LEX   (HıRSıZ) := NP
+        : ROBBER
+LEX   (KONUŞ) := VP\NP
+        : (LAM X (SPEAK X))
+LEX   (-ME) := ((VP\NP)\\(VP\NP))/*((VP\NP)\\(VP\NP))
+        : (LAM N (LAM P (LAM X ((N NOT) (P X)))))
+LEX   (-EBIL) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS W_POS)
+               ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0)))))))
+>     (-ME)(-EBIL) := (VP\NP)\\(VP\NP)
+        : ((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+           (LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS W_POS)
+                ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0))))))))
+<     (KONUŞ)(-ME -EBIL) := VP\NP
+        : (((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+            (LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS W_POS)
+                 ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0))))))))
+           (LAM X (SPEAK X)))
+LEX   (-DI) := (VP\NP)\\(VP\NP)
+        : (LAM P
+           (LAM X
+            (LAM W0
+             (LAM T0
+              ((EXISTS T)
+               (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+<     (KONUŞ -ME -EBIL)(-DI) := VP\NP
+        : ((LAM P
+            (LAM X
+             (LAM W0
+              (LAM T0
+               ((EXISTS T)
+                (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                 ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+           (((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+             (LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS W_POS)
+                  ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0))))))))
+            (LAM X (SPEAK X))))
+LEX   (-AGR) := (S\NP)\\(VP\NP)
+        : (LAM P (LAM X (P X)))
+<     (KONUŞ -ME -EBIL -DI)(-AGR) := S\NP
+        : ((LAM P (LAM X (P X)))
+           ((LAM P
+             (LAM X
+              (LAM W0
+               (LAM T0
+                ((EXISTS T)
+                 (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                  ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+            (((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+              (LAM P
+               (LAM X
+                (LAM W0
+                 (LAM T0
+                  ((EXISTS W_POS)
+                   ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0))))))))
+             (LAM X (SPEAK X)))))
+<     (HıRSıZ)(KONUŞ -ME -EBIL -DI -AGR) := S
+        : (((LAM P (LAM X (P X)))
+            ((LAM P
+              (LAM X
+               (LAM W0
+                (LAM T0
+                 ((EXISTS T)
+                  (((AND ((EARLIER T0) T)) (((P X) W0) T))
+                   ((((KNOW (((P X) W0) T)) SPEAKER) W0) T)))))))
+             (((LAM N (LAM P (LAM X ((N NOT) (P X)))))
+               (LAM P
+                (LAM X
+                 (LAM W0
+                  (LAM T0
+                   ((EXISTS W_POS)
+                    ((AND ((POSSIBILITY W0) W_POS)) (((P X) W_POS) T0))))))))
+              (LAM X (SPEAK X)))))
+           ROBBER)
+
+Final LF, normal-order evaluated: 
+
+    (LAM W0
+     (LAM T0
+      ((EXISTS T)
+       (((AND ((EARLIER T0) T))
+         ((EXISTS W_POS)
+          ((AND ((POSSIBILITY W0) W_POS)) (((NOT (SPEAK ROBBER)) W_POS) T))))
+        ((((KNOW
+            ((EXISTS W_POS)
+             ((AND ((POSSIBILITY W0) W_POS))
+              (((NOT (SPEAK ROBBER)) W_POS) T))))
+           SPEAKER)
+          W0)
+         T))))) =
+    (\ W0 . \ T0 . EXISTS T
+     (AND (EARLIER T0 T)
+      (EXISTS W_POS (AND (POSSIBILITY W0 W_POS) (NOT (SPEAK ROBBER) W_POS T)))
+      (KNOW
+       (EXISTS W_POS (AND (POSSIBILITY W0 W_POS) (NOT (SPEAK ROBBER) W_POS T)))
+       SPEAKER W0 T)))
+
+Try (cky-pprint) to see the details including the features and slash modalities.
+    (cky-reveal-cell <cell>) to pretty-print the parse in <cell>.
+NIL
+* (dribble)
