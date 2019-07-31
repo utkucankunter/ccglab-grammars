@@ -1,0 +1,148 @@
+
+%		General utility
+%%	Fullstop
+FS		p := S\*S	: \s.s;
+
+%-----------------------------%
+
+%	NNI
+%%	Plural
+-ler	c := N\N : \x.!multiple x;
+
+%%	Case
+-0		c := NP[cs=N,ps=?x]\N[ps=?x] 	: \x.x;
+-i		c := NP[cs=A]\N 							: \x.x;
+
+%%	Indefiniteness
+-00		c := NP[ps=?1x,cs=?2x]\NP[ps=?1x,cs=?2x] : \x\b.!and (x b) (!indefinite b);
+
+%-----------------------------%
+
+%	VVI
+%%	Agreement
+-0		c := S\(S\NP[cs=N]) : \p.p !he;
+-0		c := (S\NP[cs=N,ps=3s])\(S\NP[cs=N]) : \p.p;
+
+%%	Tense
+-di		c := (S\NP[cs=N])\V	: \p\b\t\w.!and (p b t w) (t < t0);
+
+%-----------------------------%
+
+%		Verbs
+al				v := V\NP[cs=A]						: \x\a\t\w.!take x a t w;
+kes				v := V\NP[cs=A]						: \x\a\t\w.!cut x a t w;
+değ				v := V					 					: \a\t\w.!touch a t w;
+dur				v := V[ev=culmn]					: \a\t\w.!stop a t w;
+eş				v := V[ev=culmp]\NP[cs=A]	: \a\t\w.!dig a t w;
+gel 			v := V 										: \a\t\w.!come a t w;
+getir			v := V\NP[cs=A] 					: \x\a\t\w.!bring x a t w;
+git 			v := V 										: \a\t\w.!go a t w;
+gör				v := V\NP[cs=A] 					: \x\a\t\w.!see x a t w;
+gülümse		v := V										: \a\t\w.!smile a t w;
+ısır			v := V\NP[cs=A]						: \x\a\t\w.!bite x a t w;
+koş 			v := V 										: \a\t\w.!run a t w;
+tahsil_et	v := V\NP[cs=A]						: \x\a\t\w.!collect x a t w;
+ye 				v := V\NP[cs=A]						: \x\a\t\w.!eat x a t w;
+
+%-----------------------------%
+
+%		NND_CI
+%%	ekmek -çi gel -di -0 FS
+ekmek	n := N 		: !bread;
+-çi		c := N\\N : \x\a.!deals_with x a;
+
+%		NJD_0
+%%	küçük -0 -i getir -di -0 FS
+küçük	a := N/N 	: \x\a\d\l.!and (!small (!at d) a) (d > l) (x a);
+-0		c := N[ps=3p]\\(N/N) 					: \p\a\d\l.p !in_context a d l;
+
+%		NVD_ACAK
+%%	al -acak -lar -i tahsil_et -di -0 FS0
+%%%	no contradictions, but interesting result regarding T/A/M 
+-acak	c := N\\(V\NP[cs=A])	: \p\x\t\w.!and (p x !anon t w) (t > t0);
+
+%		NVD_GAN
+%%	ısır -gan -0 değ -di -0 FS
+%%%	no contradictions, but interesting result regarding T/A/M 
+-gan 	c := N\\(V\NP[cs=A])	: \p\a\t\w.p !anything a t w;
+
+%-----------------------------%
+
+%		JND_LI/JND_SIZ
+%%	tat -lı/-sız yemek -i -00 ye -di -0 FS
+tat		n := N : !sweetness;
+-lı		c := (N/N)\\N : \x\y\a.!and (!have x a) (y a);
+-sız	c := (N/N)\\N : \x\y\a.!and (!not (!have x a)) (y a);
+yemek	n := N 				: !dish;
+
+%		JJD_IMSI
+%%	mavi -msi renk -i gör -di -0 FS
+mavi	n := N/N 					: \x\a\d\l.!and (!blue (!at d) a) (d > l) (x a);
+-msi	c := (N/N)\\(N/N) : \p\x\a\d\l\l1.!and (p x a d l1) (d < l) (l1 < l);
+renk 	n := N 						: !color;
+
+%		JVD_IK
+%%	kes -ik çayır -0
+-ik		c := (N/N)\\(V\NP[cs=A]) : \p\x\a\t\w.!and (p a !anon t w) (t < t0) (x a);
+çayır	n := N : !prairie;
+
+%-----------------------------%
+
+%		VND_LAN
+%%	ev -len -di -0 FS
+ev 		n := N : !home;
+-len	c := V\\N : \x\a\t\w.(!acquire x a t w);
+
+%		VJD_LAS
+%%	köpek -0 güzel -leş -di -0 FS
+köpek	n := N[ps=3s]	: !dog;
+güzel	a := N/N 			: \x\a\d\l.!and (!pretty (!at d) a) (d > l) (x a);
+-leş	c := V\\(N/N) : \p\x\t\w.!and (p x) (!increase d t w);
+
+%		VVD_AKLA
+%%	otobüs -0 dur -akla -di -0 FS
+otobüs	n := N : !bus;
+-akla		c := V[ev=proc]\V[ev=culmn] : \p.p;
+
+%		VVD_ALA
+%% 	köpek -0 yer -i eş -ele -di -0 FS
+yer 	n := N : !ground;
+-ele	c := V[ev=proc]\V : \p.p;
+
+%-----------------------------%
+
+%		AND_CA
+%%	dost -ça gülümse -di -0 FS
+dost	n := N 				: !friend;
+-ça		c := (V/V)\\N : \x\p\b\t\w.!and (!be x b t w) (p b t w);
+
+%		AJD_CA
+%%	çocuk -0 hızlı -ca koş -di -0 FS
+çocuk	n := N 						: !kid;
+hızlı	a := N/N 					: \x\a\d\l.!and (!quick (!at d) a) (d > l) (x a);
+-ca 	c := (V/V)\\(N/N) : \p\v\b\t\w.p (v b t w);
+
+%		AVD_ARAK
+%%	gülümse -yerek gel -di -0 FS
+-yerek	c := (V/V)\\V : \p1\p2\a\t\w.!and (p1 a t w) (p2 a t w);
+
+%		AVD_IP
+%%	gülümse -yip git -di -0 FS
+-yip		c := (V/V)\\V : \p1\p2\a\t\w\t1.!and (p1 a t1 w) (p2 a t w) (t1 < t);
+
+%		AAD_CEK
+%%	demin -cek gel -di -0 FS
+demin	a := V/V 					: \p\x\t\w\td.!and (p x t w) (t < t0) (t0 - t < td); %t<t0 here is an emphasis
+-cek	c := (V/V)\\(V/V) : \p.p;
+
+
+
+
+
+
+
+
+
+
+
+

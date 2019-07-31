@@ -1,0 +1,1139 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage[english]{babel}
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% References
+\usepackage[round]{natbib}
+\bibliographystyle{abbrvnat}
+
+%%% Adding Subsubsections
+\usepackage{titlesec}
+
+%%% Symbols
+\usepackage{siunitx}
+\usepackage{amssymb}
+\usepackage{12many}
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+%%% Comments
+\usepackage{verbatim}
+
+%%% Tables
+\usepackage{multirow}
+\usepackage{adjustbox}
+
+%%% CCG
+\usepackage{mathptmx} % this font is for demo. CM fonts look ugly.
+\usepackage{ccg-latex}
+
+%------------------------------------------------------------------------------------------------------%
+
+\title{PhD Thesis Proposal v10}
+\author{Utku Can KUNTER}
+%\date{} % Activate to display a given date or no date (if empty), otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+
+In preparing this proposal, our aim has been to discover a topic within linguistics, that can be studied with a focus on cognitive science and where we can make a difference, however small. \\
+
+While there has been a massive amount of research in the fields of syntax, and inflectional morphology, it appears derivational morphology has been quite understudied. Several possible reasons for this immediately come to mind. First of all, syntax, more precisely syntax at the individual word level, has been under the spotlight since the early years of generative grammar. Working at word level is the most natural approach to the problems of generative grammar, as the segmentation is already there and the number of elements to be accounted for is at a minimum for a given sentence. Of course, further analyses demonstrated how a word-level investigation fails to account for many phenomena and that a system of regularities also exist below the word level. The next logical step was to come up with a theory of inflection, as the morphological regularities relevant to syntax are (arguably always) the product of inflectional processes. Therefore, inflection has also been studied a lot. As a natural consequence of the way the research field evolved, derivational morphology had to wait the longest to step into the spotlight. \\
+
+A second possible reason is the inherent complexity of the problems related to derivational morphology. Derivational processes contribute a wide variety of semantic content, must satisfy numerous semantic constraints before they can be applied and can wildly change the argument structure of the host. Many other challenging aspects of derivation could be added to the list. On the other hand, inflectional processes occur within the realm of syntax, which is better understood, their application is often (perhaps always) mandatory and their semantic contribution is relatively standardized. All in all, inflection seems to be the easier part of morphology to deal with. \\
+
+The general research tendencies in the field are reflected in the collection of studies on Turkish. Derivational morphology has been investigated within the context of descriptive grammar and morphological analysis / disambiguation, but the work on a generative theory of derivation in Turkish, to the best of our knowledge, has not been comprehensive. \\
+
+In this thesis, our main aim is to help fill this gap in the literature and come up with a theory of derivational morphology in Turkish. Our focus is limited to Turkish, because the variety of semantic possibilities would otherwise be endless. Even a comprehensive work on Turkish derivational morphology could prove to be too much to handle, but this is not an excuse for ignoring this research area altogether. \\
+
+Our hope is to shed a little light on the intricacies of Turkish derivational morphology. By emphasizing the differences of derivational processes from syntactic processes, we will first narrow down the research question. Then, we will try to explain the regularities in these processes with a perspective of generative grammar. \\
+
+Taking up this challenge, we need a tool with an adequate expressive power; flexible enough to allow a comprehensive analysis of a wide range of phenomena, but restrictive enough to prevent theories from becoming too loose to be considered a natural language grammar. Combinatory Categorial Grammar has over decades accumulated an impressive track record proving its capacity for such an analysis. An important feature of CCG is its handling linguistic processes with an equal regard for syntax and semantics. As derivational processes are more heavily involved with semantics, this proves to be a major advantage of CCG over alternative frameworks that assume a syntax-first approach. \\
+
+In the following sections, we first determine the boundaries and method of our study. Second, we go over several important works relevant to our problem and draw a general picture of the state of the art. Third, we give a brief overview of the problem space. Finally, we present the results of our preliminary analyses and develop ideas on the possible ways forward. \\
+
+\newpage
+
+\section{Problem Definition}
+
+\label{PrDef}
+
+In this section, we try to narrow down the problem by describing our position regarding the relevant dichotomies within linguistics. These include syntax vs. morphology, inflection vs. derivation (vs. construction), derivational affixes with Turkish origin vs. others, and CCG vs. MP. 
+
+\subsection{Syntax vs. Morphology}
+
+\label{SynMorph}
+
+Possibly one of the most central and most controversial dichotomies in the field is the one concerning syntax and morphology. There have been important works siding with the idea that morphology must be considered a distinct module, such as \citet{Aronoff1994} and \citet{Aronoff2005}, while others make the very opposite claim like \citet{Lieber1992}. We do not make any claims regarding this dichotomy. On one hand, it really seems morphology distributes itself to different linguistic modules and operations. On the other hand, we feel this does not eliminate the necessity for us to come up with a theory of morphology. \\
+
+Regarding the mechanism of morphological operations, there are mainly three approaches: item and arrangement (IA), item and process (IP) and word and paradigm (WP). While these approaches are ultimately equivalent in power, they adopt different mechanisms and make different assumptions. IA assumes segmental morphology; it must find ways to represent apparently non-segmental morphology in a segmental manner. In contrast to IA, IP assumes a procedural mechanism, and represents even obviously segmental morphology as processes. WP makes neither assumptions, which is why it seems to be the safest choice. We can say our point of view is closest to WP.  \\
+
+Regarding the structure of morphological operations, an important issue has been raised by \citet{Sezer1991}. Sezer explains that syntax is relevant to the thematic structure of a sentence, while morphology is relevant to the argument structure. There are quite important implications of this claim. First, it allows us to draw a more grounded boundary between syntax and morphology. Parallel to this, it also allows us to draw a boundary between inflection and derivation. Thematic structure and argument structure offer us different points of view relevant to our modeling efforts. Of course, these implications depend on the existence of two distinct structures concerning arguments and thematic roles in a phrase, as claimed in \citet{Grimshaw1990} and several others. Our preliminary analyses demonstrate that there is indeed a fundamental difference between how syntactic and morphological processes interact with the syntactic structure. These analyses and comments will be presented in Section \ref{PrelimWork}. \\
+
+\subsection{Inflection vs. Derivation}
+
+\label{InflDeriv}
+
+Inflection and derivation are like siblings that are radically different in some ways, but still quite similar in others. This analogy implies it is possible to partition morphology into two non-intersecting sets, but quite often the choice between these sets is a matter of definition. It seems individual affixes do not occur on a binary scale; they are distributed on a continuous line. There are several alternative places where a demarcation line could be drawn between inflection and derivation, but all such lines would be arbitrary in some sense. \\
+
+Still the distinction between inflection and derivation helps us by providing shortcuts to refer to groups of affixes that exhibit certain properties. In a general and somewhat imprecise sense, inflection is closer to syntax, is more productive and contributes a well-defined abstract meaning, while derivation is subject to semantic constraints and may change the original concept altogether. These are the traditionally accepted differences between the two sides of morphology. A clear-cut distinction between inflection and derivation may or may not be possible eventually, but initially, we simply claim that morphological processes that are required by syntax are inflection, and the rest are considered derivation. We will take our next steps carefully following \citet{Sezer1991} who claims that these two kinds of processes differ in the ways they interact with the sentential structure. \\
+
+\subsection{Which Subset of Derivation?}
+
+\label{WhSubDeriv}
+
+Derivational morphology as a whole is still an enormous field that precludes a truly comprehensive analysis. Therefore, we restrict our focus to Turkish. As the following sections will show, Turkish involves a rich and diversified derivational morphology. The inventory of affixes given in \citet{Bozsahin2018} is the clearest possible demonstration of derivational capabilities in Turkish language. \\
+
+A quick glance at this list, however, reveals that some affixes familiar to Turkish speakers are missing. Many affixes are omitted from this list, despite their productive use, due to their non-Turkish origins. Affixes like "na-" from Arabic (i.e. "na-tamam") and "-syon" from French (i.e. "fermant-asyon") are quite productive and they are consciously deployed (and even sometimes removed) by Turkish speakers. Many other affixes, like "mü-" from Arabic (i.e. "mü-dahale") and "-aj from French (i.e. "arbitr-aj"), cannot be considered productive at all. Words containing these affixes are not analyzed by (most) Turkish speakers, they are kept in the lexicon in their final form. Therefore, there are no derivational processes in Turkish that involve these suffixes, at least for our purposes. \\
+
+These affixes and their kind present different dynamics than affixes that originate in Turkish. Failing to recognize this distinction, the distinction between original and borrowed derivational processes, would ultimately require a study to cover an enormous list of derivational processes. We avoid this by limiting our investigation to affixes originating in Turkish. Arguably, derivational affixes with Turkish origin are used in a more productive way by Turkish speakers, which make them more valuable in our study. \\
+
+\subsection{Generative vs. Constraint-Based Grammars}
+
+The standard Chomskian theories of language have been dominant in the literature for decades now. Their prominence came from revolutionary insights into notoriously complex problems about language and the mind itself. However, worthy alternatives appeared in time to challenge their standard status. Constraint-based grammars, which follow a completely different strategy than the Chomskian generative grammars, have been developing rapidly. Among these, CCG has received considerable attention in recent years, due to its adequate expressive power and efficient parsing. \\
+
+Several languages with interesting properties demonstrate the inadequacy of the syntax-oriented approach typical of Chomskian theories. For instance, split ergative languages like Basque, Georgian and Mayan, violate many of their central hypotheses and force them to adopt ever more intricate designs to account for these seemingly "outlier" languages. Also, they fail to give a satisfactory account of unbounded constructions. (Bounded constructions are more achievable, since they are open to context-free representation.) On the other hand, as \citet{PFTL} (hereafter PFTL) demonstrates, split ergative languages do not keep CCG theorists awake at night, and unbounded constructions can be represented quite elegantly in CCG. \\
+
+With their emphasis squarely on the autonomy of syntax, Chomskian theories set aside semantics and run into great difficulties with phenomena more involved with semantics. Proponents of CCG prefer an alternative strategy by envisioning syntax and semantics simultaneously being "projected from the lexicon" (PFTL). By not ignoring semantics in favor of an autonomous syntax, CCG provides a much more suitable platform to study derivational morphology, which is much more involved with semantics than inflectional morphology and syntax. \\
+
+\newpage
+
+\section{State of the Art}
+
+\label{StArt}
+
+In this section, we briefly describe the current state of the art. First, we list several important studies on morphology in general. Next, we look into some particular aspects of morphology. Third, we try to come up with an adequate set of CCG representations for major grammatical categories. The final two subsections are devoted to important research on Turkish morphology and CCG, respectively.
+
+\subsection{Morphology at Large}
+
+\label{MorphLarge}
+
+%\citet{Bach1976} presents the Rule-to-Rule Hypothesis. \\ %Nereye koyabiliriz?
+
+\citet{Grimshaw1990} puts forward a convincing account of argument structure (a-structure), demonstrating how and why it exists as a distinct layer. \citet{Grimshaw1990} argues that the lexical conceptual structure (lc-structure), which is present in every lexical entry and which is projected directly from the semantic content of the entry, generates a thematic structure ($\theta$-structure) and an event structure (e-structure). The $\theta$-structure determines the list of arguments that can be licensed by the lexical item and includes an implicit hierarchy between these arguments. On the other hand, the e-structure constitutes an aspectual dimension on top of the $\theta$-structure. This aspectual dimension takes priority during the labeling of arguments as subject or object. From the combination of the $\theta$-structure and the e-structure yet another structure is born, named the a-structure. The a-structure does not contain any $\theta$-marks, but it includes a complete and final hierarchy between all the arguments projected from the lc-structure. \\
+
+Since the hierarchies from the $\theta$-structure and from the e-structure coincide most of the time, the existence of a separate a-structure has not always been obvious. What \citet{Grimshaw1990} does is to put forward a theory that is able to explain the outcomes produced in the presence of conflicting structures. Indeed, analyses of several linguistic phenomena involving psychological verbs and complex event nominalization (as well as many others) show how the two structures do not have to coincide. With clear examples, \citet{Grimshaw1990} demonstrates how her theory explains these phenomena quite elegantly. \citet{HaleKeyser2002} provides a simpler, beginner-friendly discussion of a theory of argument structure. \\
+
+Assuming every lexical entry is associated with a thematic structure, and citing several sources for the possibility of an a-structure distinct from the $\theta$-structure, \citet{Sezer1991} claims that syntax operates on the thematic structure, while morphology operates on the argument structure. He points out how most derivations involve the addition or suppression of an argument, giving as a typical example passive by-arguments that act both like adjuncts and arguments. This is a powerful claim that touches the heart of the issues we are attempting to investigate. The deepest differences between syntactic and morphological processes may be rooted in their behavior being responsive to different linguistic structures. We expect this claim and arguments accompanying it will be a recurrent theme in our study. \\
+
+\citet{Sezer1991} also emphasizes the distinction between semantic selection (s-selection) and category selection (c-selection). This distinction may also take an important role in our investigation of the behavior of derivational morphology. One could say s-selection is a more general kind of restriction and c-selection is a subset of it. While scanning the semantic content of a candidate, s-selection also implicitly takes a position regarding their grammatical categories. On the other hand, c-selection only considers the grammatical categories of candidates. Perhaps inflectional processes are constrained by the principles of c-selection, while derivational processes are subject to a wider set of constraints resulting from s-selection. \\
+
+\citet{Lieber1992} claims that any processes attributed to morphology can actually be explained within the theory of syntax; succinctly, in her theory, morphology is what we call syntax below the level of $X^0$. She argues that compounds are syntactically formed and inflectional processes are basically a part of syntax, but concedes that no one has yet succeeded in deriving the properties of words and sentences from the same basic principles of grammar. We do not care much about this distinction. We are aware that morphology distributes itself to several layers of linguistic modules: Inflection is obviously closer to syntax; some languages keep most relevant content in the lexicon, while some keep it in the grammar. In the end, what we care about the most is being able to represent the entire set of possibilities from syntax and morphology in the simplest possible framework. \\ 
+
+\citet{Aronoff1994} argues for the autonomy of a morphological module. He starts with the Separation Hypothesis and gives a history of theories of morphology.
+
+\begin{quote}
+	Separation Hypothesis: Morphological operations should be separated from accompanying phonological operations. 
+\end{quote}
+
+\citet{Aronoff1994} demonstrates the existence of a morphomic level, which he claims is a purely morphological level. He distinguishes between inflectional classes and gender, as two autonomous levels and argue that inflectional classes are also purely morphological. He admits morphology is not necessary for a language, but many languages do have elaborate morphology which cannot be adequately explained without a dedicated theory of their morphology. We agree with him on the necessity for a theory of morphology. \\
+
+\citet{Aronoff2005} provide interesting cases and detailed explanations on both inflectional and derivational morphology from Kujamaat Joola, covering a wide range of possibilities with examples from many languages from around the world. They claim that understanding the morphology of individual languages leads to the understanding of morphology of Language. This is encouraging for us, since we choose to reduce the range of our focus to Turkish derivational morphology. As in \citet{Aronoff1994}, they argue for the existence of a distinct linguistic component called morphology, claiming some aspects of morphology cannot be attributed to anything else. \\
+
+\citet{Aronoff2005} define inflection as the formation of grammatical forms of a single lexeme, uses of which are determined by syntax, but derivation as the creation of one lexeme from another, including compounding. They also discuss the IA-IP distinction and points out the two approaches being equivalent mathematically, provided negative morphemes are allowed in IA. We believe WP provides a more flexible approach than both. \\ 
+
+\citet{Carstairs-McCarthy2010} looks for the roots of morphology in the central and pervasive tendency of synonymy avoidance. After going over the conventional arguments on the existence and non-existence of a distinct morphological module, he investigates the possible mechanisms behind the creation of affixes and stem altering operations. Throughout the book, he mostly deals with inflection, but reserves Chapter 7 to derivational processes, where he puts a large emphasis on cliché patterns, collocations, and more generally on lexicalization. In our opinion, the alleged linguistic tendency called synonymy avoidance, although it obviously exists, does not seem strong enough to fuel all the processes listed in the book. Therefore, the abductive argument presented in the book does not seem very convincing. \\ 
+
+\subsection{Some Particular Aspects of Morphology}
+
+%%\citet{Talmy1985}\\
+
+%%\citet{Talmy1988}\\
+
+Universality of Theta Assignment Hypothesis (UTAH) presented in \citet{Baker1988} is quite a central idea in the study of morphological processes. As a consequence of UTAH, the distance of an affix to the stem is determined by its place in the thematic structure and derivational affixes are closer to the stem than inflectional suffixes. This observation proves to be quite an important clue for us. Whenever we examine how an affix interacts with the sentential structure, UTAH provides additional evidence. \\ 
+
+\citet{MoensSteedman1988} provides an outstanding analysis of universal temporal categories and temporal relations between events. The claims made in the paper are not based on purely temporal primitives, but on causation and consequence. Following the classifications and strategies in \citet{MoensSteedman1988}, quite complex event structures may be analyzed in a robust and elegant way. Also, thanks to the framework given in the paper, the vast variety of possibilities from Turkish T/A/M markers can be easily represented in logical forms. \\ 
+
+Perhaps Turkish emphatic reduplication (TER) deserves a special mention. The kinds of reduplication used in Turkish (i.e. "tabak mabak", "zaman zaman", "sapsarı") always indicate a change in meaning and are not required by syntax. Thus, they fall into derivational morphology. One can also say, however, reduplication should be considered a morphophonological process, since there is no allomorphy. So, there are reasons to include Turkish reduplication in our study, and there are reasons to exclude it. For now, we leave the choice to a later stage and stop at a shallow introduction to arguably the most interesting kind of reduplication in Turkish, the emphatic reduplication. \\
+
+\citet{Wedel1999} and \citet{KilicBozsahin2013} present important findings on TER; the former looking into the phonological aspects of the phenomenon, while the latter prefers a data-driven approach. \citet{Wedel1999} claims that reduplicative forms used for putting emphasis on adjectives are somewhat productive. Working within the framework of Optimality Theory, he shows that the schema for creating new forms is available to Turkish speakers. \\
+
+\citet{KilicBozsahin2013}, on the other hand, show that in addition to the phonological constraints, speakers show two preferences in their linker type selection. First, they try to dissimilate the linker type from frequent consonant co-occurrences and word endings. Second, they prefer the linker type to be dissimilar from the existing root in their choice of linker type. Therefore, they claim, TER is a morpholexical process that depends on "a global lexical knowledge for selecting an appropriate linker".
+
+\subsection{Representing Grammatical Categories}
+
+Achieving an adequate representation of each major grammatical category is crucial, as the success of morphological operations depends on the host's capabilities for receiving new categories and semantics from affixes. Even at the preliminary stage of our analysis, we needed to make use of complicated logical forms for host grammatical categories and subcategories. \\ 
+
+While noun phrases seem to be a simple, even trivial class in terms of their logical form representation, \citet{Grimshaw1990} Chapter 3 presents quite detailed arguments against this default position. Nevertheless, at this initial stage, we will use the simplest possible representation for noun phrases, and gradually move onto more complex representations. \\
+
+At present, our representation of verb forms is similar to PFTL's. In time, following important works such as \citet{VanValin2006}, we will try to achieve an even deeper analysis. PFTL makes important claims shaping our strategy for building a CCG. Their assumptions in Chapter 4 regarding verbs and verbal morphology guide us in Sections 4.1 and 5.2. In these sections, we attempt to find a way to represent verbs that will accommodate all the morphological processes we will have to deal with. \\
+
+Our review of the adjectival semantics literature has been been relatively more complete. We cite \citet{Paoli1999}, \citet{Paradis2001}, \citet{KennedyMcNally2005} and \citet{Kennedy2007} in Section \ref{ReprMajGrCate} to explain the reasons behind our decisions in the construction of logical forms for adjectives. For adverbs, the literature has not been as generous, but for now, we modify and reuse the principles from adjectival semantics. \\
+
+\subsection{Turkish Morphology}
+
+\citet{Sezer1991} is an outstanding work that makes important claims regarding Turkish syntax. Its most relevant and central claim for the present work is that syntax interacts with the $\theta$-structure, while morphology interacts with the a-structure. The reasons for this claim and its consequences are discussed at length in Section \ref{PrDef} and Subsection \ref{MorphLarge}. \\
+
+\citet{OflazerGocmenBozsahin1995} gives "an outline of Turkish morphology", complete with a list of morphophonemic processes, an affix inventory and finite-state machines for nominal and verbal morphotactics. \citet{Bozsahin2018} builds on the affix inventory presented in this work. He creates a list of primitive binary concepts and analyzes each affix in the inventory using these concepts. Subections \ref{WhSubDeriv}, \ref{InvTRAff} and \ref{DerivVerbs} are largely based on this paper. \\ 
+
+\citet{GokselKerslake2005} provides a truly comprehensive grammar of Turkish. This extremely detailed and perfectly organized book is an invaluable resource for beginners in Turkish grammar. \citet{Taylan2001} provides an even deeper analysis of Turkish verbs. Looking at various aspects of verbs, \citet{Taylan2001} gives important insights to the reader. \\
+
+\subsection{CCG}
+
+\citet{Bozsahin2002} argues that setting aside inflectional morphology as a word-internal process and "designating words as minimal units of the lexicon" is too restrictive. Instead, in this study, inflectional morphology and syntax are integrated within the framework of CCG and a morphemic lexicon. The ideas put forward in this paper are in harmony with our approach. In fact, representation of grammatical categories and affixes in this paper form the basis of many representation strategies in the present work. \\
+
+%\citet{Cakici2005}\\
+
+%\citet{Cakici2009}\\
+
+\citet{SteedmanBaldridge2011} is a complete introductory level discussion of CCG's capabilities and basic grammar-building strategies. It is a primary resource in the matters related to CCG. \\
+
+\citet{Bozsahin2017} is the manual for CCGab, the computational tool on which all examples in this study are tested. CCGlab is a blessing, to say the least, making rapid prototyping possible for complex CCG rule sets. With a reliable and easy-to-use engine, it implements the CKY parser and reduces the time required for testing by several orders of magnitude. \\
+
+PFTL launches a full-scale investigation of CCG's capabilities, with demonstrative examples from numerous languages. While most of the book is relevant to our purposes, especially the Chapters 4 and 16 deserve a special mention here. \\ 
+
+Chapter 4 of PFTL looks into the categorial lexicon, establishing a framework and a general strategy for determining the syntactic categories and the logical forms of lexical items. The claim by \citet{Sezer1991} that syntactic processes and derivational processes handle argument structure differently is reflected in CCG in quite an elegant way. (\citet{SteedmanBaldridge2011} gives a complete list of modes of application on p.9.)
+
+\begin{enumerate}[label=(\arabic*), leftmargin=1cm]
+	\item Application rules
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Double slash: -ci (as in "muhasebe-ci"): \cgf{\cgs{N}{}\bs\bs\cgs{N}{}$: \lambda x\lambda a.\so{deals\_with}\,x\,a$}
+	\item Single slash: -di (as in "gel-di"): \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\end{enumerate}
+\end{enumerate}
+
+They use single slashes for syntactic operations and double slashes for derivational morphology. Double slashes ensure that only the application operation is allowed and both the input to and the output from the application must be lexical. These are powerful restrictions that hint at a fundamental difference between the nature of the operations that are restricted by them and the ones that are not. Indeed, double slashes are always present in derivational processes but never in inflectional processes. Could their role be used to explain the difference between thematic structure and argument structure? Either way, CCG provides us an adequate platform for such an analysis. \\
+
+Chapter 16 of the same work mainly deals with relativization and coordination in Turkish. These two are significant in that they both allow for unbounded constructions, which are quite tricky to explain in any theory, but can be elegantly derived in CCG. \\ 
+
+The discussion on relativization benefits from an important observation made by \citet{GeorgeKornfilt1981}. \cite{GeorgeKornfilt1981} suggest that the genitive markers on the relative clause subjects are not actually genitive markers but agreement markers. They contribute a sense of finiteness to the clause, agreeing with the verb. Agreement markers on the verb are also homophones of the possessive marker, but there is no sense of possession in the construction. This convincing claim is quite significant, because it greatly simplifies the CCG representation of relative clauses. \\
+
+\newpage
+
+\section{Shape of the Problem}
+
+A study of derivational morphology must take place within a network of other linguistic modules that are themselves still under investigation. Syntax and semantics are always relevant in the decisions one has to make regarding the best representation of affixes' syntactic categories and semantic content. Inflectional morphology is also relevant due to the potential clues hidden in the intersection of inflection and derivation, and in the different behavior of the two halves of morphology with respect to argument structure. Needless to say, phonology appears on stage from time to time, but is mostly ignored due to its effects being deemed too close to the surface. \\
+
+In this context, it would be inadequate to wander forever in the realm of derivational morphology. While we believe derivational morphology is a system on its own, its interactions with other systems must be part of the investigation. Studying it in isolation would fail to recognize its functions within the wider system and miss the clues hidden on the thick and blurred boundaries between linguistic modules. In this section, we try to take a low resolution picture of the wider system, and set the stage for our investigation. \\
+
+First, we explain our initial choices in representing major grammatical categories. Second, we take a general look on Turkish morphological processes, based on an inventory of Turkish affixes. Then, we review inflectional processes and try to identify properties that distinguish them from derivational affixes. \\
+
+\subsection{Representations of Major Grammatical Categories}
+
+\label{ReprMajGrCate}
+
+We have already pointed out that derivational affixes are capable of changing the grammatical category of an input. This adds a new layer of complexity to our task. Before starting an investigation of derivation, we must decide how to represent the main classes of lexical items. These representations should be carefully constructed so as to accommodate a wide range of derivational operations.\\
+
+We have four major grammatical categories to account for: nouns, verbs, adjectives and adverbs. We leave propositions aside for the moment. \\
+
+Nouns are represented in the simplest form. Their syntactic category is N. In their bare form, nouns are not taken to be cased and must get a case to assume their role within a sentence, as prescribed by the case filter (\citet{Cowper1992}). Named entities are no exception; they may take any case marker, and they must take case. Features would be necessary to track information required for person and number agreement, but this is not an immediate concern. 
+
+\begin{enumerate}[resume*]
+	\item CCG representation of nouns
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item ev : N : home'
+	\item Ankara : N : Ankara'
+	\end{enumerate}
+\end{enumerate}
+
+Verbal categories are not too complicated either. PFTL Chapter 4 presents important assumptions regarding the representation of predicates in CCG. The following is the list of these assumptions:
+
+\begin{enumerate}[resume*]
+	\item PFTL assumptions on verbal representation
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Bare infinitives (or root forms) are functions onto V.
+	\item Non-bare infinitives are functions onto VP.
+	\item Finiteness is a function onto S$|$NP for some $|$.
+	\item Aspect and event modalities are functions from VP and S$|$NP for some $|$.
+	\end{enumerate}
+\end{enumerate}
+
+They add that verb roots are assumed "to be the determiners of thematic structure and argument structure for predicates". \\
+
+Verbs in their bare form produce a V after their internal arguments are fulfilled. They must be promoted by T/A/M and agreement markers to the sentence level (S$\vert$NP for some $\vert$) before they can be joined with a subject and produce a complete sentence. This requirement is in line with the syntactic structures explained in \citet{Cowper1992}. \\
+
+Verbs may be intransitive, transitive or ditransitive. A verb's arity is reflected in both its syntactic category and its logical form, with an appropriate number of bound variables, denoted by $x$, $y$, $z$ and so on. The variable $a$ in the logical form stands for the subject NP. Following \citet{MoensSteedman1988} we include bound variables $t$ and $w$ for representing event time and world. These variables are indispensable in representing the semantic contribution of T/A/M markers as well as some derivational markers.
+
+\begin{enumerate}[resume*]
+	\item CCG representation of verbs
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item gel: \cgf{\cgs{V}{}$:\lambda a\lambda t\lambda w.\so{come}\,a\,t\,w$}
+	\item gör: \cgf{\cgs{V}{}\bs\cgs{NP}{ACC}$:\lambda x\lambda a\lambda t\lambda w.\so{see}\,x\,a\,t\,w$}
+	\end{enumerate}
+\end{enumerate}
+
+Our discussion of verbs have been informed mainly by PFTL so far, but in the next steps, as a deeper understanding of verbal semantics becomes necessary, \citet{VanValin2006} will be referred to a lot more frequently. In this book chapter, a comprehensive analysis of verbal semantics is presented, including event semantics and examples from multiple languages. \\
+
+Each adjective expects a noun and acts like a predicate. Its logical form must contain a bound variable that will be fulfilled by the noun. If we do this in the simplest way and do not use any other bound variables, receiving the expected noun completes the term. As a result, we do not have any bound variables left to link the entity denoted by the noun to the remainder of the sentence. We prefer keeping a second bound variable to represent the entity. \\
+
+Adjectives come in two shapes. Many adjectives are gradable in the sense that the noun modified by one is only deemed worthy if it has the property to some predefined extent. For example, for a car to be fast, it must be faster than some standard level of fastness. This level is stored in each speaker's context and somehow implicitly conveyed to the hearer. There are also adjectives that are not gradable, or at least their scale is not continuous, but binary. \citet{Paoli1999} calls the former kind relative adjectives, and the latter absolute adjectives. In the CCG representation attempts below, $x$ is a placeholder for the noun to be modified; $a$ stands for the generic entity that is both modified by the adjective and which is an instance of the noun; $d$ is the degree at which the sense of adjective's is observed and $l$ is the level of acceptance beyond which the adjective's use is justified. For non-gradable adjectives, we do not need $d$ or $l$.
+
+\begin{enumerate}[resume*]
+	\item CCG representation of adjectives  \label{CCGAdj}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item hızlı: \cgf{\cgs{N}{}\fs\cgs{N}{}$: \lambda x\lambda a\lambda d\lambda l.(\so{quick}\,(\so{at}\,d)\,a)\land(d>l)\land(x\,a)$} \label{a}
+	\item anayasal: \cgf{\cgs{N}{}\fs\cgs{N}{}$: \lambda x\lambda a.(\so{constitutional}\,a)\land(x\,a)$} \label{b}
+	\end{enumerate}
+\end{enumerate}
+
+\citet{Paoli1999} makes an important warning at this point, regarding the representation of relative adjectives. He points out that the standard level that permits or prevents the use of a given adjective depends on the noun modified by it. For instance, the standard level of fastness for a human should be different than the standard level used to judge a car. Thus, one can say, this dependency must be represented in the logical form of the adjective. In the article, this point is demonstrated with the following example: 
+
+\begin{enumerate}[resume*]
+	\item Semantics of gradable adjectives \label{SemGradAdj}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Dumbo is a small elephant. \label{a}
+	\item Dumbo is small and Dumbo is an elephant. \label{b}
+	\end{enumerate}
+\end{enumerate}
+
+We need to modify the logical form in \ref{CCGAdj} \ref{a} to make the level of acceptance $l$ dependent on the noun. But how do we do this? Are there really just two kinds of adjectives, or should we look deeper into the semantics of adjectives and try to accommodate several more kinds? \citet{Paradis2001} gives a nice schema for the kinds of adjectives; including the gradable-non-gradable dichotomy, as well as considering oppositeness and boundedness. \citet{KennedyMcNally2005} and \citet{Kennedy2007} create a massive inventory of possibilities for representing adjectival semantics, supported with arguments and counterarguments for each strategy. \\
+
+Recognizing that adjectival semantics is an ocean of challenges on its own, we choose to remain at a shallower level of analysis for now, keeping our focus on morphology. As we progress in our study of affixes, a deeper analysis of adjectives will undoubtedly become necessary, since each class of adjectives may react differently to each class of affixes. Due to the wide variety of semantic constraints on derivational morphology, an adjective may allow the application of one affix, while disallowing another, or its argument structure may be altered in a different way than previously expected. We will need to reflect these constraints on our representations by recognizing the variety of adjective classes and tuning our representations to accommodate them. Our initial analysis will involve the gradable-nongradable dichotomy, and other levels of analysis will be added later, as they become necessary. Trying to cover them all as soon as possible would shift our focus from the main issues of interest, and could increase the complexity of the task beyond manageable levels. \\
+
+Adverbs specify when, how or why an action takes place. Time adverbs require us to represent the time relation explicitly in the logical form. A specification of manner can be conveyed in the way adjectives modify nouns. Just like how the existence of some item $a$ is postulated by an adjective, which is then modified both by the adjective and the noun itself, an adverb could postulate the existence of an action $a$, first modified by the adverb and then the action along with all its arguments. For time adverbials, we sometimes need extra bound variables to represent the some information from context. For instance, in \ref{CCGAdv} \ref{a}, $t_d$ denotes the amount of time used to judge if a time difference is small enough for the adverb "demin" to be used. Reasons could be added inside the matrix verb's term as an adjunct, until a better way is found. Since the adverbs of this kind require propositions, we do not delve into their analysis immediately. 
+
+\begin{enumerate}[resume*]
+	\item CCG representation of adverbs \label{CCGAdv}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item demin: \cgf{\cgs{V}{}\fs\cgs{V}{}$: \lambda p\lambda a\lambda t\lambda w\lambda t_d.(p\,a\,t\,w)\land(t<t_0)\land(t_0-t<t_d)$} \label{a}
+	\item hızlıca: \cgf{\cgs{V}{}\fs\cgs{V}{}$: \lambda p\lambda x\lambda a\lambda d\lambda l.(\so{quick}\,(\so{at}\,d)\,a)\land(d>l)\land((p\,x)\,a)$} \label{b}
+	\end{enumerate}
+\end{enumerate}
+
+Of course, this is also a preliminary analysis. Gradability and other dichotomies should again be present in a full investigation of adverbs. As well as modifying verbs, adverbs may modify adjectives and other adverbs, adding another level of complexity to their representation. Degree adverbials should perhaps be considered a wholly different class, while time adverbials can be assumed to only modify verbs etc. \\ 
+
+Such constraints seem to be grounded in the way lexical items' argument structures fit with each other. For instance, adverbs of time, expect a grammatical category that carries a time variable, and that category happens to be the verb. So, it is not that time adverbials expect a verb, verbs happen to be the only grammatical category that fulfills the criteria for being modified by an adverb. This line of thinking will take a more central place in the discussions on morphology. Not to repeat the reasons given above, suffice it to say that these levels of detail will be added to our study as their inclusion becomes an asset than a liability.\\
+
+\subsection{An Inventory of Turkish Affixes}
+
+\label{InvTRAff}
+
+What better place is there to start an analysis of morphology than a complete inventory of affixes? \citet{Bozsahin2018} makes a bold attempt at determining the binary concepts underlying Turkish morphological processes. Based on \citet{OflazerGocmenBozsahin1995}, his inventory of affixes is claimed to be comprehensive, but admittedly preliminary. The idea is to come up with a conceptual analysis of these processes to provide a reliable basis for further research on Turkish morphology, syntax and semantics. A few of these binary concepts (out of a total 24) are CAUS (causative), FACIL (facilitative), GRAD (gradable), PRED (predicative) and STAT (stative). \\
+
+\citet{Bozsahin2018} uses a coding scheme to distinguish each class of affixes, including the final grammatical category, the source grammatical category, and the type of process (inflectional or derivational). He adds a representative allomorph (for derivations) or a function description (for inflections) to this term and assigns each affix a unique code:
+
+\begin{enumerate}[resume*]
+	\item Coding scheme in \citet{Bozsahin2018}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item NNI\_PLU: Inflection on a noun, producing a noun, making it plural
+	\item VVI\_REFX: Inflection on a verb, producing a verb, making it reflexive
+	\item VJD\_AL: Derivation on an adjective, producing a verb, using a suffix of the form AL
+	\item AAD\_CEK: Derivation on an adverb, producing an adverb, using a suffix of the form CEK
+	\end{enumerate}
+\end{enumerate}
+
+Inflectional affixes in \citet{Bozsahin2018} never change the grammatical category of their input item, while derivational affixes may or may not make such changes. Arguably, the most interesting derivations occur between predicates and non-predicates, since such derivations require the affix to make substantial changes on the argument structure. While inflectional affixes can be studied in just a few groups, the semantic contribution of derivational affixes prevents us from working at a similar level of complexity. \\
+
+\citet{Bozsahin2018} gives us a general view of the affixal inventory. The following tables show the distribution of affixes with respect to their function. \citet{Bozsahin2018} makes the adjective-noun distinction, however adds that the distinction is not as clear as the one between verbs and nouns etc. and does not list any zero affixes. We believe recognizing a zero affix for converting adjectives to nouns is inevitable. The logical forms of adjectives are quite different than nouns, and a conversion must be carried out by a zero affix (or perhaps a unary rule, if we are following IP) before any nominal affix can be applied. This is why the adjective to noun count in Table \ref{tab:DervAffStats} is marked with an asterisk. \\
+
+\begin{table}[h]
+\centering
+    \begin{tabular}{l l l}
+        \hline
+		Source / Result & Noun & Verb\\ \hline
+		Noun & 19 & 0\\
+		Verb & 0 & 41\\ \hline
+    \end{tabular} \\ \vskip .2cm
+    \caption{Distribution of Inflectional Affixes}
+    \label{tab:InflAffStats}   
+\end{table}
+
+\begin{table}[h]
+\centering
+    \begin{tabular}{l l l l l}
+        \hline
+		Source / Result & Noun & Verb & Adjective & Adverb\\ \hline
+		Noun & 9 & 6 & 10 & 6\\
+		Verb & 27 & 6 & 20 & 2\\
+		Adjective & 2* & 6 & 6 & 3\\
+		Adverb & 0 & 0 & 0 & 1\\ \hline
+    \end{tabular} \\ \vskip .2cm
+    \caption{Distribution of Derivational Affixes}
+    \label{tab:DervAffStats}   
+\end{table}
+
+The following subsection provides possible representations of some selected inflectional affixes in CCG. Derivational affixes will be attempted in Section \ref{PrelimWork}. Based on these, we will try to discover regularities.
+
+\subsection{A Glance at Inflectional Processes}
+
+Nominal inflection in Turkish is fairly simple, at least compared to verbal inflection. There are only three main classes of markers: plural, possessive and case. They all carry out their tasks at the syntactic level (We will return to "-ki" later in this subsection.)
+
+\begin{enumerate}[resume*]
+	\item Plural marker \label{Plu}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item -ler: \cgf{\cgs{N}{}\bs\cgs{N}{}$: \lambda x.\so{multiple}\,x$} \label{a} %Semantics of plurality? \x1\x2.x1<>x2
+	\end{enumerate}
+\end{enumerate}
+
+\begin{enumerate}[resume*]
+	\item Case markers \label{Case}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item -$\varnothing$: \cgf{\cgs{NP}{NOM}\bs\cgs{N}{}$:\lambda x.x$}
+	\item -i: \cgf{\cgs{NP}{ACC}\bs\cgs{N}{}$:\lambda x.x$}
+	\end{enumerate}
+\end{enumerate}
+
+Please notice the use of \textbackslash in the syntactic categories. These affixes must be more flexible in their application, as we may have to postpone their application until after some modifiers are applied or some constructions have been set up. \\
+
+\ref{Plu} \ref{a} representation of a plural marker is admittedly quite simple and open to improvement. Perhaps, like many inflectional operations, the change that takes place in the semantics should just be reflected on the syntactic category, with the help of a feature. In fact, we must perhaps use a number feature in preparation of verbal agreement inflection. We did not go into that level of detail at this stage. \ref{Case} case markers demonstrate that strategy by employing a feature indicating case, but no change in the logical form. \\
+
+If we accept there is a zero marker indicating nominative case, which one might say leads to a more orderly and simple grammar, case marking is obligatory. Case marking ensures that each noun phrase assumes its intended place within the thematic structure. Since it carries out such an important task, its being obligatory does not sound surprising. The plural marker carries out a comparable task, ensuring agreement in number. It would not be surprising to imagine an obligatory number marker that distinguishes between singular and plural nouns. As in most languages, the "default" forms of nouns, namely singular and nominative, are not marked in Turkish. It might give us a clearer field if we assume inflectional operations are always obligatory. Just like how a zero marker makes a noun nominative, many other zero markers may be present to mark default forms. If we refuse to give the default forms a different status than other forms, we might be able to see more regularities in the data. \\
+
+We believe the relative marker "-ki", which is mentioned under the NNI group in \citet{Bozsahin2018} should be considered an exception.
+
+\begin{enumerate}[resume*]
+	\item Relative marker -ki
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item ev -de -ki ses
+	\item araba -da -ki -ler -in -ki
+	\item sen -in -ki
+	\end{enumerate}
+\end{enumerate}
+
+"-ki" applies to an NP that has taken a possessive marker or a locative case marker and produces an adjective. (This adjective is often immediately converted into a noun.) Therefore, it changes the grammatical category of its input, which is normally an indication of derivation. On the other hand, possessive markers and case markers clearly belong to the group of inflectional markers and  "-ki" comes after them. Since we would expect derivational markers to be closer to the stem, "-ki" seems to also behave like an inflectional marker. Perhaps it does not fit into morphology at all, and it deserves to head its own construction: the "ki-construction". Until we can find more clues about this peculiar marker, we leave this issue aside. For the time being, suffice it to say that it does not matter much for us whether an affix is considered inflection or derivation, as long as we can account for its behavior with CCG. \\
+
+\begin{enumerate}[resume*]
+	\item T/A/M markers \label{TAM}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item -di: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$} \label{a}
+	\item -iyor: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t_1\lambda t_2\lambda w.(p\,a\,t\,w)\land(t_1<t)\land(t<t_2)$} \label{b}
+	\item -meli: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.\forall w_{mod} (\so{congruent}\,\so{speaker}\,w_{mod}\,t_0\,w_0)\implies (p\,a\,t\,w_{mod})$} \label{c}
+	\end{enumerate}
+\end{enumerate}
+
+\begin{enumerate}[resume*]
+	\item Agreement markers \label{Agr}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item -$\varnothing$: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM,3S})\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p\lambda a.p\,a$} \label{a}
+	\item -$\varnothing$: \cgf{\cgs{S}{}\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p.p\,\so{he}$} \label{b}
+	\end{enumerate}
+\end{enumerate}
+
+Examples in \ref{TAM} constitute just a small sample from a great variety of possibilities. T/A/M markers contribute to the semantics of a verb on several different dimensions. To reflect these contributions, we use $t$ and $w$ to denote time points and possible worlds, following \citet{MoensSteedman1988}. \\
+
+For now, our T/A/M markers convert V to S$\vert$NP, but after further analysis, we might prefer a different syntactic category. Again for now, agreement markers come in pairs; one just marks the person-number feature of the subject, while the other also fulfills the place of a dropped subject. \\
+
+At least one T/A/M marker is obligatory in Turkish finite verbs. If we assume the existence of a third-person singular marker, agreement markers are also obligatory. 
+
+\begin{enumerate}[resume*]
+	\item Voice markers \label{Voice}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item -dir: \cgf{(\cgs{V}{}\bs\cgs{NP}{})\bs\cgs{V}{}$:\lambda p\lambda x\lambda a\lambda t\lambda w.\so{init}\,(p\,x\,t\,w)\,a\,t\,w$} \label{a}
+	\item -il: \cgf{\cgs{V}{}\bs(\cgs{V}{}\bs\cgs{NP}{})$:\lambda p\lambda t\lambda w.p\,\so{anon}\,t\,w$} \label{b}
+	\end{enumerate}
+\end{enumerate}
+
+Using voice markers as an example, we can demonstrate the use of Skolem terms. As cited in PFTL, \citet{Dowty1981} makes an analysis of passivization, employing Skolem functions as "existentials taking narrow scope with respect to the operator". Also, the set of variables taken by the Skolem function may be empty, in which case the Skolem term becomes a Skolem constant, "behaving like a wide-scope existential". Our passive marker in \ref{Voice} \ref{b} makes use of a Skolem constant, $anon'$ in just this way. This technique frees us from having to introduce quantifiers where they would only create notational clutter. \\
+
+There is a strong case for voice markers' actually being derivational suffixes. First, they obviously change the argument structure, adding and removing the arguments of a verb. This means their application cannot wait until after some arguments are filled by NP's of the sentence; they must apply directly to the verb stem and determine the final argument structure. Second, they are closest to the verb stem and they come before all (other) verbal inflection. Moreover, they even come before the derivational marker "-mek". Perhaps the CCG representations in \ref{Voice} should be updated with a double slash. In Section \ref{InflVsDerv}, we will return to the important distinction between inflection and derivation with respect to CCG application modes.
+
+\newpage
+
+\section{Preliminary Work}
+
+\label{PrelimWork}
+
+Our best hope is to come up with a mechanistic explanation of why derivational morphology is / must be restricted the way it is. Derivational processes seem to have special properties that distinguish them from other linguistic processes. These properties are most clearly reflected in their CCG representations. We believe that these are not just random realizations, but are actually the consequence of simple properties inherent in the concept of derivation. In this section, we first try to develop CCG entries for some selected derivational affixes and come up with preliminary generalizations. These generalizations will be the first step in our attempts to formally investigate the special properties of derivational processes. Second, we return to the claim that syntactic and morphological processes differ in the way they interact with the sentential structure. Finally, we look deeper into a particular inflectional process. \\
+
+\subsection{Deriving from Nouns}
+
+In Turkish, there are 31 derivational affixes that apply on nouns (\citet{Bozsahin2018}). Only one affix expecting a noun host is marked as productive in the original source, JND\_SIZ, but we believe there are several others, if we slightly lower our standards of productiveness. Especially the JND class affixes seem to be more productive. \\
+
+\begin{enumerate}[resume*]
+	\item NND\_CI: Lexical entries for "muhasebe -ci -$\varnothing$ gel -di -$\varnothing$"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item muhasebe: \cgf{\cgs{N}{3S}$: \so{accounting}$}
+	\item -ci: \cgf{\cgs{N}{}\bs\bs\cgs{N}{}$: \lambda x\lambda a.\so{deals\_with}\,x\,a$}
+	\item -$\varnothing$: \cgf{\cgs{NP}{NOM}\bs\cgs{N}{}$:\lambda x.x$}
+	\item gel: \cgf{\cgs{V}{}$:\lambda a\lambda t\lambda w.\so{come}\,a\,t\,w$}
+	\item -di: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p\lambda a.p\,a$}
+	\end{enumerate}
+\end{enumerate}
+
+\begin{enumerate}[resume*]
+	\item VND\_LAN: Lexical entries for "kız -$\varnothing$ ev -len -di -$\varnothing$"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item kız: \cgf{\cgs{N}{3S}$: \so{girl}$}
+	\item -$\varnothing$: \cgf{\cgs{NP}{NOM}\bs\cgs{N}{}$:\lambda x.x$}
+	\item ev: \cgf{\cgs{N}{3S}$: \so{home}$}
+	\item len: \cgf{\cgs{V}{}\bs\bs\cgs{N}{}$:\lambda x\lambda a\lambda t\lambda w.\so{acquire}\,x\,a\,t\,w$}
+	\item -di: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p\lambda a.p\,a$}
+	\end{enumerate}
+\end{enumerate}
+
+\begin{enumerate}[resume*]
+	\item JND\_LI: Lexical entries for "tat -lı -yı -$\varnothing \varnothing$ iste -di -$\varnothing$"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item tat: \cgf{\cgs{N}{3S}$: \so{sweetness}$}
+	\item -lı: \cgf{(\cgs{N}{}\fs\cgs{N}{})\bs\bs\cgs{N}{}$: \lambda x\lambda y\lambda a.(\so{have}\,x\,a)\land(y\,a)$}
+	\item -yı: \cgf{\cgs{NP}{ACC}\bs\cgs{N}{}$:\lambda x.x$}
+	\item -$\varnothing \varnothing$: \cgf{\cgs{NP}{}\bs\cgs{NP}{}$:\lambda x\lambda a.(x\,a)\land(\so{indefinite}\,a)$}
+	\item iste: \cgf{\cgs{V}{}\bs\cgs{NP}{ACC}$:\lambda x\lambda a\lambda t\lambda w.\so{demand}\,x\,a\,t\,w$}
+	\item -di: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{\cgs{S}{}\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p.p\,\so{he}$}
+	\end{enumerate}
+\end{enumerate}
+
+%Tatlı aslında hızlı gibi gradable olmalı.
+
+The marker -$\varnothing \varnothing$ will be described in Subsection \ref{IndefTR}. 
+
+\begin{enumerate}[resume*]
+	\item AND\_CA: Lexical entries for "dost -ça gülümse -di -$\varnothing$"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item dost: \cgf{\cgs{N}{3S}$: \so{friend}$}
+	\item -ça: \cgf{(\cgs{V}{}\fs\cgs{V}{})\bs\bs\cgs{N}{}$: \lambda x\lambda p\lambda a\lambda t\lambda w.(\so{be}\,x\,a\,t\,w)\land(p\,a\,t\,w)$}
+	\item gülümse: \cgf{\cgs{V}{}$:\lambda a\lambda t\lambda w.\so{smile}\,a\,t\,w$}
+	\item -di: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{\cgs{S}{}\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p.p\,\so{he}$}
+	\end{enumerate}
+\end{enumerate}
+
+%Ortak özelliklere vurgu. 
+
+%Some general semantics, comments...
+
+\subsection{Deriving from Verbs}
+
+\label{DerivVerbs}
+
+There are 55 derivational affixes that apply on verbs. 7 of these are marked as productive in \citet{Bozsahin2018}. \\ 
+
+Most suffixes of the NVD class chooses a thematic role made available by the verb and converts the input to an entity that could assume that role. Others create the name of act.
+
+\begin{enumerate}[resume*]
+	\item NVD\_ACAK (patient)
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item al-acak: The entity that is taken
+	\item ver-ecek: The entity that is given
+	\end{enumerate}
+	
+	\item NVD\_AK (location)
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item dur-ak: The place where one stops
+	\item yat-ak: The place where one lies
+	\end{enumerate}
+	
+	\item NVD\_AMAK (patient)
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item bas-amak: The entity that is stepped on
+	\item tut-amak: The entity that is grabbed
+	\end{enumerate}
+	
+	\item NVD\_AN (agent)
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item bak-an: The one who looks
+	\item kap-an: The entity that catches
+	\end{enumerate}
+	
+	\item NVD\_ANAK (agent for intransitives / theme for transitives)
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item gel-enek: The habits that have come
+	\item yet-enek: The skills that suffice
+	\item tut-anak: The entity that is held
+	\item öde-nek: The amount that is paid
+	\end{enumerate}
+	
+	\item NVD\_CA (name of the act for intransitives / theme for transitives)
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item eğlen-ce: The act of having fun
+	\item dinlen-ce: The act of resting
+	\item sakın-ca: What is to be avoided
+	\item düşün-ce: What is thought
+	\end{enumerate}
+	
+	\item NVD\_GAC (agent)
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item süz-geç: The entity that filters
+	\item büyüt-eç: The entity that magnifies
+	\end{enumerate}
+	
+	\item NVD\_YIS (name of the act + a sense of manner)
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item yürü-yüş: The act of walking
+	\item uç-uş: The act of flying
+	\end{enumerate}
+\end{enumerate}
+
+The above set of examples demonstrate how NVD processes select the agent, patient, location, theme or the action itself as the content of the new noun. This selection is often made according to the arity of the host verb. The fact that this selection is quite consistent may give us important clues on how derivation interacts with the argument structure. After all, consistency in such processes usually stem from an underlying structural property. 
+
+We propose the following CCG representations as a first step. 
+
+\begin{enumerate}[resume*]
+	\item NVD\_ACAK: Lexical entries for "al -acak -lar -ı iste -di -$\varnothing$"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item al: \cgf{\cgs{V}{}\bs\cgs{NP}{ACC}$:\lambda x\lambda a.\so{give}\,x\,a\,t\,w$}
+	\item -acak: \cgf{\cgs{N}{}\bs\bs(\cgs{V}{}\bs\cgs{NP}{ACC})$:\lambda p\lambda x\lambda t\lambda w.(p\,x\,\so{anon}\,t\,w)\land(t>t_0)$}
+	\item -lar: \cgf{\cgs{N}{}\bs\cgs{N}{}$:\lambda x.\so{multiple}\,x$}
+	\item -ı: \cgf{\cgs{NP}{ACC}\bs\cgs{N}{}$:\lambda x.x$}
+	\item iste: \cgf{\cgs{V}{}\bs\cgs{NP}{ACC}$:\lambda x\lambda a\lambda t\lambda w.\so{demand}\,x\,a\,t\,w$}
+	\item -di: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{\cgs{S}{}\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p.p\,\so{he}$}
+	\end{enumerate}
+\end{enumerate}
+
+An important observation here is how the argument structure of a verb must be preserved even after a noun is derived from it. Once the argument structure of a verb is represented in a logical form, it is there to stay. We can fulfill the individual arguments, for instance, we may reduce the number of bound variables by replacing them with Skolem terms. However, the argument structure is kept till the end, no matter what operations take place during the derivation process. \\
+
+\cite{Grimshaw1990} mentions the generally accepted dichotomy between result and process nominals, but suggests another dichotomy between complex event nominals and others. She claims that the real distinction between the two kinds of nominals comes from their having or lacking argument structures. She points out that if a nominal lacks aspectual analysis, it will also lack an argument structure; otherwise, it will have an argument structure. \\
+
+This dichotomy has a clear parallel in CCG. When we derive a complex event nominal from a verb, it seems we keep the argument structure of the host verb. On the other hand, when the result is not a complex event nominal, we are not allowed to keep the argument structure. Perhaps this is an indication that complex event nominals are actually derived every time and never lexicalized, but other nominals are lexicalized and the argument structures from host verbs are bypassed. As an added benefit, nominals that are locally ambiguous in terms of denoting complex events are automatically disambiguated during parsing, because the existence of an argument forces the reading with the argument structure, and vice versa. \\
+
+VVD suffixes seem to leave the argument structure unchanged, but only modify the semantic content. Their application depends on the verbal class in \citet{MoensSteedman1988} given in Table \ref{tab:TempOntVerbs}. \\
+
+\begin{table}[h]
+\centering
+    \begin{tabular}{lccc}
+        \hline
+		Class &  \multicolumn{2}{c}{Events} & States\\ \hline
+		Consequence & Atomic & Extended & \\ \hline
+		+ & Culmination: recognize, spot & Culm. Process: build a house & \multirow{2}{*}{know, love} \\
+		- & Point: hiccup, tap, wink & Process: run, swim, walk \\ \hline
+    \end{tabular} \\ \vskip .2cm
+    \caption{Distribution of Derivational Affixes}
+    \label{tab:TempOntVerbs}
+\end{table}
+
+Most of these suffixes convert an atomic event to a process, or at least contribute a sense of repetition and inconclusiveness of action.
+
+\begin{enumerate}[resume*]
+	\item VVD\_AKLA
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item dur-akla
+	\item it-ekle
+	\end{enumerate}
+	
+	\item VVD\_ALA
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item eş-ele
+	\item şaş-ala
+	\end{enumerate}
+	
+	\item VVD\_IKLA
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item uyu-kla
+	\item dit-ikle
+	\end{enumerate}
+	
+	\item VVD\_USTUR
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item it-iştir
+	\item ver-iştir
+	\end{enumerate}
+\end{enumerate}
+
+This change in sense has further consequences regarding inflection. Appropriateness of T/A/M markers for a verb is determined by the verbal class. As the verb moves to the process class, it is qualified for markers and adverbs that are compatible only with processes. When these markers and adverbs are used with some verbs, they do not sound weird, because the verb has assumed a secondary verbal class. Some verbs, on the other hand, do sound weird in a similar context. Due to the sense of inconclusiveness and continuity, the derived verbs also sound better with duration specifying adverbs. \\
+
+\begin{enumerate}[resume*]
+	\item "uyu"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Çocuk az önce uyu-du: Culmination
+	\item Çocuk 3 saattir uyu-yor: Process
+	\item Çocuk her akşam erkenden uyu-yor: Habitual action
+	\item *Çocuk az önce uyu-kla-di: Ungrammatical
+	\item Çocuk 3 saattir uyu-kl-uyor: Process
+	\item Çocuk her akşam 
+	\end{enumerate}
+	
+	\item "dur"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Polis az önce dur-du: Culmination
+	\item Polis 3 haftadır kapının önünde dur-uyor: State
+	\item Polis çocuğu görünce dur-akla-dı: Process %? 
+	\item *Polis 3 dakikadır dur-akl-ıyor: Does not work
+	\item Polis çocuğu her gördüğünde dur-akl-ıyor: Repeated / habitual action
+	\end{enumerate}
+\end{enumerate}
+
+Strangely enough, all VVD affixes except one, involve a CAUS concept according to \citet{Bozsahin2018}. We will test the validity of this claim and look for possible reasons. \ref{VVD_AKLA} shows a preliminary representation of a VVD affix.
+
+\begin{enumerate}[resume*]
+	\item VVD\_AKLA: Lexical entries for "otobüs -$\varnothing$ dur -akla -dı -$\varnothing$" \label{VVD_AKLA}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item otobüs: \cgf{\cgs{N}{3S}$: \so{bus}$}
+	\item -$\varnothing$: \cgf{\cgs{NP}{NOM}\bs\cgs{N}{}$:\lambda x.x$}
+	\item dur: \cgf{\cgs{V}{CULM}$:\lambda a\lambda t\lambda w.\so{stop}\,a\,t\,w$}
+	\item -akla: \cgf{\cgs{V}{PROC}\bs\bs\cgs{V}{CULM}$:\lambda p.p$}
+	\item -di: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p\lambda a.p\,a$}
+	\end{enumerate}
+\end{enumerate}
+
+\ref{JVD_IK} demonstrates the representation of the JVD\_IK affix. This affix also contributes a sense of passivization, which is reflected on its logical form with the Skolem constant $anon'$.
+
+\begin{enumerate}[resume*]
+	\item JVD\_IK: Lexical entries for "yık -ık duvar -ı gör -dü -$\varnothing$" \label{JVD_IK}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item yık: \cgf{\cgs{V}{}\bs\cgs{NP}{ACC}$:\lambda x\lambda a\lambda t\lambda w.\so{demolish}\,x\,a\,t\,w$}
+	\item -ık: \cgf{(\cgs{N}{}\fs\cgs{N}{})\bs\bs(\cgs{V}{}\bs\cgs{NP}{ACC})$:\lambda p\lambda x\lambda a\lambda t\lambda w.(p\,a\,\so{anon}\,t\,w)\land(t<t_0)\land(x\,a)$}
+	\item duvar: \cgf{\cgs{N}{}$: \so{wall}$}
+	\item -ı: \cgf{\cgs{NP}{ACC}\bs\cgs{N}{}$:\lambda x.x$}
+	\item gör: \cgf{\cgs{V}{}\bs\cgs{NP}{ACC}$:\lambda x\lambda a\lambda t\lambda w.\so{see}\,x\,a\,t\,w$}
+	\item -dü: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{\cgs{S}{}\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p.p\,\so{he}$}
+	\end{enumerate}
+\end{enumerate}
+
+We present below, not one but two AVD affixes, due to their fascinating logical forms.
+
+\begin{enumerate}[resume*]
+	\item AVD\_ARAK: Lexical entries for "gülümse -yerek gel -di -$\varnothing$"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item gülümse: \cgf{\cgs{V}{}$:\lambda a\lambda t\lambda w.\so{smile}\,a$}
+	\item -yerek: \cgf{(\cgs{V}{}\fs\cgs{V}{})\bs\bs\cgs{V}{}$:\lambda p_1\lambda p_2\lambda a\lambda t\lambda w.(p_1\,a\,t\,w)\land(p_2\,a\,t\,w)$}
+	\item gel: \cgf{\cgs{V}{}$:\lambda a\lambda t\lambda w.\so{come}\,a\,t\,w$}
+	\item -di: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{\cgs{S}{}\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p.p\,\so{he}$}
+	\end{enumerate}
+\end{enumerate}
+
+\begin{enumerate}[resume*]
+	\item AVD\_IP: Lexical entries for "gülümse -yip git -ti -$\varnothing$"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item gülümse: \cgf{\cgs{V}{}$:\lambda a\lambda t\lambda w.\so{smile}\,a\,t\,w$}
+	\item -yip: \cgf{(\cgs{V}{}\fs\cgs{V}{})\bs\bs\cgs{V}{}$:\lambda p_1\lambda p_2\lambda a\lambda t\lambda w\lambda t_1.(p_1\,a\,t_1\,w)\land(p_2\,a\,t\,w)\land(t_1<t)$}
+	\item git: \cgf{\cgs{V}{}$:\lambda a\lambda t\lambda w.\so{go}\,a\,t\,w$}
+	\item -ti: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{\cgs{S}{}\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p.p\,\so{he}$}
+	\end{enumerate}
+\end{enumerate}
+
+%CCG representation'ların açıklamaları
+
+\subsection{Deriving from Adjectives}
+
+There are 17* (possibly 18) derivational affixes that apply on adjectives. Adjectives act like predicates in their logical forms, by taking the leftmost place in a term. If we wanted to avoid such a representation, we could use some actual verb, such as "be", as the predicate and place the adjective between the verb and the noun, just like a verbal argument. The choice between these two alternatives does not seem to make much difference in terms of expressive power, so we prefer the former alternative which is more convenient. \\
+
+NJD\_$\varnothing$ is not listed in \citet{Bozsahin2018}, but we present it here to give an idea how such an affix would work.
+
+\begin{enumerate}[resume*]
+	\item NJD\_$\varnothing$: Lexical entries for "küçük -$\varnothing$ -ü getir -di -$\varnothing$"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item küçük: \cgf{\cgs{N}{}\fs\cgs{N}{}$:\lambda x\lambda a\lambda d\lambda l.(\so{little}(\so{at}\,d)\,a)\,(d>l)\,(x\,a)$}
+	\item -$\varnothing$: \cgf{\cgs{N}{}\bs\bs(\cgs{N}{}\fs\cgs{N}{})$:\lambda p.p\,\so{incontext}$}
+	\item -ü: \cgf{\cgs{NP}{ACC}\bs\cgs{N}{}$:\lambda x.x$}
+	\item getir: \cgf{\cgs{V}{}\bs\cgs{NP}{ACC}$:\lambda x\lambda a\lambda t\lambda w.\so{bring}\,x\,a\,t\,w$}
+	\item -di: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{\cgs{S}{}\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p.p\,\so{he}$}
+	\end{enumerate}
+\end{enumerate}
+
+At first sight, VJD class affixes can be divided into two groups. Four affixes in the first group are used to indicate increases in the level of gradable adjectives. (The fact that only increases are accounted for in this way may be worth an investigation on its own.) Two affixes in the second group indicate a change in the subject's view of the object. In other words, subject's view of the object changes towards a higher level on the scale indicated by a gradable adjective. The following is an example from the larger group of VJD affixes.
+
+\begin{enumerate}[resume*]
+	\item VJD\_LAS: Lexical entries for "köpek -$\varnothing$ güzel -leş -ti -$\varnothing$"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item köpek: \cgf{\cgs{N}{}$: \so{dog}$}
+	\item -$\varnothing$: \cgf{\cgs{NP}{NOM}\bs\cgs{N}{}$:\lambda x.x$}
+	\item güzel: \cgf{\cgs{N}{}\fs\cgs{N}{}$: \lambda x\lambda a\lambda d\lambda l.(\so{pretty}\,(\so{at}\,d)\,a)\land(d>l)\land(x\,a)$}
+	\item -leş:\cgf{\cgs{V}{}\bs\bs(\cgs{N}{}\fs\cgs{N}{})$: \lambda p \lambda x \lambda t \lambda w.(p\,x)\land(\so{increase}\,d\,t\,w)$} %Burada l=0 yaparak d>l koşulunu iptal edebiliriz. 
+	\item -ti: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p\lambda a.p\,a$}
+	\end{enumerate}
+\end{enumerate}
+
+All JJD affixes except one modify the intensity of the adjective. Thus, they apply on gradable adjectives. Probably, they could all be marked +GRAD. (The exception is JJD\_MSAR that makes the derivations "iyi-mser", "kara-msar" and the like.) To reflect the change in the grade of the adjective, we introduce a second limit $l_1$. In the following example, $l_1$ is a limit easier to satisfy than the original $l$. When JJD\_MSI is applied, the grade of the adjective attained by the noun $d$ is not claimed to be over the original limit; it is now between a lower limit and the original limit: $l_1<d<l$.
+
+\begin{enumerate}[resume*]
+	\item JJD\_IMSI: Lexical entries for "mavi -msi renk -i gör -dü -$\varnothing$"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item mavi: \cgf{\cgs{N}{}\fs\cgs{N}{}$: \lambda x\lambda a\lambda d\lambda l.(\so{blue}\,(\so{at}\,d)\,a)\land(d>l)\,\land(x\,a)$}
+	\item -msi: \cgf{(\cgs{N}{}\fs\cgs{N}{})\bs\bs(\cgs{N}{}\fs\cgs{N}{})$: \lambda p \lambda x \lambda a\lambda d\lambda l\lambda l_1.(p\,x\,a\,d\,l_1)\land(d<l)\land(l_1<l)$}
+	\item renk: \cgf{\cgs{N}{}$: \so{color}$}
+	\item -i: \cgf{\cgs{NP}{ACC}\bs\cgs{N}{}$:\lambda x.x$}
+	\item gör: \cgf{\cgs{V}{}\bs\cgs{NP}{ACC}$:\lambda x\lambda a\lambda t\lambda w.\so{see}\,x\,a\,t\,w$}
+	\item -dü: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{\cgs{S}{}\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p.p\,\so{he}$}
+	\end{enumerate}
+\end{enumerate}
+
+Only 3 AJD affixes exist. The following example is the more productive one, producing manner adverbials. 
+
+\begin{enumerate}[resume*]
+	\item AJD\_CA: Lexical entries for "çocuk -$\varnothing$ hızlı -ca gel -di -$\varnothing$"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item çocuk: \cgf{\cgs{N}{}$: \so{kid}$}
+	\item -$\varnothing$: \cgf{\cgs{NP}{NOM}\bs\cgs{N}{}$:\lambda x.x$}
+	\item hızlı: \cgf{\cgs{N}{}\fs\cgs{N}{}$: \lambda x\lambda a\lambda d\lambda l.(\so{quick}\,(\so{at}\,d)\,a)\land(d>l)\land(x\,a)$}
+	\item -ca: \cgf{(\cgs{V}{}\fs\cgs{V}{})\bs\bs(\cgs{N}{}\fs\cgs{N}{})$: \lambda p \lambda v \lambda a\lambda t\lambda w.p\,(v\,a\,t\,w)$}
+	\item gel: \cgf{\cgs{V}{}$:\lambda a\lambda t\lambda w.\so{come}\,a\,t\,w$}
+	\item -di: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p\lambda a.p\,a$}
+	\end{enumerate}
+\end{enumerate}
+
+%CCG representation'ların açıklamaları
+
+%Zaman kalırsa bunları derivation olarak göstereyim
+
+\subsection{Deriving from Adverbs}
+
+There is only 1 affix that apply on adverbs, and that one affix is not productive either. It seems derivation from adverbs is almost not possible in Turkish. Possibly, deriving from Turkish adverbs is too complex or counter-intuitive for some reason and either it was never invented, or it gradually disappeared. Of course there might be other affixes that we have not noticed so far. If there is really a lack of adverb-based derivational morphology in Turkish, this gap might lead us to an insightful exploration. \\
+
+Still we try to come up with the lexical entry for (demin) "-cek" below. $t_d$ indicates a specific length of time shorter than which any duration is deemed short enough for invoking the concept "demin". $p$ is as usual the placeholder for the predicate, x stands for the subject, t and w are for time and world, respectively. \\ 
+
+%\citet some adverbial semantics paper
+
+\begin{enumerate}[resume*]
+	\item AAD\_CEK: Lexical entries for "demin -cek gel -di -$\varnothing$"
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item demin: \cgf{\cgs{V}{}\fs\cgs{V}{}$:\lambda p\lambda x\lambda t\lambda w\lambda t_d.(p\,x\,t\,w)\land(t<t_0)\land(t_0-t<t_d)$}
+	\item -cek: \cgf{(\cgs{V}{}\fs\cgs{V}{})\bs\bs(\cgs{V}{}\bs\cgs{V}{})$:\lambda p.p$}
+	\item gel: \cgf{\cgs{V}{}$:\lambda a\lambda t\lambda w.\so{come}\,a\,t\,w$}
+	\item -di: \cgf{(\cgs{S}{}\bs\cgs{NP}{NOM})\bs\cgs{V}{}$:\lambda p\lambda a\lambda t\lambda w.(p\,a\,t\,w)\land(t<t_0)$}
+	\item -$\varnothing$: \cgf{\cgs{S}{}\bs(\cgs{S}{}\bs\cgs{NP}{NOM})$:\lambda p.p\,\so{he}$}
+	\end{enumerate}
+\end{enumerate}
+
+\subsection{Revisiting Inflection vs. Derivation}
+
+\label{InflVsDerv}
+
+We have already mentioned the claim in \citet{Sezer1991} that syntactic processes operate on the thematic structure, while morphological processes operate on the argument structure. The arguments for a distinct a-structure given in \citet{Grimshaw1990} were also briefly explained in Section \ref{MorphLarge}. It is easy to see how inflectional processes are required by the syntax. On the other hand, derivational processes operate with fundamentally different principles. Our intuition is that the difference lies in their being responsive to different layers of linguistic structures. While inflection applies only after all arguments are fulfilled, derivation applies on the individual lexical item and changes its argument structure. \\
+
+In fact, their behavior is a direct consequence of the different tasks assigned to each kind of morphological process. Inflection must ensure all constituents fit into a final syntactic structure, but it cannot do it before individual constituents are "completed", in other words, have all their arguments fulfilled. Derivation, on the other hand, must take place before arguments start to fall into place within a-structures, because it is tasked with changing those very a-structures. Derivation is capable of creating new lexical items; therefore, it must take precedence over all syntactic processes. \\
+
+Again in Section \ref{MorphLarge}, we have cited \citet{Sezer1991} for the distinction between s-selection and c-selection. We believe this is a significant finding in explaining why derivational processes behave differently than inflectional processes. Inflectional processes, which uniformly apply or do not apply to an entire grammatical category, and which do not make much reference to the semantic contents of their hosts, seem to require only c-selection. Derivational processes, however, consider both the grammatical category and the semantic content of their hosts, thus employing s-selection.  \\
+
+These arguments have been implicit in the choices we have made in developing the CCG representations of selected Turkish affixes. Our choice between \textbackslash\  and \textbackslash \textbackslash\  has never been arbitrary or inconsistent. We have always used \textbackslash\  for inflectional processes, since they cannot be forced to satisfy the three conditions for \textbackslash \textbackslash\  application, as given in PFTL: 
+
+\begin{enumerate}[resume*]
+	\item PFTL assumptions on the choice of \textbackslash \textbackslash\
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Host is lexical.
+	\item Operation is application only. 
+	\item Output is lexical.
+	\end{enumerate}
+\end{enumerate}
+
+We were also careful to consistently use \textbackslash \textbackslash\ for derivational processes, as we expected from them to always satisfy the conditions listed above. In fact, this set of conditions is a defining property of a derivational processes. \\
+
+For instance, we must use single \textbackslash\ for relativizer markers because they are syntactically autonomous. Not to prevent the possibility of unbounded relativization, we must avoid using \textbackslash \textbackslash\ which would restrict the application too tightly. Also, as PFTL suggests, "The relative marker occupies the slot of the tense marker in the inflectional paradigm.". Indeed, they come after voice markers and prevent any T/A/M markers from application; which indicate their belonging to the class of inflectional processes. However, they also change the grammatical category of their host to adjective, which could signal a derivational process is underway. \\
+
+Such controversies only put further emphasis on the necessity to be able to account for inflectional and derivational processes with similar mechanisms. They also demonstrate the adequacy of our approach and the toolkit provided by CCG towards the realm of morphology. At the end of the day, morphology indeed distributes itself over the grammar by employing \textbackslash\ and \textbackslash \textbackslash\ as it sees fit (PFTL). But CCG accommodates all these possibilities without requiring special mechanisms. \\
+
+\subsection{A Deeper Glance at Inflection: Marking Indefiniteness in Turkish}
+
+\label{IndefTR}
+
+While our main focus is on derivational morphology, some linguistic aspects that do not necessarily fall into this domain are bound to appear under the spotlight from time to time. One such issue has to do with the representation of indefiniteness in Turkish. \\
+
+Some Turkish sentences exhibit a curious lack of accusative case on the main argument of their verb. The following examples are from \citet{Sezer1991} pp.42-43: 
+
+\begin{enumerate}[resume*] 
+	\item Accusative argument to a matrix verb
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Ali kitabı okudu.
+	\item Ali kitap okudu. 
+	\end{enumerate}
+\end{enumerate}
+
+Normally we would expect the argument "kitap" to be assigned accusative case. In fact, it must be assigned accusative case whether it is realized phonologically or not, due to the Case Filter (\citet{Cowper1992}). So what makes this argument lose its phonological case marking? There has been a lot of effort directed towards explaining this phenomenon. For example, \citet{Sezer1991} distinguishes abstract and morphological case in Turkish in order to account for similar observations. We think this approach weakens the theory by adding a possibly unnecessary degree of freedom to the rule set governing case marking. \\
+
+At this point, we find it necessary to refer to established views on the issue. We are aware that the literature on Turkish definiteness overwhelmingly holds accusative case responsible for the overt marking of definiteness, and does not put forward any overt marking for indefiniteness. Referentiality and specificity are also denied any dedicated overt markers. We believe the established opinion may not be the best possible explanation for the phenomena related to Turkish definiteness. \\
+
+\citet{Dede1986} creates a list of six possibilities regarding definiteness and referentiality of Turkish NPs: \{definite, indefinite, nondefinite\} $X$ \{referential, nonreferential\}. Then, based on this list, he sets out to discover the strategies of Turkish speakers regarding this issue. At the very beginning, he claims that referentiality in Turkish is never overtly marked. On the other hand, definite direct objects are exceptionally marked with the accusative case ending. In fact, he claims, for a definite direct object, the accusative marker is mandatory.  \\
+
+Several points can be raised against these claims. First, why is definiteness only marked in accusative case; what about other cases? We need to explain why direct objects have a special status with respect to definiteness. Second, if it is only definiteness that is marked, why must the accusative case, which has an important role to play in the sentential structure, be omitted due to indefiniteness? Perhaps a more intuitive explanation would involve marking indefiniteness instead of definiteness. \\
+
+\citet{Tura1986} conducts a similar analysis on non-verbal sentences. She uses the same list of combinations regarding definiteness and referentiality of Turkish NPs. Although the chapter looks into these issues with a focus on discourse, it includes quite interesting and relevant claims from our point of view. One of these describes why the singular-plural distinction can be voluntarily skipped. In \ref{SgPlDistOm} \ref{a}, the speaker "is not interested in establishing a discourse referent" and he demonstrates this by "neutralizing the singular-plural distinction" and not using any determiners. 
+
+\begin{enumerate}[resume*] 
+	\item Singular-plural distinction omitted due to non-referential use \label{SgPlDistOm}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Beşte otobüs vardı ama... \label{a}
+	\item Otobüs beşteydi. \label{b}
+	\end{enumerate}
+\end{enumerate}
+
+We believe the act of "neutralizing" is key here; the speaker is allowed to neutralize some distinctions when the context is appropriate. Here the singular-plural distinction is neutralized due to non-referentiality; perhaps case marking is also neutralized elsewhere, and who knows what else. We will soon return to this issue, but first let us go over some other familiar examples. Possessive markers also constitute an important and obvious example in the definiteness-indefiniteness dichotomy. 
+
+\begin{enumerate}[resume*] 
+	\item Possessive marked dependent of a nominal \label{PossNom}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item arının sokması \label{a}
+	\item arı sokması \label{b}
+	\end{enumerate}
+
+	\item Determiner in a possessive construction \label{PossCon}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item kitabın kapağı \label{a}
+	\item kitap kapağı \label{b}
+	\end{enumerate}
+	
+	\item Accusative argument to a nominal \label{AccArg}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item kitabı okumak \label{a}
+	\item kitap okumak \label{b}
+	\end{enumerate}
+\end{enumerate}
+
+In \ref{PossNom} \ref{a}, "arının" must denote a a definite bee that have been recently observed by the speaker and the hearer; therefore, it is allowed to carry a possessive marker. On the other hand, \ref{b} lacks the possessive marker and refers to an indefinite, unspecific bee. In the first examples of \ref{PossCon} and \ref{AccArg}, we are talking about a specific book and its cover, while in \ref{b}, we are not. \\
+
+It seems this phenomenon is not limited to accusative marked objects; possessive markers and other case markers are also prone to being removed by a similar operation. 
+
+\begin{enumerate}[resume*] 
+	\item Dative argument to a matrix verb \label{DatArg}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item bisiklete binmek \label{a}
+	\item bisiklet binmek \label{b}
+	\item antibiyotiğe başlamak \label{c}
+	\item antibiyotik başlamak \label{d}
+	\end{enumerate}
+	
+	\item Ablative argument to a matrix verb \label{AblArg}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item kaydıraktan kaymak \label{a}
+	\item kaydırak kaymak \label{b}
+	\end{enumerate}
+\end{enumerate}
+
+"bisiklete" and "antibiyotiğe" in \ref{DatArg} \ref{a} and \ref{c} refer to any item or some definite item. We need more context to disambiguate their meaning and determine the level of definiteness they convey. However, examples \ref{b} and \ref{d} can only refer to an indefinite item. Similarly in \ref{AblArg}, the use of "kaydıraktan" in \ref{a} may lend itself to a definite reading, but the lack of ablative marker in \ref{b} prevents this possibility. \\
+
+We have not been able to construct examples with locative or instrumental case assigned items. \\
+
+We suspect there is a compulsory subtractive inflectional suffix marking indefiniteness. This suffix phonologically removes case / possessive markers. The noun phrase remains in the same case and takes its place as an argument in the sentence, but the case marking is not pronounced. \\
+
+The operation is more clearly observed with possessives and accusatives, because these are arguments, and they have a closer relation with their governor. We feel there is a sense of definiteness attached to arguments. For adjuncts, it seems, the operation is not compulsory. This might be because a similar sense of definiteness is not automatically assigned to adjuncts. \\
+
+Finally, case marking is necessary for making an item's role in the sentence explicit. As pointed out in \citet{Sezer1991}, items without case must always be to the left of their governor, as otherwise the lack of case marking creates ambiguity. The following set of examples is taken and extended from \citet{Sezer1991} pp.42-43:
+
+\begin{enumerate}[resume*] 
+	\item Variable word order with an accusative argument to a matrix verb \label{AccArgSezer}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Ali kitabı okudu. \label{a}
+	\item Kitabı Ali okudu. \label{b}
+	\item Ali okudu kitabı. \label{c}
+	\item Ali kitap okudu. \label{d}
+	\item *Kitap Ali okudu. \label{e}
+	\item *Ali okudu kitap. \label{f}
+	\item *Ali çok ilginç bir kitabı okumuş. \label{g}
+	\item Ali çok ilginç bir kitap okumuş. \label{h}
+	\item *Çok ilginç bir kitap Ali okumuş. \label{i}
+	\item *Ali okumuş çok ilginç bir kitap. \label{j}
+	\end{enumerate}
+\end{enumerate}
+
+Example \ref{a} is an ordinary SOV sentence with an accusative definite argument. Emphasis can be placed anywhere in the sentence. Examples \ref{b} and \ref{c} have accusative definite arguments and non-standard word orders, OSV and SVO respectively. In these two sentences, the emphasis is on S, which immediately precedes V. \ref{d} contains an indefinite argument with the standard SOV word order. Due to the standard word order, "kitap" can easily be identified as the object, and there is no ambiguity. \ref{e} and \ref{f} following non-standard word orders (OSV and SVO, respectively) are ungrammatical, since the lack of case marking creates ambiguity. Example \ref{g} demonstrates that the accusative marker should be omitted on indefinite objects. The determiner, "bir" in this example brings a sense of indefiniteness to "kitap". Comparing \ref{g} with \ref{h}, it seems the accusative marker is incompatible with this sense of indefiniteness. The subtractive morphological operation that marks indefiniteness is perhaps obligatory. With the SOV word order in \ref{h}, the sentence is perfectly acceptable. Since the accusative marker is missing in \ref{i} and \ref{j}, non-standard word orders lead to ambiguity in distinguishing between the subject and the object. This is why these two sentences are not acceptable. \\
+
+Another good example to test the integrity of this hypothesis could be the following sentence and its like (\cite{Ozge2019pc}): %how to cite per.comm.?
+
+\begin{enumerate}[resume*] 
+	\item Accusative marked generic object \label{Gener}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Çocuklar çikolatayı çok sever. \label{Cik}
+	\end{enumerate}
+\end{enumerate}
+
+The noun phrase "çikolata-yı" obviously does not refer to any particular piece of chocolate, but could one say it is indefinite? At first sight, it seems to refer to the general concept of chocolate, or a generic sense of chocolate. In this sense, "chocolate" has just one instance and it is definite, thus maybe our hypothesis survives this example. \\ 
+
+If we follow this path to the extreme, it can even be argued that plural markers are dropped due to indefiniteness. This way one could explain how a particular common noun can become a collective noun. Also, one could explain why a plural must either be definite or must cover all instances of an item; if a plural is indefinite, it lacks the plural marker whether or not it is accompanied by a determiner.
+
+\begin{enumerate}[resume*] 
+	\item Plural nominative subject to a matrix verb \label{PlNomSbj1}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Japonlar yapmış. \label{a}
+	\item Birkaç Japon yapmış. \label{b}
+	\item Japon yapmış. \label{c}
+	\end{enumerate}
+	
+	\item Plural nominative subject to a matrix verb \label{PlNomSbj2}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Ambara koltuklar geldi. \label{a}
+	\item Ambara birkaç koltuk geldi. \label{b}
+	\item Ambara koltuk geldi. \label{c}
+	\end{enumerate}
+	
+	\item Plural accusative argument to a matrix verb \label{PlAccArg}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Simitleri aldım. \label{a}
+	\item Birkaç simit aldım. \label{b}
+	\item Simit aldım. \label{c}
+	\end{enumerate}
+\end{enumerate}
+
+In \ref{PlNomSbj1} \ref{a}, "Japonlar", either denotes some known group of, or all instances of the class. In the former possibility, it is definite which group is indicated. In the latter possibility, since all instances of the class is referred to, we cannot speak of indefiniteness. "Koltuklar" in \ref{b} only allows the former reading. Examples \ref{b} in \ref{PlNomSbj1} and \ref{PlNomSbj2} contain subjects that are modified by "birkaç" indicating their indefiniteness and number. Despite their being plural, these nouns do not take plural markers. This can be explained by the obligatory indefiniteness marker that eliminates the plural marker. Examples \ref{c} in these groups have subjects that are ambiguous between two readings: Either they denote a definite instance of a class (although OSV in \ref{PlNomSbj2} reduces the plausibility of this reading), or they denote an indefinite group of instances (somehow plurality is implied). The former case is business as usual. In the latter case, we can explain the lack of plural markers with subtractive morphology. The group of examples in \ref{PlAccArg} involve accusative markers in addition to the plural markers. In \ref{a}, we have a definite group of bagels, therefore both markers can be observed. In \ref{b}, indefiniteness is explicitly indicated by a determiner, thus both markers are dropped. Finally, "Simit" in \ref{c} also lacks both markers, although indefiniteness is not made explicit by a determiner. \\
+
+The third examples from each series can appear to be generic nouns, leading one to argue they should be exempt from an indefiniteness marker as in \ref{Gener} \ref{Cik}. In \ref{PlNomSbj1} \ref{c} "Japon" is after all an agent in an event, thus probably is a collection of people, rather than a generic concept. \ref{PlNomSbj2} \ref{c} also cannot be a generic concept, because the physical arrival of a group of couches  is described. \ref{PlAccArg} \ref{c} is similar, but in this case, "Simit" is the object, rather than the subject. This final example also shows how the indefiniteness marker is capable of removing both the case marker and the plural marker in one strike. Perhaps the indefiniteness marker removes all inflection. \\ 
+
+Word order indeed seems to play a role in determining the level of definiteness. As the following examples demonstrate, a different word order may indicate a different level of definiteness.
+
+\begin{enumerate}[resume*] 
+	\item Plural nominative subject to a matrix verb \label{PlNomWO}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Koltuklar ambara geldi. \label{a}
+	\item Birkaç koltuk ambara geldi. \label{b}
+	\item Koltuk ambara geldi. \label{c}
+	\end{enumerate}
+\end{enumerate}
+
+Compared to \ref{PlNomSbj2}, we observe no meaning changes in \ref{a} and \ref{b} of \ref{PlNomWO}. In \ref{c}, however, we previously observed two possible meanings in \ref{PlNomSbj2}, while in \ref{PlNomWO} only one of them remains: It must be a single definite couch that arrived. \\
+
+Applying the substractive indefiniteness marker seems obligatory with some determiners indicating indefiniteness, but not always. 
+
+\begin{enumerate}[resume*] 
+	\item The use with "bazı" determiner
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item ?Bazı Japonlar yapmış. 
+	\item Ambara bazı koltuklar geldi. 
+	\item İnternette bazı yorumlar gördüm.
+	\item Bazı takım elbiseli adamlar seni sordu. 
+	\end{enumerate}
+
+	\item The use with "birkaç" determiner
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item *Birkaç Japonlar yapmış. 
+	\item *Ambara birkaç koltuklar geldi. 
+	\item *İnternette birkaç yorumlar gördüm.
+	\item *Birkaç takım elbiseli adamlar seni sordu. 
+	\end{enumerate}
+\end{enumerate}
+
+It seems semantics plays an important role in determining the behavior of the indefiniteness marker. The determiner "birkaç" may be marking true indefiniteness, while "bazı" could signify indefiniteness in the speaker's context, but possible definiteness in the hearer's context. Instead, \citet{Bliss2004} points out how "bazı" resembles "some" in English and always makes an NP indefinite. However, unlike "some", which may occur in context where the NP is specific or non-specific, "bazı" always makes the NP specific. Perhaps what we were looking for was hidden in the dichotomy between indefiniteness and non-specificity. There are not one, but two subtractive markers: the indefiniteness marker and the non-specificity marker. The former removes the case markers, while the latter removes the plural marker. The claim in \citet{Tura1986} that the singular-plural distinction could be neutralized due to non-referentiality has a direct parallel in this solution. When both markers are present, we observe \ref{PlAccArg} \ref{c} and the like. (Due to limited time, we postpone making a deeper analysis in this direction to the next version of this text.) \\ 
+
+%Taken from Wiki!
+
+\begin{table}[h]
+\centering
+	\begin{adjustbox}{width=1\textwidth}
+    	\begin{tabular}{lcc}
+        \hline
+		Definiteness / Specificity & Specific & Non-specific\\ \hline
+		Definite & I'm looking for the manager, Ms Lee. & I'm looking for the manager, whoever that may be.\\ \hline
+		Indefinite & There's a certain word that I can never remember. & Think of a word, any word. \\ \hline
+    	\end{tabular}
+	\end{adjustbox}
+	\caption{Two dimensions of definiteness}
+    	\label{tab:TwoDimDef}
+\end{table}
+
+Modified versions of example sentences in \ref{Bazi} provide evidence for this line of thinking. The "bazı" sentences sound somewhat more plausible combined with a question requesting information from the hearer. The accusative marker still drops due to indefiniteness, but the plural marker remains.
+
+\begin{enumerate}[resume*] 
+	\item The use with "bazı" determiner \label{Bazi}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Bazı Japonlar yapmış. Haberin var mı? \label{a}
+	\item Ambara bazı koltuklar geldi. Haberin var mı? \label{b}
+	\item İnternette bazı yorumlar gördüm. Haberin var mı? \label{c}
+	\item Bazı takım elbiseli adamlar seni sordu. Haberin var mı? \label{d}
+	\end{enumerate}
+\end{enumerate}
+
+A related issue concerns the subjects of relative clauses. Forms of object relative clause (ORC) subjects resemble genitive marked nouns. But are they really $NP_{GEN}$? The following list is based on examples from PFTL. 
+
+\begin{enumerate}[resume*] 
+	\item Relative clauses \label{RelCl}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Arının soktuğu kız \label{a}
+	\item Arıların soktuğu kız \label{b}
+	\item Bir arının soktuğu kız \label{c}
+	\item *Bir arıların soktuğu kız \label{d}
+	\item Birkaç arının soktuğu kız \label{e}
+	\item *Birkaç arıların soktuğu kız \label{f}
+	\item *Bazı arının soktuğu kız \label{g}
+	\item Bazı arıların soktuğu kız \label{h}
+	\end{enumerate}
+\end{enumerate}
+
+\ref{RelCl} covers eight combinations on two dimensions. The first dimension has two levels controlling whether a plural marker is present. The second dimension has four levels: no determiner, "bir", "birkaç" and "bazı". There is ambiguity in \ref{a} regarding definiteness, but it is somewhat closer to the reading that indicates a definite bee. In \ref{b}, there are multiple bees and they constitute a group identifiable by the speaker; perhaps they were flying around moments ago. In \ref{c}, however, the indefiniteness of "arının" is made explicit by the determiner "bir". Nevertheless, the "-ın" marker remains. \ref{d} is obviously ungrammatical, due to the disagreement in number. \\ 
+
+\ref{e} is the next step, where "birkaç" explicitly indicates there are multiple bees and they are indefinite. In this case, the plural marker drops, but the "-ın" is still there. \ref{f} is ungrammatical, because the sense of indefiniteness is present without a doubt, but the plural marker is used. We have previously demonstrated how the plural marker must drop in such cases, when the obligatory indefiniteness marker is applied. Finally in \ref{g} and \ref{h}, we observe the opposite preference by the determiner; this time the plural marker must not be dropped, despite indefiniteness. As in our comments for \ref{Bazi}, we cite \citet{Bliss2004} and repeat the possibility of a second subtractive affix, that operates independently from the first one, and that represents a second dimension (specificity) in the space of indefiniteness. If we return to the main point, though, in both cases, the "-ın" affix remains. \\
+
+We can clearly observe that the "-ın" marker should never be dropped, although in some cases indefiniteness is explicitly marked with "bir", "birkaç" and "bazı" determiners. If we assume our arguments about the subtractive indefiniteness marker are correct and "-ın" is indeed the genitive marker, \ref{RelCl} would constitute counterexamples difficult to explain. \\
+
+As cited in PFTL, \citet{GeorgeKornfilt1981} explains why the "-ın" in Turkish ORCs is not an instance of genitive case, but a marker of finiteness. Both these sources provide plenty of examples demonstrating the correctness of the claim. The following list presents our analyses of the underlying morphology for ORC examples. PL stands for the plural marker, INDEF for the indefiniteness marker and FIN for the finiteness marker. Finiteness marker naturally comes last, since it carries out its task high on the syntactic tree, linking the subject and the verb phrase. Parentheses indicate an affix removed by subtractive morphology.
+
+\begin{enumerate}[resume*] 
+	\item Relative clauses analyzed \label{RelClAn1}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Arının soktuğu kız: Arı-FIN ... / Arı-INDEF-FIN ... \label{a}
+	\item Arıların soktuğu kız: Arı-PL-FIN ... \label{b}
+	\item Bir arının soktuğu kız: Bir arı-INDEF-FIN ... \label{c}
+	\item Birkaç arının soktuğu kız: Birkaç arı-(PL)-INDEF-FIN ... \label{d}
+	\item Bazı arıların soktuğu kız: Bazı arı-PL-INDEF-FIN ... \label{e}
+	\end{enumerate}
+\end{enumerate}
+
+In \ref{RelClAn1} \ref{a} there is ambiguity in meaning. If we choose the reading with a definite bee, we must go with the first analysis, otherwise with the second one. In \ref{e}, the plural marker remains, despite being followed by the indefiniteness marker. The following set of examples demonstrate how the analyses would change if an unspecificity (UNSP) marker is also claimed. UNSP seems to come before INDEF. This time, it is UNSP that removes the plural marker, and not INDEF; therefore, \ref{e} is not a problem anymore. 
+
+\begin{enumerate}[resume*] 
+	\item Relative clauses analyzed \label{RelClAn2}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Arının soktuğu kız: Arı-FIN ... / Arı-UNSP-INDEF-FIN ... \label{a}
+	\item Arıların soktuğu kız: Arı-PL-FIN ... \label{b}
+	\item Bir arının soktuğu kız: Bir arı-UNSP-INDEF-FIN ... \label{c}
+	\item Birkaç arının soktuğu kız: Birkaç arı-(PL)-UNSP-INDEF-FIN ... \label{d}
+	\item Bazı arıların soktuğu kız: Bazı arı-PL-INDEF-FIN ... \label{e}
+	\end{enumerate}
+\end{enumerate}
+
+If we are going to be strict and claim all kinds of inflection are always obligatory, we will need to mark specificity (SP) and definiteness (DEF), as well as unspecificity and indefiniteness. Also, there is no reason why a zero-marker (SG) should not be marking singular NPs. Perhaps what UNSP and INDEF do is simply removing any phonological realization of a certain class of affixes. For UNSP, this class is number markers, and for INDEF, case markers.
+
+\begin{enumerate}[resume*] 
+	\item Relative clauses analyzed \label{RelClAn3}
+	\begin{enumerate}[label=(\alph*), ref=(\alph*)]\itemsep1pt
+	\item Arının soktuğu kız: Arı-SG-SP-DEF-FIN ... / Arı-SG-UNSP-INDEF-FIN ... \label{a}
+	\item Arıların soktuğu kız: Arı-PL-SP-DEF-FIN ... \label{b}
+	\item Bir arının soktuğu kız: Bir arı-(SG)-UNSP-INDEF-FIN ... \label{c}
+	\item Birkaç arının soktuğu kız: Birkaç arı-(PL)-UNSP-INDEF-FIN ... \label{d}
+	\item Bazı arıların soktuğu kız: Bazı arı-PL-SP-INDEF-FIN ... \label{e}
+	\end{enumerate}
+\end{enumerate}
+
+If we make a preliminary attempt at constructing a sequence of NNI affixes, it would look like the following (We exclude "-ki", since it does not quite behave like an inflectional marker and rather seems to have a construction of its own.): \\
+
+SG/PL - SP/UNSP - POSS - CASE - DEF/INDEF - FIN
+
+\newpage
+
+\bibliography{References}
+
+\newpage
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
